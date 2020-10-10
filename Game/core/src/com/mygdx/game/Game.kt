@@ -11,7 +11,6 @@ class Game : ApplicationAdapter() {
     var img: Texture? = null
     override fun create() {
         batch = SpriteBatch()
-        img = Texture("badlogic.jpg")
     }
 
     override fun render() {
