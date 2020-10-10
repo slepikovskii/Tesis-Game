@@ -1,0 +1,4 @@
+Pixels size for character: 1080 x 1080
+Useful youtube how to slice the sheets: https://www.youtube.com/watch?v=KTBOahrXTBE
+
+Pixels size for background:3840 x 2160
