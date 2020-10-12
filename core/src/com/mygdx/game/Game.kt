@@ -1,29 +1,47 @@
 package com.mygdx.game
 
-import com.badlogic.gdx.ApplicationAdapter
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.GL20
-import com.badlogic.gdx.graphics.Texture
+import com.badlogic.ashley.core.PooledEngine
+import com.badlogic.gdx.assets.AssetManager
+import com.badlogic.gdx.graphics.OrthographicCamera
+import com.badlogic.gdx.graphics.g2d.Batch
+import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.mygdx.game.assests.initiateAssetManager
+import com.mygdx.game.screen.GameScreen
+import com.mygdx.game.screen.MainScreen
+import ktx.app.KtxGame
+import ktx.app.KtxScreen
+import ktx.inject.Context
+import ktx.inject.register
+import ktx.log.debug
+import ktx.log.logger
 
-class Game : ApplicationAdapter() {
-    var batch: SpriteBatch? = null
-    var img: Texture? = null
+private val log = logger<Game>()
+
+class Game : KtxGame<KtxScreen>() {
+    private val context = Context()
+
     override fun create() {
-        batch = SpriteBatch()
-        img = Texture("badlogic.jpg")
-    }
+        context.register {
+            bindSingleton(this@Game)
+            bindSingleton<Batch>(SpriteBatch())
+            bindSingleton(BitmapFont())
+            bindSingleton(initiateAssetManager())
+            // The camera ensures we can render using our target resolution of 800x480
+            //    pixels no matter what the screen resolution is.
+            bindSingleton(OrthographicCamera().apply { setToOrtho(false, 1280f, 720f) })
+            bindSingleton(PooledEngine())
 
-    override fun render() {
-        Gdx.gl.glClearColor(1f, 0f, 0f, 1f)
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
-        batch!!.begin()
-        batch!!.draw(img, 0f, 0f)
-        batch!!.end()
+            addScreen(MainScreen(inject(), inject(), inject(), inject(), inject()))
+            addScreen(GameScreen(inject(), inject(), inject(), inject(), inject()))
+        }
+        setScreen<MainScreen>()
+        super.create()
     }
 
     override fun dispose() {
-        batch!!.dispose()
-        img!!.dispose()
+        log.debug { "Entities in engine: ${context.inject<PooledEngine>().entities.size()}" }
+        context.dispose()
+        super.dispose()
     }
 }
