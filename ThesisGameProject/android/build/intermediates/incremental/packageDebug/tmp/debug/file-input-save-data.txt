@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Oct 10 18:29:17 EEST 2020
+#Mon Oct 12 21:10:02 EEST 2020
 4.path=lib/x86/libgdx-box2d.so
 8.set=NATIVE_RESOURCE
 6.path=lib/x86/libgdx.so

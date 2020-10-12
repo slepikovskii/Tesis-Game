@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ThesisGameProject.iml" filepath="$PROJECT_DIR$/.idea/modules/ThesisGameProject.iml" group="ThesisGameProject" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android/android.iml" group="ThesisGameProject/android" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/core.iml" group="ThesisGameProject/core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/desktop/desktop.iml" filepath="$PROJECT_DIR$/.idea/modules/desktop/desktop.iml" group="ThesisGameProject/desktop" />
     </modules>
   </component>
 </project>

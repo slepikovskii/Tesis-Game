@@ -6,3 +6,15 @@ sourceCompatibility = 1.7
 sourceSets.main.java.srcDirs = [ "src/" ]
 
 eclipse.project.name = appName + "-core"
+
+ext {
+    // Update this version to match the latest KTX release:
+    ktxVersion = '1.9.11-b1'
+}
+
+dependencies {
+    api "com.badlogicgames.gdx:gdx:$gdxVersion"
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    api "io.github.libktx:ktx-app:$ktxVersion"
+
+}
