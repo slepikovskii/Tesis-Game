@@ -1,4 +1,4 @@
-#Mon Oct 12 21:10:02 EEST 2020
-base.0=D\:\\Tesis game\\Tesis-Game\\ThesisGameProject\\android\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+#Mon Oct 12 23:38:40 EEST 2020
+base.0=D\:\\Tesis game\\Tesis-Game\\ThesisGameProject\\android\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
