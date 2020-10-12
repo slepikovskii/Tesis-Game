@@ -1,13 +1,13 @@
-package screens
+package com.mygdx.game.screens
 
 import com.mygdx.game.ThesisGame
 import ktx.log.debug
 import ktx.log.logger
-import ktx.app.KtxScreen as KtxScreen1
+import ktx.app.KtxScreen
 
 private val LOG = logger<MainMenu>()
 
-class MainMenu : KtxScreen1 {
+class MainMenu(game: ThesisGame) : ThesisGameScreen(game){
     override fun show() {
         LOG.debug { "Main menu shown" }
         super.show()
