@@ -8,6 +8,7 @@ project.ext.mainClassName = "com.mygdx.game.desktop.DesktopLauncher"
 project.ext.assetsDir = new File("../android/assets")
 
 dependencies {
+    api project(':core')
     api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
     api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 }
