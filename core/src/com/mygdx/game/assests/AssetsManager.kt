@@ -1,10 +1,10 @@
 package com.mygdx.game.assests
 
+import com.badlogic.gdx.assets.AssetDescriptor
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
-import ktx.assets.getAsset
-import ktx.assets.load
 import ktx.freetype.registerFreeTypeFontLoaders
 
 fun initiateAssetManager(): AssetManager {
@@ -14,17 +14,27 @@ fun initiateAssetManager(): AssetManager {
     return assetManager
 }
 
-enum class Textures(val path: String) {
+enum class Textures(val path: String,
+        val descriptor: AssetDescriptor<Texture> = AssetDescriptor(path, Texture::class.java)) {
     Example("background/Example on how the platform looks like.png")
 }
 
-inline fun AssetManager.load(asset: Textures) = load<Texture>(asset.path)
-inline operator fun AssetManager.get(asset: Textures) = getAsset<Texture>(asset.path)
-
-enum class TextureAtlasAssets(val path: String) {
+enum class TextureAtlasAssets(val path: String, val descriptor: AssetDescriptor<TextureAtlas> = AssetDescriptor(path,
+        TextureAtlas::class.java)) {
     Buttons("UI/Buttons.atlas"),
     Scales("UI/Scales.atlas")
 }
 
-inline fun AssetManager.load(asset: TextureAtlasAssets) = load<TextureAtlas>(asset.path)
-inline operator fun AssetManager.get(asset: TextureAtlasAssets) = getAsset<TextureAtlas>(asset.path)
+enum class Animations(val path: String,
+        val descriptor: AssetDescriptor<TextureAtlas> = AssetDescriptor(path, TextureAtlas::class.java)) {
+    Lvl1("animation/Animation.atlas")
+}
+
+enum class FontAsset(
+        val path: String,
+        val descriptor: AssetDescriptor<BitmapFont> = AssetDescriptor(
+                path,
+                BitmapFont::class.java
+        )) {
+    FONT_DEFAULT("fonts/LuckiestGuy.ttf")
+}

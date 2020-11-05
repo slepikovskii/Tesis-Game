@@ -1,48 +1,70 @@
 package com.mygdx.game.screen
 
+import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.g2d.BitmapFont
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.mygdx.game.Game
+import com.mygdx.game.assests.Animations
+import com.mygdx.game.assests.FontAsset
 import com.mygdx.game.assests.TextureAtlasAssets
 import com.mygdx.game.assests.Textures
-import com.mygdx.game.assests.load
+import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.launch
 import ktx.app.KtxScreen
+import ktx.assets.async.AssetStorage
+import ktx.async.KtxAsync
+import ktx.collections.gdxArrayOf
+import ktx.freetype.generateFont
 import ktx.graphics.use
 
 class MainScreen(private val game: Game,
-                 private val batch: Batch,
-                 private val font: BitmapFont,
-                 private val assets: AssetManager,
-                 private val camera: OrthographicCamera) : KtxScreen {
+        private val batch: Batch,
+        private val assets: AssetStorage,
+        private val camera: OrthographicCamera,
+        private val engine: PooledEngine) : KtxScreen {
+
+
+    private var fontGenerator = assets.loadSync<FreeTypeFontGenerator>("fonts/LuckiestGuy.ttf")
+
+    private val font = fontGenerator.generateFont {
+        size = 42
+    }
+
     override fun show() {
-        Textures.values().forEach { assets.load(it) }
-        TextureAtlasAssets.values().forEach { assets.load(it) }
+        super.show()
+        val assetRefs = gdxArrayOf(
+                TextureAtlasAssets.values().map { assets.loadAsync(it.descriptor) },
+                Textures.values().map { assets.loadAsync(it.descriptor) },
+                FontAsset.values().map { assets.loadAsync(it.descriptor) },
+                Animations.values().map { assets.loadAsync(it.descriptor) }
+        ).flatten()
+        KtxAsync.launch {
+            assetRefs.joinAll()
+        }
     }
 
     override fun render(delta: Float) {
-        // continue loading our assets
-        assets.update()
 
         camera.update()
         batch.projectionMatrix = camera.combined
 
         batch.use {
             font.draw(it, "Thesis Game", 100f, 150f)
-            if (assets.isFinished) {
+            if (assets.progress.isFinished) {
                 font.draw(it, "Tap anywhere to begin!", 100f, 100f)
             } else {
                 font.draw(it, "Loading assets...", 100f, 100f)
             }
         }
 
-        if (Gdx.input.isTouched && assets.isFinished) {
+        if (Gdx.input.isTouched && assets.progress.isFinished) {
             game.removeScreen<MainScreen>()
             dispose()
             game.setScreen<GameScreen>()
         }
+        engine.update(delta)
     }
 
 }
