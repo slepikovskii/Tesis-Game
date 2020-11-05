@@ -26,22 +26,16 @@ class GameScreen(private val batch: Batch,
         private val gameViewport: FitViewport) : KtxScreen {
 
     override fun render(delta: Float) {
-//        when {
-//            Gdx.input.isKeyPressed(Input.Keys.LEFT) -> bike[MoveComponent.mapper]?.let { move -> move.speed = -200f }
-//            Gdx.input.isKeyPressed(Input.Keys.RIGHT) -> bike[MoveComponent.mapper]?.let { move -> move.speed = 200f }
-//            else -> bike[MoveComponent.mapper]?.let { move -> move.speed = 0f }
-//        }
-
+        engine.update(delta)
         stage.run {
             viewport.apply()
             act()
             draw()
         }
-        // everything is now done withing our entity engine --> update it every frame
-        engine.update(delta)
     }
 
     override fun show() {
+        super.show()
         // initialize entity engine
         engine.apply {
             addSystem(MoveSystem())
@@ -65,7 +59,6 @@ class GameScreen(private val batch: Batch,
                 defaults().fillX().expandX()
 
                 label("GAME") { cell ->
-                    wrap = true
                     setAlignment(Align.center)
                     cell.apply {
                         padTop(20f)
