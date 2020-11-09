@@ -42,6 +42,10 @@ class ThesisGame : KtxGame<KtxScreen>() {
     override fun create() {
      Gdx.app.logLevel= LOG_DEBUG
      LOG.debug { "Application launched" }
+
+     val assetrefs = gdxArrayof(
+         TextureAtlasAsset.values().filter {it.isSkinAtlas}.map {assets.loadAsync(it.descriptor)}
+     )
       addScreen(MainMenu(this))
       setScreen<MainMenu>()
     }
