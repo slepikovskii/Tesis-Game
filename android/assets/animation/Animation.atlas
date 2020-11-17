@@ -1,0 +1,678 @@
+
+Animation.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bike_lvl
+  rotate: false
+  xy: 1, 1
+  size: 134, 165
+  orig: 216, 216
+  offset: 39, 15
+  index: 100
+bike_lvl
+  rotate: false
+  xy: 175, 1
+  size: 134, 165
+  orig: 216, 216
+  offset: 39, 15
+  index: 101
+bike_lvl
+  rotate: false
+  xy: 349, 1
+  size: 134, 165
+  orig: 216, 216
+  offset: 39, 15
+  index: 102
+bike_lvl
+  rotate: false
+  xy: 523, 1
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 14
+  index: 103
+bike_lvl
+  rotate: false
+  xy: 697, 1
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 14
+  index: 104
+bike_lvl
+  rotate: false
+  xy: 871, 1
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 14
+  index: 105
+bike_lvl
+  rotate: false
+  xy: 1045, 1
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 14
+  index: 106
+bike_lvl
+  rotate: false
+  xy: 1219, 1
+  size: 134, 167
+  orig: 216, 216
+  offset: 39, 14
+  index: 107
+bike_lvl
+  rotate: false
+  xy: 1393, 1
+  size: 132, 167
+  orig: 216, 216
+  offset: 40, 14
+  index: 108
+bike_lvl
+  rotate: false
+  xy: 1567, 1
+  size: 132, 167
+  orig: 216, 216
+  offset: 40, 14
+  index: 109
+bike_lvl
+  rotate: false
+  xy: 1741, 1
+  size: 132, 167
+  orig: 216, 216
+  offset: 40, 14
+  index: 110
+bike_lvl
+  rotate: false
+  xy: 1, 172
+  size: 132, 167
+  orig: 216, 216
+  offset: 40, 15
+  index: 111
+bike_lvl
+  rotate: false
+  xy: 175, 172
+  size: 132, 167
+  orig: 216, 216
+  offset: 40, 15
+  index: 112
+bike_lvl
+  rotate: false
+  xy: 349, 172
+  size: 132, 167
+  orig: 216, 216
+  offset: 40, 15
+  index: 113
+bike_lvl
+  rotate: false
+  xy: 523, 172
+  size: 132, 166
+  orig: 216, 216
+  offset: 40, 16
+  index: 114
+bike_lvl
+  rotate: false
+  xy: 697, 172
+  size: 133, 167
+  orig: 216, 216
+  offset: 39, 16
+  index: 115
+bike_lvl
+  rotate: false
+  xy: 871, 172
+  size: 133, 167
+  orig: 216, 216
+  offset: 39, 16
+  index: 116
+bike_lvl
+  rotate: false
+  xy: 1045, 172
+  size: 133, 167
+  orig: 216, 216
+  offset: 39, 16
+  index: 117
+bike_lvl
+  rotate: false
+  xy: 1219, 172
+  size: 134, 167
+  orig: 216, 216
+  offset: 39, 16
+  index: 118
+bike_lvl
+  rotate: false
+  xy: 1393, 172
+  size: 134, 167
+  orig: 216, 216
+  offset: 39, 16
+  index: 119
+bike_lvl
+  rotate: false
+  xy: 1567, 172
+  size: 134, 168
+  orig: 216, 216
+  offset: 39, 16
+  index: 120
+bike_lvl
+  rotate: false
+  xy: 1741, 172
+  size: 134, 168
+  orig: 216, 216
+  offset: 39, 16
+  index: 121
+bike_lvl
+  rotate: false
+  xy: 1, 343
+  size: 134, 168
+  orig: 216, 216
+  offset: 39, 16
+  index: 122
+bike_lvl
+  rotate: false
+  xy: 175, 343
+  size: 134, 169
+  orig: 216, 216
+  offset: 39, 15
+  index: 123
+bike_lvl
+  rotate: false
+  xy: 349, 343
+  size: 134, 169
+  orig: 216, 216
+  offset: 39, 15
+  index: 124
+bike_lvl
+  rotate: false
+  xy: 523, 343
+  size: 134, 169
+  orig: 216, 216
+  offset: 39, 15
+  index: 125
+bike_lvl
+  rotate: false
+  xy: 697, 343
+  size: 134, 169
+  orig: 216, 216
+  offset: 39, 15
+  index: 126
+bike_lvl
+  rotate: false
+  xy: 871, 343
+  size: 132, 169
+  orig: 216, 216
+  offset: 40, 15
+  index: 127
+bike_lvl
+  rotate: false
+  xy: 1045, 343
+  size: 132, 169
+  orig: 216, 216
+  offset: 40, 15
+  index: 128
+bike_lvl
+  rotate: false
+  xy: 1219, 343
+  size: 132, 168
+  orig: 216, 216
+  offset: 40, 15
+  index: 129
+bike_lvl
+  rotate: false
+  xy: 1393, 343
+  size: 132, 168
+  orig: 216, 216
+  offset: 40, 15
+  index: 130
+bike_lvl
+  rotate: false
+  xy: 1567, 343
+  size: 132, 168
+  orig: 216, 216
+  offset: 40, 15
+  index: 131
+bike_lvl
+  rotate: false
+  xy: 1741, 343
+  size: 132, 168
+  orig: 216, 216
+  offset: 40, 15
+  index: 132
+bike_lvl
+  rotate: false
+  xy: 1, 514
+  size: 132, 167
+  orig: 216, 216
+  offset: 40, 16
+  index: 133
+bike_lvl
+  rotate: false
+  xy: 175, 514
+  size: 132, 166
+  orig: 216, 216
+  offset: 40, 16
+  index: 134
+bike_lvl
+  rotate: false
+  xy: 349, 514
+  size: 133, 166
+  orig: 216, 216
+  offset: 39, 16
+  index: 135
+bike_lvl
+  rotate: false
+  xy: 523, 514
+  size: 133, 167
+  orig: 216, 216
+  offset: 39, 15
+  index: 136
+bike_lvl
+  rotate: false
+  xy: 697, 514
+  size: 134, 167
+  orig: 216, 216
+  offset: 39, 15
+  index: 137
+bike_lvl
+  rotate: false
+  xy: 871, 514
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 15
+  index: 138
+bike_lvl
+  rotate: false
+  xy: 1045, 514
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 15
+  index: 139
+bike_lvl
+  rotate: false
+  xy: 1219, 514
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 15
+  index: 140
+bike_lvl
+  rotate: false
+  xy: 1393, 514
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 15
+  index: 141
+bike_lvl
+  rotate: false
+  xy: 1567, 514
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 14
+  index: 142
+bike_lvl
+  rotate: false
+  xy: 1741, 514
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 14
+  index: 143
+bike_lvl
+  rotate: false
+  xy: 1, 685
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 14
+  index: 144
+bike_lvl
+  rotate: false
+  xy: 175, 685
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 14
+  index: 145
+bike_lvl
+  rotate: false
+  xy: 349, 685
+  size: 133, 167
+  orig: 216, 216
+  offset: 40, 13
+  index: 146
+bike_lvl
+  rotate: false
+  xy: 523, 685
+  size: 132, 167
+  orig: 216, 216
+  offset: 40, 13
+  index: 147
+bike_lvl
+  rotate: false
+  xy: 697, 685
+  size: 132, 166
+  orig: 216, 216
+  offset: 40, 14
+  index: 148
+bike_lvl
+  rotate: false
+  xy: 871, 685
+  size: 132, 166
+  orig: 216, 216
+  offset: 40, 14
+  index: 149
+bike_lvl
+  rotate: false
+  xy: 1045, 685
+  size: 132, 166
+  orig: 216, 216
+  offset: 40, 14
+  index: 150
+bike_lvl
+  rotate: false
+  xy: 1219, 685
+  size: 132, 166
+  orig: 216, 216
+  offset: 40, 14
+  index: 151
+bike_lvl
+  rotate: false
+  xy: 1393, 685
+  size: 132, 165
+  orig: 216, 216
+  offset: 40, 15
+  index: 152
+bike_lvl
+  rotate: false
+  xy: 1567, 685
+  size: 132, 165
+  orig: 216, 216
+  offset: 40, 15
+  index: 153
+bike_lvl
+  rotate: false
+  xy: 1741, 685
+  size: 133, 165
+  orig: 216, 216
+  offset: 39, 15
+  index: 154
+bike_lvl
+  rotate: false
+  xy: 1, 856
+  size: 133, 166
+  orig: 216, 216
+  offset: 39, 15
+  index: 155
+bike_lvl
+  rotate: false
+  xy: 175, 856
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 15
+  index: 156
+bike_lvl
+  rotate: false
+  xy: 349, 856
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 15
+  index: 157
+bike_lvl
+  rotate: false
+  xy: 523, 856
+  size: 134, 166
+  orig: 216, 216
+  offset: 39, 15
+  index: 158
+bike_lvl
+  rotate: false
+  xy: 697, 856
+  size: 134, 167
+  orig: 216, 216
+  offset: 39, 15
+  index: 159
+bike_lvl
+  rotate: false
+  xy: 871, 856
+  size: 134, 167
+  orig: 216, 216
+  offset: 39, 15
+  index: 160
+bike_lvl
+  rotate: false
+  xy: 1045, 856
+  size: 134, 167
+  orig: 216, 216
+  offset: 39, 15
+  index: 161
+bike_lvl
+  rotate: false
+  xy: 1219, 856
+  size: 134, 167
+  orig: 216, 216
+  offset: 39, 15
+  index: 162
+bike_lvl
+  rotate: false
+  xy: 1393, 856
+  size: 134, 168
+  orig: 216, 216
+  offset: 39, 15
+  index: 163
+bike_lvl
+  rotate: false
+  xy: 1567, 856
+  size: 134, 168
+  orig: 216, 216
+  offset: 39, 15
+  index: 164
+bike_lvl
+  rotate: false
+  xy: 1741, 856
+  size: 134, 168
+  orig: 216, 216
+  offset: 39, 15
+  index: 165
+bike_lvl
+  rotate: false
+  xy: 1, 1027
+  size: 132, 168
+  orig: 216, 216
+  offset: 40, 15
+  index: 166
+bike_lvl
+  rotate: false
+  xy: 175, 1027
+  size: 132, 168
+  orig: 216, 216
+  offset: 40, 15
+  index: 167
+bike_lvl
+  rotate: false
+  xy: 349, 1027
+  size: 132, 169
+  orig: 216, 216
+  offset: 40, 15
+  index: 168
+bike_lvl
+  rotate: false
+  xy: 523, 1027
+  size: 132, 169
+  orig: 216, 216
+  offset: 40, 15
+  index: 169
+bike_lvl
+  rotate: false
+  xy: 697, 1027
+  size: 132, 168
+  orig: 216, 216
+  offset: 40, 16
+  index: 170
+bike_lvl
+  rotate: false
+  xy: 871, 1027
+  size: 132, 168
+  orig: 216, 216
+  offset: 40, 16
+  index: 171
+bike_lvl
+  rotate: false
+  xy: 1045, 1027
+  size: 132, 168
+  orig: 216, 216
+  offset: 40, 16
+  index: 172
+bike_lvl
+  rotate: false
+  xy: 1219, 1027
+  size: 133, 168
+  orig: 216, 216
+  offset: 39, 16
+  index: 173
+bike_lvl
+  rotate: false
+  xy: 1393, 1027
+  size: 133, 168
+  orig: 216, 216
+  offset: 39, 16
+  index: 174
+bike_lvl
+  rotate: false
+  xy: 1567, 1027
+  size: 134, 168
+  orig: 216, 216
+  offset: 39, 16
+  index: 175
+bike_lvl
+  rotate: false
+  xy: 1741, 1027
+  size: 134, 168
+  orig: 216, 216
+  offset: 39, 16
+  index: 176
+bike_lvl
+  rotate: false
+  xy: 1, 1198
+  size: 134, 167
+  orig: 216, 216
+  offset: 39, 16
+  index: 177
+bike_lvl
+  rotate: false
+  xy: 175, 1198
+  size: 134, 167
+  orig: 216, 216
+  offset: 39, 16
+  index: 178
+bike_lvl
+  rotate: false
+  xy: 349, 1198
+  size: 134, 167
+  orig: 216, 216
+  offset: 39, 16
+  index: 179
+bike_lvl
+  rotate: false
+  xy: 523, 1198
+  size: 134, 168
+  orig: 216, 216
+  offset: 39, 15
+  index: 180
+bike_lvl
+  rotate: false
+  xy: 697, 1198
+  size: 134, 168
+  orig: 216, 216
+  offset: 39, 15
+  index: 181
+bike_lvl
+  rotate: false
+  xy: 871, 1198
+  size: 134, 167
+  orig: 216, 216
+  offset: 39, 15
+  index: 182
+bike_lvl
+  rotate: false
+  xy: 1045, 1198
+  size: 134, 168
+  orig: 216, 216
+  offset: 39, 14
+  index: 183
+bike_lvl
+  rotate: false
+  xy: 1219, 1198
+  size: 134, 168
+  orig: 216, 216
+  offset: 39, 14
+  index: 184
+bike_lvl
+  rotate: false
+  xy: 1393, 1198
+  size: 132, 168
+  orig: 216, 216
+  offset: 40, 14
+  index: 185
+bike_lvl
+  rotate: false
+  xy: 1567, 1198
+  size: 132, 168
+  orig: 216, 216
+  offset: 40, 14
+  index: 186
+bike_lvl
+  rotate: false
+  xy: 1741, 1198
+  size: 132, 169
+  orig: 216, 216
+  offset: 40, 14
+  index: 187
+bike_lvl
+  rotate: false
+  xy: 1, 1369
+  size: 132, 167
+  orig: 216, 216
+  offset: 40, 14
+  index: 188
+bike_lvl
+  rotate: false
+  xy: 175, 1369
+  size: 132, 166
+  orig: 216, 216
+  offset: 40, 15
+  index: 189
+bike_lvl
+  rotate: false
+  xy: 349, 1369
+  size: 144, 165
+  orig: 216, 216
+  offset: 28, 15
+  index: 190
+bike_lvl
+  rotate: false
+  xy: 523, 1369
+  size: 161, 165
+  orig: 216, 216
+  offset: 11, 15
+  index: 191
+bike_lvl
+  rotate: false
+  xy: 697, 1369
+  size: 172, 165
+  orig: 216, 216
+  offset: 0, 15
+  index: 192
+bike_lvl
+  rotate: false
+  xy: 871, 1369
+  size: 172, 165
+  orig: 216, 216
+  offset: 0, 15
+  index: 193
+bike_lvl
+  rotate: false
+  xy: 1045, 1369
+  size: 133, 165
+  orig: 216, 216
+  offset: 39, 15
+  index: 194
+bike_lvl
+  rotate: false
+  xy: 1219, 1369
+  size: 134, 165
+  orig: 216, 216
+  offset: 39, 15
+  index: 195

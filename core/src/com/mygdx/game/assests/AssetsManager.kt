@@ -1,18 +1,10 @@
 package com.mygdx.game.assests
 
 import com.badlogic.gdx.assets.AssetDescriptor
-import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
-import ktx.freetype.registerFreeTypeFontLoaders
-
-fun initiateAssetManager(): AssetManager {
-    val assetManager = AssetManager()
-    // Calling registerFreeTypeFontLoaders is necessary in order to load TTF/OTF files:
-    assetManager.registerFreeTypeFontLoaders()
-    return assetManager
-}
+import ktx.freetype.freeTypeFontParameters
 
 enum class Textures(val path: String,
         val descriptor: AssetDescriptor<Texture> = AssetDescriptor(path, Texture::class.java)) {
@@ -34,7 +26,13 @@ enum class FontAsset(
         val path: String,
         val descriptor: AssetDescriptor<BitmapFont> = AssetDescriptor(
                 path,
-                BitmapFont::class.java
+                BitmapFont::class.java,
+                freeTypeFontParameters(path) {
+                    genMipMaps=true
+                    size=30
+                    minFilter = Texture.TextureFilter.MipMapLinearLinear
+                    magFilter = Texture.TextureFilter.Linear
+                }
         )) {
     FONT_DEFAULT("fonts/LuckiestGuy.ttf")
 }

@@ -2,9 +2,9 @@ package com.mygdx.game.screen
 
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
+import com.badlogic.gdx.scenes.scene2d.Stage
 import com.mygdx.game.Game
 import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.FontAsset
@@ -22,14 +22,14 @@ import ktx.graphics.use
 class MainScreen(private val game: Game,
         private val batch: Batch,
         private val assets: AssetStorage,
-        private val camera: OrthographicCamera,
+        private val stage: Stage,
         private val engine: PooledEngine) : KtxScreen {
 
 
     private var fontGenerator = assets.loadSync<FreeTypeFontGenerator>("fonts/LuckiestGuy.ttf")
 
     private val font = fontGenerator.generateFont {
-        size = 42
+        size = 30
     }
 
     override fun show() {
@@ -46,9 +46,6 @@ class MainScreen(private val game: Game,
     }
 
     override fun render(delta: Float) {
-
-        camera.update()
-        batch.projectionMatrix = camera.combined
 
         batch.use {
             font.draw(it, "Thesis Game", 100f, 150f)
@@ -67,4 +64,7 @@ class MainScreen(private val game: Game,
         engine.update(delta)
     }
 
+    override fun resize(width: Int, height: Int) {
+        stage.viewport.update(width, height, true)
+    }
 }

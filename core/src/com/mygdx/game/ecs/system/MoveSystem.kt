@@ -12,7 +12,7 @@ class MoveSystem : IteratingSystem(allOf(TransformComponent::class, MoveComponen
     override fun processEntity(entity: Entity, deltaTime: Float) {
         entity[TransformComponent.mapper]?.let { transform ->
             entity[MoveComponent.mapper]?.let { move ->
-                transform.bounds.x = MathUtils.clamp(transform.bounds.x + move.speed * deltaTime, 0f, 800f - 64f)
+                transform.size.x = MathUtils.clamp(transform.size.x + move.speed * deltaTime, 0f, 800f - 64f)
             }
         }
     }
