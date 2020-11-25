@@ -6,10 +6,7 @@ import com.badlogic.ashley.core.EntityListener
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.utils.GdxRuntimeException
-import com.mygdx.game.ecs.component.Animation2D
-import com.mygdx.game.ecs.component.AnimationComponent
-import com.mygdx.game.ecs.component.AnimationType
-import com.mygdx.game.ecs.component.GraphicComponent
+import com.mygdx.game.ecs.component.*
 import ktx.ashley.allOf
 import ktx.ashley.get
 import ktx.log.debug
@@ -21,7 +18,7 @@ private val LOG = logger<AnimationSystem>()
 
 class AnimationSystem(
     private val atlas: TextureAtlas
-) : IteratingSystem(allOf(AnimationComponent::class, GraphicComponent::class).get()), EntityListener {
+) : IteratingSystem(allOf(AnimationComponent::class, GraphicComponent::class, MoveComponent::class).get()), EntityListener {
     private val animationCache = EnumMap<AnimationType, Animation2D>(AnimationType::class.java)
 
     override fun addedToEngine(engine: Engine) {

@@ -11,7 +11,8 @@ import ktx.ashley.get
 
 class PlayerMovementSystem(
         private val atlas: TextureAtlas
-) : IteratingSystem(allOf(AnimationComponent::class, PlayerComponent::class, GraphicComponent::class, MoveComponent::class).get()), EntityListener {
+) : IteratingSystem(
+        allOf(PlayerComponent::class, GraphicComponent::class, MoveComponent::class).get()), EntityListener {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         entity[MoveComponent.mapper]?.let { move ->
@@ -28,7 +29,6 @@ class PlayerMovementSystem(
 
         }
     }
-
 
     override fun addedToEngine(engine: Engine) {
         super.addedToEngine(engine)

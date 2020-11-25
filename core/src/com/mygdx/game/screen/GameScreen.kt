@@ -37,7 +37,7 @@ class GameScreen(private val batch: Batch,
         engine.apply {
             addSystem(MoveSystem())
             addSystem(RenderSystem(assets, stage, gameViewport, assets[Textures.Example.descriptor]))
-            addSystem(PlayerMovementSystem(assets[Animations.Lvl1.descriptor]))
+//            addSystem(PlayerMovementSystem(assets[Animations.Lvl1.descriptor]))
             addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor]))
         }
         engine.run {
