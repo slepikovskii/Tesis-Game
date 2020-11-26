@@ -8,8 +8,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.viewport.FitViewport
+import com.mygdx.game.asset.TextureAtlasAsset
 import com.mygdx.game.ecs.system.RenderSystem
 import com.mygdx.game.screens.MainMenu
+import com.mygdx.game.ui.createSkin
+import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.launch
 import ktx.app.KtxGame
 import ktx.app.KtxScreen
 import ktx.assets.async.AssetStorage
@@ -32,6 +36,7 @@ class ThesisGame : KtxGame<KtxScreen>() {
     val batch by lazy { SpriteBatch() }
     val engine : Engine by lazy {  PooledEngine().apply {
         val atlas = assets[TextureAtlasAsset.GRAPHICS.descriptor]
+
         addSystem(RenderSystem(
                 batch,
                 gameViewport,
@@ -50,22 +55,36 @@ class ThesisGame : KtxGame<KtxScreen>() {
     }
 
     override fun create() {
-     Gdx.app.logLevel= LOG_DEBUG
-     LOG.debug { "Application launched" }
+        Gdx.app.logLevel = LOG_DEBUG
+        LOG.debug { "Application launched" }
 
-     val assetrefs = gdxArrayOf(
-         TextureAtlasAsset.values().filter {it.isSkinAtlas}.map {assets.loadAsync(it.descriptor)}
-     ).flatten()
+        var old = System.currentTimeMillis()
 
-      addScreen(MainMenu(this))
-      setScreen<MainMenu>()
+        val assetrefs = gdxArrayOf(
+                TextureAtlasAsset.values().filter { it.isSkinAtlas }.map { assets.loadAsync(it.descriptor) }
+        ).flatten()
+        KtxAsync.launch {
+            assetrefs.joinAll()
+            // skin assets loaded -> create skin
+            LOG.debug { "It took ${(System.currentTimeMillis() - old) * 0.001f} seconds to load skin assets" }
+            old = System.currentTimeMillis()
+            createSkin(assets)
+            LOG.debug { "It took ${(System.currentTimeMillis() - old) * 0.001f} seconds to create the skin" }
+
+            addScreen(MainMenu(this@ThesisGame))
+            setScreen<MainMenu>()
+        }
+
+    }
+    override fun render() {
+
+        super.render()
     }
 
-    override fun dispose() {
-        super.dispose()
-        batch.dispose()
-
-        stage.dispose()
-    }
-
+        override fun dispose() {
+            super.dispose()
+            batch.dispose()
+            assets.dispose()
+            stage.dispose()
+     }
 }
