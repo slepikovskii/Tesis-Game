@@ -7,6 +7,7 @@ import ktx.log.logger
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.mygdx.game.UNIT_SCALE
 import com.mygdx.game.asset.TextureAsset
@@ -23,6 +24,9 @@ import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
 import ktx.collections.gdxArrayOf
 import ktx.graphics.use
+import ktx.scene2d.actors
+import ktx.scene2d.label
+import ktx.scene2d.table
 
 private val LOG = logger<MainMenu>()
 
@@ -58,8 +62,21 @@ class MainMenu(game: ThesisGame) : ThesisGameScreen(game){
             LOG.debug { "It took ${(System.currentTimeMillis() - old) * 0.001f} seconds to load assets and initialize" }
             assetsLoaded()
         }
-
+        setupUI()
         super.show()
+    }
+    private fun setupUI(){
+        stage.actors {
+            table {
+               defaults().fillX().expandX()
+                label("Main Menu") {
+                    wrap = true
+                    setAlignment(Align.center)
+                }
+                row()
+
+            }
+        }
     }
     private fun assetsLoaded() {
 
@@ -77,8 +94,4 @@ class MainMenu(game: ThesisGame) : ThesisGameScreen(game){
         super.render(delta)
     }
 
-    override fun dispose() {
-        super.dispose()
-
-    }
 }
