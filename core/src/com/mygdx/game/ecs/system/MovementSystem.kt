@@ -23,8 +23,8 @@ class MoveSystem : IteratingSystem(allOf(TransformComponent::class, MoveComponen
                 entity[TransformComponent.mapper]?.let {
                     it.position.x = MathUtils.clamp(
                             it.position.x + moveCmp.speed * deltaTime,
-                            0f,
-                            Gdx.graphics.width - it.size.x
+                            -40f,
+                            Gdx.graphics.width + 40 - it.size.x
                     )
                 }
             }
@@ -34,8 +34,8 @@ class MoveSystem : IteratingSystem(allOf(TransformComponent::class, MoveComponen
                 entity[TransformComponent.mapper]?.let {
                     it.position.x = MathUtils.clamp(
                             it.position.x - moveCmp.speed * deltaTime,
-                            0f,
-                            Gdx.graphics.width - it.size.x
+                            -40f,
+                            Gdx.graphics.width + 40 - it.size.x
                     )
                 }
             }
