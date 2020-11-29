@@ -35,16 +35,12 @@ class Game : KtxGame<KtxScreen>() {
         assetStorage.registerFreeTypeFontLoaders(replaceDefaultBitmapFontLoader = true)
         assetStorage
     }
-    private val gameViewport = FitViewport(1280.toFloat(), 720.toFloat())
+    private val gameViewport = FitViewport(1280f, 720f)
     private val stage: Stage by lazy {
         val result = Stage(gameViewport)
         Gdx.input.inputProcessor = result
         result
     }
-
-//    private val fontGenerator = runBlocking {
-//        assets.load<FreeTypeFontGenerator>("fonts/LuckiestGuy.ttf")
-//    }
 
     override fun create() {
         context.register {

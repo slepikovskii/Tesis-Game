@@ -29,5 +29,6 @@ fun Engine.createPlayer(
         with<MoveComponent>()
         with<GraphicComponent> { z = 1 }
         with<AnimationComponent> { type = AnimationType.BIKE_LVL_1 }
+        with<FacingComponent>()
     }
 }
