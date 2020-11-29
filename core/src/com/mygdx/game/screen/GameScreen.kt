@@ -10,11 +10,12 @@ import com.mygdx.game.assests.Textures
 import com.mygdx.game.ecs.createPlayer
 import com.mygdx.game.ecs.system.AnimationSystem
 import com.mygdx.game.ecs.system.MoveSystem
-import com.mygdx.game.ecs.system.PlayerMovementSystem
 import com.mygdx.game.ecs.system.RenderSystem
 import ktx.app.KtxScreen
 import ktx.assets.async.AssetStorage
-import ktx.scene2d.*
+import ktx.scene2d.actors
+import ktx.scene2d.label
+import ktx.scene2d.table
 
 class GameScreen(private val batch: Batch,
         private val assets: AssetStorage,

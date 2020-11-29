@@ -16,10 +16,10 @@ fun Engine.createPlayer(
         with<PlayerComponent>()
         with<TransformComponent> {
             val atlas = assets[Animations.Lvl1.descriptor]
-            val playerGraphicRegion = atlas.findRegion("bike_lvl", 100)
+            val playerGraphicRegion = atlas.findRegion("bike_lvl", 0)
             size.set(
-                    playerGraphicRegion.originalWidth.toFloat(),
-                    playerGraphicRegion.originalHeight.toFloat()
+                    playerGraphicRegion.regionWidth.toFloat(),
+                    playerGraphicRegion.regionHeight.toFloat()
             )
             setInitialPosition(
                     10f,
@@ -29,5 +29,6 @@ fun Engine.createPlayer(
         with<MoveComponent>()
         with<GraphicComponent> { z = 1 }
         with<AnimationComponent> { type = AnimationType.BIKE_LVL_1 }
+        with<FacingComponent>()
     }
 }

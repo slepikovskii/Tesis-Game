@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Pool
 import ktx.ashley.mapperFor
 import ktx.collections.GdxArray
 
-private const val DEFAULT_FRAME_DURATION = 1 / 20f
+const val DEFAULT_FRAME_DURATION = 1 / 20f
 
 enum class AnimationType(
         val atlasKey: String,
