@@ -1,0 +1,69 @@
+
+Scales.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Coin
+  rotate: false
+  xy: 1, 1
+  size: 941, 337
+  orig: 960, 540
+  offset: 19, 103
+  index: -1
+Energy 0
+  rotate: false
+  xy: 944, 1369
+  size: 941, 341
+  orig: 960, 540
+  offset: 19, 101
+  index: -1
+Energy 2
+  rotate: false
+  xy: 1, 683
+  size: 941, 341
+  orig: 960, 540
+  offset: 19, 101
+  index: -1
+Energy 3
+  rotate: false
+  xy: 944, 1026
+  size: 941, 341
+  orig: 960, 540
+  offset: 19, 101
+  index: -1
+Energy 4
+  rotate: false
+  xy: 1, 340
+  size: 941, 341
+  orig: 960, 540
+  offset: 19, 101
+  index: -1
+Energy 5
+  rotate: false
+  xy: 944, 683
+  size: 941, 341
+  orig: 960, 540
+  offset: 19, 101
+  index: -1
+Energy full
+  rotate: false
+  xy: 1, 1369
+  size: 941, 341
+  orig: 960, 540
+  offset: 19, 101
+  index: -1
+Settings button click
+  rotate: false
+  xy: 944, 331
+  size: 925, 350
+  orig: 960, 540
+  offset: 20, 95
+  index: -1
+Timer
+  rotate: false
+  xy: 1, 1026
+  size: 941, 341
+  orig: 960, 540
+  offset: 19, 101
+  index: -1

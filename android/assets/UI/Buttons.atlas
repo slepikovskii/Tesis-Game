@@ -1,0 +1,83 @@
+
+Buttons.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Homeshop button
+  rotate: false
+  xy: 607, 1
+  size: 604, 629
+  orig: 1728, 972
+  offset: 562, 159
+  index: -1
+Menu button
+  rotate: false
+  xy: 1, 1
+  size: 604, 629
+  orig: 1728, 972
+  offset: 562, 159
+  index: -1
+Music
+  rotate: false
+  xy: 1819, 1680
+  size: 205, 212
+  orig: 1728, 972
+  offset: 442, 376
+  index: -1
+Settings button
+  rotate: false
+  xy: 607, 1263
+  size: 604, 629
+  orig: 1728, 972
+  offset: 562, 159
+  index: -1
+Sound
+  rotate: false
+  xy: 1213, 386
+  size: 254, 179
+  orig: 1728, 972
+  offset: 799, 409
+  index: -1
+X button
+  rotate: false
+  xy: 1213, 1263
+  size: 604, 629
+  orig: 1728, 972
+  offset: 562, 159
+  index: -1
+box
+  rotate: false
+  xy: 1213, 567
+  size: 316, 380
+  orig: 486, 486
+  offset: 85, 49
+  index: -1
+box2
+  rotate: false
+  xy: 1213, 949
+  size: 394, 312
+  orig: 486, 486
+  offset: 50, 80
+  index: -1
+pause button
+  rotate: false
+  xy: 1, 1263
+  size: 604, 629
+  orig: 1728, 972
+  offset: 562, 159
+  index: -1
+play button
+  rotate: false
+  xy: 1, 632
+  size: 604, 629
+  orig: 1728, 972
+  offset: 562, 159
+  index: -1
+save button
+  rotate: false
+  xy: 607, 632
+  size: 604, 629
+  orig: 1728, 972
+  offset: 562, 159
+  index: -1
