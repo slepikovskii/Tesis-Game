@@ -13,7 +13,9 @@ fun Engine.createPlayer(
 ): Entity {
 
     return entity {
-        with<PlayerComponent>()
+        with<PlayerComponent>() {
+            papers = 10
+        }
         with<TransformComponent> {
             val atlas = assets[Animations.Lvl1.descriptor]
             val playerGraphicRegion = atlas.findRegion("bike_lvl", 0)

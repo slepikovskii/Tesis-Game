@@ -32,6 +32,7 @@ enum class FontAsset(
                     size=30
                     minFilter = Texture.TextureFilter.MipMapLinearLinear
                     magFilter = Texture.TextureFilter.Linear
+                    borderWidth = 1f
                 }
         )) {
     FONT_DEFAULT("fonts/LuckiestGuy.ttf")

@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.mygdx.game.assests.FontAsset
 import com.mygdx.game.assests.TextureAtlasAssets
+import com.mygdx.game.event.GameEventManager
 import com.mygdx.game.screen.GameScreen
 import com.mygdx.game.screen.MainScreen
 import kotlinx.coroutines.joinAll
@@ -50,6 +51,7 @@ class Game : KtxGame<KtxScreen>() {
             bindSingleton(PooledEngine())
             bindSingleton(gameViewport)
             bindSingleton(stage)
+            bindSingleton(GameEventManager())
             addScreen(MainScreen(inject(), inject(), inject(), inject(), inject()))
             addScreen(GameScreen(inject(), inject(), inject(), inject(), inject()))
         }
