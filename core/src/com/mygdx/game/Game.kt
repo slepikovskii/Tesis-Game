@@ -23,22 +23,19 @@ import ktx.freetype.async.registerFreeTypeFontLoaders
 import ktx.inject.Context
 import ktx.inject.register
 import ktx.log.logger
-import ktx.scene2d.Scene2DSkin
-import ktx.style.label
-import ktx.style.skin
 
 private val log = logger<Game>()
 
 class Game : KtxGame<KtxScreen>() {
     private val context = Context()
-     val assets: AssetStorage by lazy {
+    val assets: AssetStorage by lazy {
         KtxAsync.initiate()
         val assetStorage = AssetStorage()
         assetStorage.registerFreeTypeFontLoaders(replaceDefaultBitmapFontLoader = true)
         assetStorage
     }
-     val gameViewport = FitViewport(1280f, 720f)
-     val stage: Stage by lazy {
+    val gameViewport = FitViewport(1280f, 720f)
+    val stage: Stage by lazy {
         val result = Stage(gameViewport)
         Gdx.input.inputProcessor = result
         result

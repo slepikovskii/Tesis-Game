@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.FitViewport
+import com.mygdx.game.UI.SkinImageButton
 import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.Textures
 import com.mygdx.game.ecs.createPlayer
@@ -19,10 +20,10 @@ import ktx.scene2d.label
 import ktx.scene2d.table
 
 class GameScreen(private val batch: Batch,
-        private val assets: AssetStorage,
-        private val engine: PooledEngine,
-        private val stage: Stage,
-        private val gameViewport: FitViewport) : KtxScreen {
+                 private val assets: AssetStorage,
+                 private val engine: PooledEngine,
+                 private val stage: Stage,
+                 private val gameViewport: FitViewport) : KtxScreen {
 
     override fun render(delta: Float) {
         engine.update(delta)
@@ -53,26 +54,24 @@ class GameScreen(private val batch: Batch,
         stage.viewport.update(width, height, true)
     }
 
-     private fun setupUI() {
-                    stage.actors {
-                        table {
-                            defaults().fillX().expandX()
+    private fun setupUI() {
+        stage.actors {
+            table {
+                defaults().fillX().expandX()
 
-                            label("GAME") { cell ->
-                                setFontScale(2f)
-                                setAlignment(Align.center)
-                                cell.apply {
-                                    padTop(20f)
-                                }
-                            }
+                label("GAME") { cell ->
+                    setFontScale(2f)
+                    setAlignment(Align.center)
+                    cell.apply {
+                        padTop(20f)
+                    }
+                }
 
-                            imageButton("play_button" ) {
-                                setScale(2f)
-                            }
+                imageButton(SkinImageButton.PLAYBUTTON.name)
 
-                            top()
-                            setFillParent(true)
-                            pack()
+                top()
+                setFillParent(true)
+                pack()
             }
         }
     }
