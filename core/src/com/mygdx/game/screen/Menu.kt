@@ -18,6 +18,11 @@ import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
 import ktx.collections.gdxArrayOf
 import ktx.graphics.use
+import ktx.scene2d.Scene2DSkin
+import ktx.scene2d.scene2d
+import ktx.style.imageButton
+import ktx.style.label
+import ktx.style.skin
 
 class Menu(private val game: Game,
            private val batch: Batch,
@@ -25,7 +30,7 @@ class Menu(private val game: Game,
            private val stage: Stage,
            private val engine: PooledEngine): KtxScreen {
     private var img = assets[TextureAtlasAssets.Buttons.descriptor]
-    private var  imgPlay = img.findRegion("play",-1)
+    private var  imgPlay = img.findRegion("pause button",-1)
 
     override fun show() {
         super.show()
@@ -37,6 +42,16 @@ class Menu(private val game: Game,
         ).flatten()
         KtxAsync.launch {
             assetRefs.joinAll()
+            Scene2DSkin.defaultSkin = skin(assets[TextureAtlasAssets.Buttons.descriptor]){
+                label  ("default") {
+
+                }
+                imageButton ("play_button" ) {
+                    imageUp = it.getDrawable("pause button")
+                    imageChecked = imageUp
+                    imageDown = imageUp
+                }
+            }
         }
     }
     private fun setupUI() {

@@ -67,7 +67,7 @@ pause button
   orig: 1728, 972
   offset: 562, 159
   index: -1
-play
+play button
   rotate: false
   xy: 1, 632
   size: 604, 629

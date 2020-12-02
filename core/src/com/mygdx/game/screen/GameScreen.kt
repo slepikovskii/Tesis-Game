@@ -14,6 +14,7 @@ import com.mygdx.game.ecs.system.RenderSystem
 import ktx.app.KtxScreen
 import ktx.assets.async.AssetStorage
 import ktx.scene2d.actors
+import ktx.scene2d.imageButton
 import ktx.scene2d.label
 import ktx.scene2d.table
 
@@ -63,6 +64,10 @@ class GameScreen(private val batch: Batch,
                                 cell.apply {
                                     padTop(20f)
                                 }
+                            }
+
+                            imageButton("play_button" ) {
+                                setScale(2f)
                             }
 
                             top()
