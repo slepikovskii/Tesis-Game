@@ -52,22 +52,22 @@ class GameScreen(private val batch: Batch,
         stage.viewport.update(width, height, true)
     }
 
-    private fun setupUI() {
-        stage.actors {
-            table {
-                defaults().fillX().expandX()
+     private fun setupUI() {
+                    stage.actors {
+                        table {
+                            defaults().fillX().expandX()
 
-                label("GAME") { cell ->
-                    setFontScale(2f)
-                    setAlignment(Align.center)
-                    cell.apply {
-                        padTop(20f)
-                    }
-                }
+                            label("GAME") { cell ->
+                                setFontScale(2f)
+                                setAlignment(Align.center)
+                                cell.apply {
+                                    padTop(20f)
+                                }
+                            }
 
-                top()
-                setFillParent(true)
-                pack()
+                            top()
+                            setFillParent(true)
+                            pack()
             }
         }
     }

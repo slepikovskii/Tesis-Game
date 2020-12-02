@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetDescriptor
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
+import com.badlogic.gdx.utils.I18NBundle
 import ktx.freetype.freeTypeFontParameters
 
 enum class Textures(val path: String,
@@ -17,8 +18,9 @@ enum class TextureAtlasAssets(val path: String, val descriptor: AssetDescriptor<
     Scales("UI/Scales.atlas")
 }
 
-enum class Animations(val path: String,
-        val descriptor: AssetDescriptor<TextureAtlas> = AssetDescriptor(path, TextureAtlas::class.java)) {
+
+enum class Animations(val path: String, val descriptor: AssetDescriptor<TextureAtlas> = AssetDescriptor(path,
+        TextureAtlas::class.java)) {
     Lvl1("animation/Animation.atlas")
 }
 
