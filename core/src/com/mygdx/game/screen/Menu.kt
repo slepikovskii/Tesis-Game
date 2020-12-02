@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.mygdx.game.Game
-import com.mygdx.game.UI.MenuUI
 import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.FontAsset
 import com.mygdx.game.assests.TextureAtlasAssets
@@ -12,8 +11,6 @@ import com.mygdx.game.assests.Textures
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import ktx.app.KtxScreen
-import ktx.actors.onClick
-import ktx.actors.plusAssign
 import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
 import ktx.collections.gdxArrayOf
@@ -23,9 +20,9 @@ class Menu(private val game: Game,
            private val batch: Batch,
            private val assets: AssetStorage,
            private val stage: Stage,
-           private val engine: PooledEngine): KtxScreen {
-    private var img = assets[TextureAtlasAssets.Buttons.descriptor]
-    private var  imgPlay = img.findRegion("play",-1)
+           private val engine: PooledEngine) : KtxScreen {
+//    private var img = assets[TextureAtlasAssets.Buttons.descriptor]
+//    private var imgPlay = img.findRegion("play", -1)
 
     override fun show() {
         super.show()
@@ -39,22 +36,18 @@ class Menu(private val game: Game,
             assetRefs.joinAll()
         }
     }
+
     private fun setupUI() {
 //        ui.run {
 //           stage += this.table
 //        }
     }
 
-    override fun hide() {
-        super.hide()
-
-    }
-
     override fun render(delta: Float) {
         super.render(delta)
-        batch.use {
-            imgPlay
-        }
+//        batch.use {
+//            imgPlay
+//        }
     }
 
 
