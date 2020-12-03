@@ -70,7 +70,7 @@ class Game : KtxGame<KtxScreen>() {
             bindSingleton(stage)
 
             addScreen(MainScreen(inject(), inject(), inject(), inject(), inject()))
-            addScreen(Menu(inject(), inject(), inject(), inject(), inject()))
+            addScreen(Menu(inject(), inject(), inject(), inject(), inject() ))
             addScreen(GameScreen(inject(), inject(), inject(), inject(), inject()))
         }
         setScreen<MainScreen>()

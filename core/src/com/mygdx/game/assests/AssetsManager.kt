@@ -39,3 +39,4 @@ enum class FontAsset(
         )) {
     FONT_DEFAULT("fonts/LuckiestGuy.ttf")
 }
+
