@@ -10,7 +10,7 @@ import ktx.assets.async.AssetStorage
 import ktx.log.debug
 import ktx.log.logger
 
-private val LOG = logger<Screen>()
+val LOG = logger<Screen>()
 
 abstract class AbstractScreen(
         val game: Game

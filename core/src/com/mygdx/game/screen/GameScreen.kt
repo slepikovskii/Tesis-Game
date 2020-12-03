@@ -67,7 +67,9 @@ class GameScreen(private val batch: Batch,
                     }
                 }
 
-                imageButton(SkinImageButton.PLAYBUTTON.name)
+//               imageButton(SkinImageButton.PLAYBUTTON.name){
+//                   setScale(20f)
+//               }
 
                 top()
                 setFillParent(true)

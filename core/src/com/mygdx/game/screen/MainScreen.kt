@@ -59,7 +59,7 @@ class MainScreen(private val game: Game,
         if (Gdx.input.isTouched && assets.progress.isFinished) {
             game.removeScreen<MainScreen>()
             dispose()
-            game.setScreen<GameScreen>()
+            game.setScreen<Menu>()
         }
         engine.update(delta)
     }
