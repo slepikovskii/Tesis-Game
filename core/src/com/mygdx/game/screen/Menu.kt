@@ -3,9 +3,12 @@ package com.mygdx.game.screen
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.I18NBundle
 import com.mygdx.game.Game
-import com.mygdx.game.UI.MenuUI
+
+import com.mygdx.game.UI.SkinImageButton
 import com.mygdx.game.assests.*
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
@@ -14,6 +17,11 @@ import ktx.app.KtxScreen
 import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
 import ktx.collections.gdxArrayOf
+import ktx.scene2d.actors
+import ktx.scene2d.imageButton
+import ktx.scene2d.scene2d
+import ktx.scene2d.table
+import javax.swing.text.StyleConstants.setAlignment
 
 class Menu(private val game: Game,
            private val batch: Batch,
@@ -32,12 +40,8 @@ class Menu(private val game: Game,
     }
 
 
-    //    private var img = assets[TextureAtlasAssets.Buttons.descriptor]
-//    private var imgPlay = img.findRegion("play", -1)
-    private val ui = MenuUI().apply {
-        playMenuButton.onClick { game.setScreen<GameScreen>() }
 
-}
+
 
     override fun show() {
         super.show()
@@ -56,8 +60,48 @@ class Menu(private val game: Game,
 
 
     private fun setupUI() {
-        ui.run {  }
+    stage.actors {
+        table {
+            defaults().expandX()
+            setDebug(true)
+            imageButton(SkinImageButton.PLAYBUTTON.name){cell ->
+                x = 50f
+                y = 50f
+                cell.apply {
+                    padTop(20f)
+                    colspan(1)
+                    maxWidth(200f)
+                    maxHeight(200f)
+                    expandX()
+                }
+            }
+            row()
+            imageButton(SkinImageButton.SETTINGSBUTTON.name){cell ->
 
+                cell.apply {
+                    padTop(30f)
+                    colspan(2)
+                    maxWidth(200f)
+                    maxHeight(200f)
+                }
+            }
+            row()
+            imageButton(SkinImageButton.QUITBUTTON.name){cell ->
+
+                cell.apply {
+                    padTop(30f)
+                    colspan(3)
+                    maxWidth(200f)
+                    maxHeight(200f)
+                    expandX()
+                }
+            }
+
+            top()
+            setFillParent(true)
+            pack()
+        }
+    }
     }
 
 

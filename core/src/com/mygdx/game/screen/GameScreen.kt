@@ -58,6 +58,7 @@ class GameScreen(private val batch: Batch,
         stage.actors {
             table {
                 defaults().fillX().expandX()
+                setDebug(true)
 
                 label("GAME") { cell ->
                     setFontScale(2f)
