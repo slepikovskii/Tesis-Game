@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.utils.GdxRuntimeException
 import com.mygdx.game.ecs.component.*
 import ktx.ashley.allOf
+import ktx.ashley.exclude
 import ktx.ashley.get
 import ktx.log.debug
 import ktx.log.error
@@ -17,7 +18,7 @@ import java.util.*
 private val LOG = logger<AnimationSystem>()
 
 class AnimationSystem(
-    private val atlas: TextureAtlas
+        private val atlas: TextureAtlas
 ) : IteratingSystem(allOf(AnimationComponent::class, GraphicComponent::class, MoveComponent::class).get()), EntityListener {
     private val animationCache = EnumMap<AnimationType, Animation2D>(AnimationType::class.java)
 
@@ -36,6 +37,8 @@ class AnimationSystem(
         require(aniCmp != null) { "Entity |entity| must have an AnimationComponent. entity=$entity" }
         val graphic = entity[GraphicComponent.mapper]
         require(graphic != null) { "Entity |entity| must have a GraphicComponent. entity=$entity" }
+        val moveCmp = entity[MoveComponent.mapper]
+        require(moveCmp != null) { "Entity |entity| must have an MoveComponent. entity=$entity" }
 
         if (aniCmp.type == AnimationType.NONE) {
             LOG.error { "No aniCmp type specified" }
@@ -44,7 +47,11 @@ class AnimationSystem(
 
         if (aniCmp.animation.type == aniCmp.type) {
             // animation is correct -> update it
-            aniCmp.stateTime += deltaTime
+            if (moveCmp.speed > 0) {
+                aniCmp.stateTime += deltaTime
+            } else {
+                aniCmp.stateTime = 0f
+            }
         } else {
             // change animation
             aniCmp.stateTime = 0f

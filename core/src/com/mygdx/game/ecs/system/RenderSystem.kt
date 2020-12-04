@@ -8,8 +8,7 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.viewport.Viewport
-import com.mygdx.game.ecs.component.GraphicComponent
-import com.mygdx.game.ecs.component.TransformComponent
+import com.mygdx.game.ecs.component.*
 import ktx.ashley.allOf
 import ktx.ashley.get
 import ktx.assets.async.AssetStorage
@@ -20,7 +19,7 @@ class RenderSystem(
         private val stage: Stage,
         private val gameViewport: Viewport,
         backgroundTexture: Texture) : SortedIteratingSystem(
-        allOf(TransformComponent::class, GraphicComponent::class).get(),
+        allOf(TransformComponent::class, GraphicComponent::class, FacingComponent::class).get(),
         compareBy { entity: Entity -> entity[GraphicComponent.mapper]?.z }), EntityListener {
     private val batch = stage.batch
     private val background = Sprite(backgroundTexture)
@@ -32,7 +31,7 @@ class RenderSystem(
 
     override fun update(deltaTime: Float) {
         stage.viewport.apply()
-        renderBackground(deltaTime)
+        renderBackground()
         forceSort()
         gameViewport.apply()
         batch.use(gameViewport.camera.combined) {
@@ -41,16 +40,20 @@ class RenderSystem(
     }
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
+        val facingComponent = entity[FacingComponent.mapper]
+        require(facingComponent != null) { "Entity |entity| must have an FacingComponent. entity=$entity" }
+
         entity[TransformComponent.mapper]?.let { transform ->
             entity[GraphicComponent.mapper]?.let {
                 it.sprite.run {
+                    setFlip(facingComponent.direction == FacingDirection.LEFT, false)
                     setBounds(transform.position.x, transform.position.y, transform.size.x, transform.size.y)
                     draw(batch) }
             }
         }
     }
 
-    private fun renderBackground(deltaTime: Float) {
+    private fun renderBackground() {
         batch.use(stage.camera.combined) {
             background.run {
                 setSize(gameViewport.worldWidth, gameViewport.worldHeight)

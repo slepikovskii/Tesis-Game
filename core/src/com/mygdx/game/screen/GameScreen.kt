@@ -5,22 +5,25 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.FitViewport
+import com.mygdx.game.UI.SkinImageButton
 import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.Textures
 import com.mygdx.game.ecs.createPlayer
 import com.mygdx.game.ecs.system.AnimationSystem
 import com.mygdx.game.ecs.system.MoveSystem
-import com.mygdx.game.ecs.system.PlayerMovementSystem
 import com.mygdx.game.ecs.system.RenderSystem
 import ktx.app.KtxScreen
 import ktx.assets.async.AssetStorage
-import ktx.scene2d.*
+import ktx.scene2d.actors
+import ktx.scene2d.imageButton
+import ktx.scene2d.label
+import ktx.scene2d.table
 
 class GameScreen(private val batch: Batch,
-        private val assets: AssetStorage,
-        private val engine: PooledEngine,
-        private val stage: Stage,
-        private val gameViewport: FitViewport) : KtxScreen {
+                 private val assets: AssetStorage,
+                 private val engine: PooledEngine,
+                 private val stage: Stage,
+                 private val gameViewport: FitViewport) : KtxScreen {
 
     override fun render(delta: Float) {
         engine.update(delta)
@@ -63,6 +66,8 @@ class GameScreen(private val batch: Batch,
                         padTop(20f)
                     }
                 }
+
+                imageButton(SkinImageButton.PLAYBUTTON.name)
 
                 top()
                 setFillParent(true)

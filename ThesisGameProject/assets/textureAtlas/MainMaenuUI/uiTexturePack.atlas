@@ -1,0 +1,34 @@
+
+uiTexturePack.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+exit_button_test
+  rotate: false
+  xy: 963, 1085
+  size: 960, 540
+  orig: 960, 540
+  offset: 0, 0
+  index: -1
+play_button_test
+  rotate: false
+  xy: 1, 1
+  size: 960, 540
+  orig: 960, 540
+  offset: 0, 0
+  index: -1
+save_button_test
+  rotate: false
+  xy: 1, 543
+  size: 960, 540
+  orig: 960, 540
+  offset: 0, 0
+  index: -1
+settings_button_test
+  rotate: false
+  xy: 1, 1085
+  size: 960, 540
+  orig: 960, 540
+  offset: 0, 0
+  index: -1
