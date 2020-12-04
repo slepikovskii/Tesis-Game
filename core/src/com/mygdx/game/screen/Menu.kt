@@ -62,17 +62,19 @@ class Menu(private val game: Game,
     private fun setupUI() {
     stage.actors {
         table {
-            defaults().expandX()
+            defaults().expandX().fill()
             setDebug(true)
+            row()
             imageButton(SkinImageButton.PLAYBUTTON.name){cell ->
                 x = 50f
                 y = 50f
                 cell.apply {
                     padTop(20f)
-                    colspan(1)
+
                     maxWidth(200f)
                     maxHeight(200f)
                     expandX()
+                    top()
                 }
             }
             row()
@@ -80,9 +82,10 @@ class Menu(private val game: Game,
 
                 cell.apply {
                     padTop(30f)
-                    colspan(2)
+
                     maxWidth(200f)
                     maxHeight(200f)
+                    center()
                 }
             }
             row()
@@ -90,10 +93,11 @@ class Menu(private val game: Game,
 
                 cell.apply {
                     padTop(30f)
-                    colspan(3)
+
                     maxWidth(200f)
                     maxHeight(200f)
                     expandX()
+                    bottom()
                 }
             }
 
