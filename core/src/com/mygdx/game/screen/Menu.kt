@@ -26,11 +26,14 @@ import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
 import ktx.collections.gdxArrayOf
 import ktx.graphics.color
+import ktx.log.debug
+import ktx.log.logger
 import ktx.scene2d.*
 import javax.swing.text.StyleConstants.setAlignment
 import com.mygdx.game.screen.GameScreen as GameScreen
 
 private const val MENU_DEFAULT_PADDING = 25f
+private val log = logger<Game>()
 
 class Menu(private val game: Game,
            private val batch: Batch,
@@ -54,6 +57,7 @@ class Menu(private val game: Game,
     }
 
     override fun show() {
+        log.debug { "${this.stage} is shown" }
         super.show()
         val assetRefs = gdxArrayOf(
                 TextureAtlasAssets.values().map { assets.loadAsync(it.descriptor) },
@@ -80,7 +84,7 @@ class Menu(private val game: Game,
            imageButton(SkinImageButton.PLAYBUTTON.name){
                 imageCell.maxHeight(200f).maxWidth(200f)
                 onClick {
-                    game.removeScreen<Menu>()
+
                     hide()
                     game.setScreen<GameScreen>()
 

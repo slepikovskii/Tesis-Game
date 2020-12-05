@@ -42,6 +42,7 @@ class MainScreen(private val game: Game,
         ).flatten()
         KtxAsync.launch {
             assetRefs.joinAll()
+
         }
     }
 
@@ -67,6 +68,7 @@ class MainScreen(private val game: Game,
     override fun resize(width: Int, height: Int) {
         stage.viewport.update(width, height, true)
     }
+
     override fun hide() {
         stage.clear()
 

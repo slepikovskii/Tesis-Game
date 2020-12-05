@@ -15,6 +15,7 @@ import com.mygdx.game.ecs.system.MoveSystem
 import com.mygdx.game.ecs.system.RenderSystem
 import ktx.actors.onClick
 import ktx.app.KtxScreen
+import ktx.ashley.getSystem
 import ktx.assets.async.AssetStorage
 import ktx.scene2d.actors
 import ktx.scene2d.imageButton
@@ -73,8 +74,7 @@ class GameScreen(private val game: Game,
                     right()
 
                     onClick {
-                        game.removeScreen<GameScreen>()
-                        hide()
+
                         game.setScreen<Menu>()
 
                     }
@@ -88,8 +88,17 @@ class GameScreen(private val game: Game,
         }
     }
 
+    override fun dispose() {
+        super.dispose()
+    }
     override fun hide() {
-        super.hide()
+        stage.clear()
+        engine.run {
+            getSystem<MoveSystem>().setProcessing(false)
+            getSystem<RenderSystem>().setProcessing(false)
+            getSystem<AnimationSystem>().setProcessing(false)
+
+        }
 
     }
 
