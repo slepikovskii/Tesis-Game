@@ -1,14 +1,12 @@
 package com.mygdx.game.screen
 
 import com.badlogic.ashley.core.PooledEngine
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Cell.defaults
-import com.badlogic.gdx.scenes.scene2d.ui.Image
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Value.maxHeight
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup
-import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Align.center
 import com.badlogic.gdx.utils.I18NBundle
@@ -21,12 +19,15 @@ import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import ktx.actors.onClick
 import ktx.app.KtxScreen
+import ktx.app.clearScreen
+import ktx.app.emptyScreen
 import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
 import ktx.collections.gdxArrayOf
 import ktx.graphics.color
 import ktx.scene2d.*
 import javax.swing.text.StyleConstants.setAlignment
+import com.mygdx.game.screen.GameScreen as GameScreen
 
 private const val MENU_DEFAULT_PADDING = 25f
 
@@ -40,12 +41,15 @@ class Menu(private val game: Game,
 
 
     override fun render(delta: Float) {
-        engine.update(delta)
+
         stage.run {
             viewport.apply()
             act()
             draw()
         }
+
+            engine.update(delta)
+
     }
 
     override fun show() {
@@ -61,6 +65,7 @@ class Menu(private val game: Game,
 
         }
         setupUI()
+
     }
 
 
@@ -74,8 +79,10 @@ class Menu(private val game: Game,
                 imageCell.maxHeight(200f).maxWidth(200f)
                 onClick {
                     game.removeScreen<Menu>()
+                    stage.clear()
+                    game.setScreen<GameScreen>()
                     dispose()
-                    game.setScreen<GameScreen>() }
+                }
 
             }
             row()
@@ -85,13 +92,21 @@ class Menu(private val game: Game,
             row()
             imageButton(SkinImageButton.QUITBUTTON.name){
                 imageCell.maxHeight(200f).maxWidth(200f)
-                onClick { game.dispose() }
+                onClick { Gdx.app.exit() }
             }
             top()
             center()
-            dispose()
+
         }
     }
+    }
+    override fun resize(width: Int, height: Int) {
+
+        stage.viewport.update(width, height, true)
+    }
+
+    override fun dispose() {
+        super.dispose()
     }
 
 
