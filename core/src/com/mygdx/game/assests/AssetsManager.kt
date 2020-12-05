@@ -9,7 +9,8 @@ import ktx.freetype.freeTypeFontParameters
 
 enum class Textures(val path: String,
                     val descriptor: AssetDescriptor<Texture> = AssetDescriptor(path, Texture::class.java)) {
-    Example("background/Example on how the platform looks like.png")
+    Example("background/Example on how the platform looks like.png"),
+    MenuBG("background/piggy screen.png")
 }
 
 enum class TextureAtlasAssets(val path: String,

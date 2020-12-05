@@ -3,13 +3,20 @@ package com.mygdx.game.screen
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.ui.Cell.defaults
+import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import com.badlogic.gdx.scenes.scene2d.ui.Value.maxHeight
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup
+import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup
 import com.badlogic.gdx.utils.Align
+import com.badlogic.gdx.utils.Align.center
 import com.badlogic.gdx.utils.I18NBundle
 import com.mygdx.game.Game
 
 import com.mygdx.game.UI.SkinImageButton
 import com.mygdx.game.assests.*
+import com.sun.awt.SecurityWarning.setPosition
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import ktx.actors.onClick
@@ -17,11 +24,11 @@ import ktx.app.KtxScreen
 import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
 import ktx.collections.gdxArrayOf
-import ktx.scene2d.actors
-import ktx.scene2d.imageButton
-import ktx.scene2d.scene2d
-import ktx.scene2d.table
+import ktx.graphics.color
+import ktx.scene2d.*
 import javax.swing.text.StyleConstants.setAlignment
+
+private const val MENU_DEFAULT_PADDING = 25f
 
 class Menu(private val game: Game,
            private val batch: Batch,
@@ -29,6 +36,8 @@ class Menu(private val game: Game,
            private val stage: Stage,
            private val engine: PooledEngine,
            ) : KtxScreen {
+
+
 
     override fun render(delta: Float) {
         engine.update(delta)
@@ -62,48 +71,32 @@ class Menu(private val game: Game,
     private fun setupUI() {
     stage.actors {
         table {
-            defaults().expandX().fill()
+            defaults().fillX().expandX().pad(MENU_DEFAULT_PADDING)
+            setFillParent(true)
             setDebug(true)
-            row()
-            imageButton(SkinImageButton.PLAYBUTTON.name){cell ->
-                x = 50f
-                y = 50f
-                cell.apply {
-                    padTop(20f)
 
-                    maxWidth(200f)
-                    maxHeight(200f)
-                    expandX()
-                    top()
-                }
+
+
+            imageButton(SkinImageButton.PLAYBUTTON.name){cell ->
+
+                imageCell.maxHeight(200f).maxWidth(200f)
+
+
             }
             row()
             imageButton(SkinImageButton.SETTINGSBUTTON.name){cell ->
+                imageCell.maxHeight(200f).maxWidth(200f)
 
-                cell.apply {
-                    padTop(30f)
-
-                    maxWidth(200f)
-                    maxHeight(200f)
-                    center()
-                }
             }
             row()
             imageButton(SkinImageButton.QUITBUTTON.name){cell ->
-
-                cell.apply {
-                    padTop(30f)
-
-                    maxWidth(200f)
-                    maxHeight(200f)
-                    expandX()
-                    bottom()
-                }
+                imageCell.maxHeight(200f).maxWidth(200f)
             }
 
             top()
-            setFillParent(true)
-            pack()
+            center()
+
+
         }
     }
     }
