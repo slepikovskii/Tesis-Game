@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.FitViewport
+import com.mygdx.game.Game
 import com.mygdx.game.UI.SkinImageButton
 import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.Textures
@@ -12,14 +13,17 @@ import com.mygdx.game.ecs.createPlayer
 import com.mygdx.game.ecs.system.AnimationSystem
 import com.mygdx.game.ecs.system.MoveSystem
 import com.mygdx.game.ecs.system.RenderSystem
+import ktx.actors.onClick
 import ktx.app.KtxScreen
 import ktx.assets.async.AssetStorage
 import ktx.scene2d.actors
 import ktx.scene2d.imageButton
 import ktx.scene2d.label
 import ktx.scene2d.table
+import kotlin.math.min
+private const val MAX_DELTA_TIME = 1 / 30f
 
-class GameScreen(private val batch: Batch,
+class GameScreen(private val game: Game,
                  private val assets: AssetStorage,
                  private val engine: PooledEngine,
                  private val stage: Stage,
@@ -27,11 +31,14 @@ class GameScreen(private val batch: Batch,
 
     override fun render(delta: Float) {
         engine.update(delta)
+
         stage.run {
             viewport.apply()
             act()
             draw()
         }
+
+
     }
 
     override fun show() {
@@ -46,6 +53,7 @@ class GameScreen(private val batch: Batch,
         engine.run {
             createPlayer(assets)
         }
+
         setupUI()
     }
 
@@ -57,25 +65,32 @@ class GameScreen(private val batch: Batch,
     private fun setupUI() {
         stage.actors {
             table {
-                defaults().fillX().expandX()
+                defaults().fillX()
+                setDebug(true)
 
+                imageButton(SkinImageButton.MENUBUTTON.name){
+                    imageCell.maxHeight(100f).maxWidth(100f)
+                    right()
 
-                label("GAME") { cell ->
-                    setFontScale(2f)
-                    setAlignment(Align.center)
-                    cell.apply {
-                        padTop(20f)
+                    onClick {
+                        game.removeScreen<GameScreen>()
+                        hide()
+                        game.setScreen<Menu>()
+
                     }
                 }
 
-//               imageButton(SkinImageButton.PLAYBUTTON.name){
-//                   setScale(20f)
-//               }
-
                 top()
+                right()
                 setFillParent(true)
                 pack()
             }
         }
     }
+
+    override fun hide() {
+        super.hide()
+
+    }
+
 }

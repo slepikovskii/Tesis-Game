@@ -2,6 +2,7 @@ package com.mygdx.game.screen
 
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Screen
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.*
@@ -47,8 +48,8 @@ class Menu(private val game: Game,
             act()
             draw()
         }
-
             engine.update(delta)
+
 
     }
 
@@ -62,6 +63,7 @@ class Menu(private val game: Game,
         ).flatten()
         KtxAsync.launch {
             assetRefs.joinAll()
+
 
         }
         setupUI()
@@ -79,9 +81,9 @@ class Menu(private val game: Game,
                 imageCell.maxHeight(200f).maxWidth(200f)
                 onClick {
                     game.removeScreen<Menu>()
-                    stage.clear()
+                    hide()
                     game.setScreen<GameScreen>()
-                    dispose()
+
                 }
 
             }
@@ -105,8 +107,10 @@ class Menu(private val game: Game,
         stage.viewport.update(width, height, true)
     }
 
-    override fun dispose() {
-        super.dispose()
+
+    override fun hide() {
+        stage.clear()
+
     }
 
 

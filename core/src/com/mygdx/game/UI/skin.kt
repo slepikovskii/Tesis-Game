@@ -10,13 +10,14 @@ import ktx.style.label
 import ktx.style.skin
 
 enum class SkinImageButton {
-    PLAYBUTTON, QUITBUTTON, SETTINGSBUTTON
+    PLAYBUTTON, QUITBUTTON, SETTINGSBUTTON, MENUBUTTON
 }
 
 enum class SkinImage(val atlaskey: String) {
     PLAY("play button"),
     QUIT("X button"),
-    SETTINGS("Settings button")
+    SETTINGS("Settings button"),
+    MENU("Menu button")
 }
 
 fun createSkin(assets: AssetStorage) {
@@ -43,6 +44,10 @@ private fun Skin.createImageButtonStyles(
     }
     imageButton(SkinImageButton.SETTINGSBUTTON.name) {
         imageUp = skin.getDrawable(SkinImage.SETTINGS.atlaskey)
+        imageDown = imageUp
+    }
+    imageButton(SkinImageButton.MENUBUTTON.name) {
+        imageUp = skin.getDrawable(SkinImage.MENU.atlaskey)
         imageDown = imageUp
     }
 }
