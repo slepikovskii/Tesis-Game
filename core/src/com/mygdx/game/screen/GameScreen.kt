@@ -16,12 +16,14 @@ import com.mygdx.game.ecs.createPlayer
 import com.mygdx.game.ecs.system.AnimationSystem
 import com.mygdx.game.ecs.system.MoveSystem
 import com.mygdx.game.ecs.system.RenderSystem
+import kotlinx.coroutines.launch
 import ktx.actors.onClick
 import ktx.app.KtxScreen
 import ktx.ashley.entity
 import ktx.ashley.get
 import ktx.ashley.getSystem
 import ktx.assets.async.AssetStorage
+import ktx.async.KtxAsync
 import ktx.scene2d.actors
 import ktx.scene2d.imageButton
 import ktx.scene2d.label
@@ -105,7 +107,7 @@ class GameScreen(private val game: Game,
             getSystem<MoveSystem>().setProcessing(false)
             getSystem<RenderSystem>().setProcessing(false)
             getSystem<AnimationSystem>().setProcessing(false)
-
+            engine.removeAllEntities()
 
 
         }
