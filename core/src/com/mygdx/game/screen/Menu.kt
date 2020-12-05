@@ -48,10 +48,6 @@ class Menu(private val game: Game,
         }
     }
 
-
-
-
-
     override fun show() {
         super.show()
         val assetRefs = gdxArrayOf(
@@ -73,30 +69,27 @@ class Menu(private val game: Game,
         table {
             defaults().fillX().expandX().pad(MENU_DEFAULT_PADDING)
             setFillParent(true)
-            setDebug(true)
 
-
-
-            imageButton(SkinImageButton.PLAYBUTTON.name){cell ->
-
+           imageButton(SkinImageButton.PLAYBUTTON.name){
                 imageCell.maxHeight(200f).maxWidth(200f)
-
+                onClick {
+                    game.removeScreen<Menu>()
+                    dispose()
+                    game.setScreen<GameScreen>() }
 
             }
             row()
-            imageButton(SkinImageButton.SETTINGSBUTTON.name){cell ->
+            imageButton(SkinImageButton.SETTINGSBUTTON.name){
                 imageCell.maxHeight(200f).maxWidth(200f)
-
             }
             row()
-            imageButton(SkinImageButton.QUITBUTTON.name){cell ->
+            imageButton(SkinImageButton.QUITBUTTON.name){
                 imageCell.maxHeight(200f).maxWidth(200f)
+                onClick { game.dispose() }
             }
-
             top()
             center()
-
-
+            dispose()
         }
     }
     }
