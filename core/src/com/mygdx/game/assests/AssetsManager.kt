@@ -10,14 +10,15 @@ enum class Textures(val path: String,
         val descriptor: AssetDescriptor<Texture> = AssetDescriptor(path, Texture::class.java)) {
     Example("background/Example on how the platform looks like.png"),
     Background("background/sky_bg.png"),
-    Houses("background/houses_bg.png"),
+    HousesBackground("background/houses_bg.png"),
     Road("background/road.png")
 }
 
 enum class TextureAtlasAssets(val path: String, val descriptor: AssetDescriptor<TextureAtlas> = AssetDescriptor(path,
         TextureAtlas::class.java)) {
     Buttons("UI/Buttons.atlas"),
-    Scales("UI/Scales.atlas")
+    Scales("UI/Scales.atlas"),
+    Houses("background/houses.atlas")
 }
 
 enum class Animations(val path: String,

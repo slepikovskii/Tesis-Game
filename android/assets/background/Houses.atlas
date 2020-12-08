@@ -1,0 +1,76 @@
+
+Houses.png
+size: 2048,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+house01
+  rotate: false
+  xy: 950, 200
+  size: 200, 222
+  orig: 270, 270
+  offset: 35, 33
+  index: -1
+house02
+  rotate: false
+  xy: 748, 200
+  size: 200, 222
+  orig: 270, 270
+  offset: 35, 33
+  index: -1
+house03
+  rotate: false
+  xy: 246, 8
+  size: 243, 206
+  orig: 270, 270
+  offset: 14, 31
+  index: -1
+house04
+  rotate: false
+  xy: 246, 216
+  size: 243, 206
+  orig: 270, 270
+  offset: 14, 31
+  index: -1
+house05
+  rotate: false
+  xy: 2, 213
+  size: 242, 209
+  orig: 270, 270
+  offset: 9, 30
+  index: -1
+house06
+  rotate: false
+  xy: 2, 2
+  size: 242, 209
+  orig: 270, 270
+  offset: 9, 30
+  index: -1
+house07
+  rotate: false
+  xy: 1152, 170
+  size: 126, 252
+  orig: 270, 270
+  offset: 78, 9
+  index: -1
+house08
+  rotate: false
+  xy: 1280, 170
+  size: 126, 252
+  orig: 270, 270
+  offset: 78, 9
+  index: -1
+house09
+  rotate: false
+  xy: 491, 34
+  size: 255, 193
+  orig: 270, 270
+  offset: 7, 45
+  index: -1
+house10
+  rotate: false
+  xy: 491, 229
+  size: 255, 193
+  orig: 270, 270
+  offset: 7, 45
+  index: -1
