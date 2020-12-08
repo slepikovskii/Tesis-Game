@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.Textures
 import com.mygdx.game.ecs.component.FacingDirection
+import com.mygdx.game.ecs.createHouses
 import com.mygdx.game.ecs.createPlayer
 import com.mygdx.game.ecs.system.AnimationSystem
 import com.mygdx.game.ecs.system.MoveSystem
@@ -53,8 +54,10 @@ class GameScreen(private val eventManager: GameEventManager,
             addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor]))
             addSystem(PlayerInputSystem(eventManager))
         }
+
         engine.run {
             createPlayer(assets)
+            createHouses(assets)
         }
         eventManager.run {
             addListener(GameEvent.PaperThrown::class, this@GameScreen)
@@ -77,7 +80,7 @@ class GameScreen(private val eventManager: GameEventManager,
         stage.actors {
             background = parallaxBackground(arrayOf(
                     assets[Textures.Background.descriptor],
-                    assets[Textures.Houses.descriptor],
+                    assets[Textures.HousesBackground.descriptor],
                     assets[Textures.Road.descriptor]
             )).apply {
                 heigth = 720f

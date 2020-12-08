@@ -18,38 +18,38 @@ private const val HOR_ACCELERATION = 50f
 
 class MoveSystem(private val gameEventManager: GameEventManager) : IteratingSystem(
         allOf(TransformComponent::class, MoveComponent::class).get()) {
-    override fun processEntity(entity: Entity, deltaTime: Float) {
-        val moveCmp = entity[MoveComponent.mapper]
-        require(moveCmp != null) { "Entity |entity| must have an MoveComponent. entity=$entity" }
 
-        when {
-            Gdx.input.isKeyPressed(Input.Keys.RIGHT) -> {
-                moveCmp.speed = moveCmp.speed + HOR_ACCELERATION * deltaTime
-                entity[FacingComponent.mapper]?.direction = FacingDirection.RIGHT
-                entity[TransformComponent.mapper]?.let {
-                    it.position.x = MathUtils.clamp(
-                            it.position.x + moveCmp.speed * deltaTime,
-                            -40f,
-                            Gdx.graphics.width + 40 - it.size.x
-                    )
+    override fun processEntity(entity: Entity, deltaTime: Float) {
+        entity[MoveComponent.mapper]?.let {
+            when {
+                Gdx.input.isKeyPressed(Input.Keys.RIGHT) -> {
+                    it.speed += HOR_ACCELERATION * deltaTime
+                    entity[FacingComponent.mapper]?.direction = FacingDirection.RIGHT
+                    entity[TransformComponent.mapper]?.apply {
+                        position.x = MathUtils.clamp(
+                                position.x + it.speed * deltaTime,
+                                -40f,
+                                Gdx.graphics.width + 40 - size.x
+                        )
+                    }
+                    gameEventManager.dispatchEvent(GameEvent.PlayerMoved(FacingDirection.RIGHT))
                 }
-                gameEventManager.dispatchEvent(GameEvent.PlayerMoved(FacingDirection.RIGHT))
-            }
-            Gdx.input.isKeyPressed(Input.Keys.LEFT) -> {
-                moveCmp.speed = moveCmp.speed + HOR_ACCELERATION * deltaTime
-                entity[FacingComponent.mapper]?.direction = FacingDirection.LEFT
-                entity[TransformComponent.mapper]?.let {
-                    it.position.x = MathUtils.clamp(
-                            it.position.x - moveCmp.speed * deltaTime,
-                            -40f,
-                            Gdx.graphics.width + 40 - it.size.x
-                    )
+                Gdx.input.isKeyPressed(Input.Keys.LEFT) -> {
+                    it.speed += HOR_ACCELERATION * deltaTime
+                    entity[FacingComponent.mapper]?.direction = FacingDirection.LEFT
+                    entity[TransformComponent.mapper]?.apply {
+                        position.x = MathUtils.clamp(
+                                position.x - it.speed * deltaTime,
+                                -40f,
+                                Gdx.graphics.width + 40 - size.x
+                        )
+                    }
+                    gameEventManager.dispatchEvent(GameEvent.PlayerMoved(FacingDirection.LEFT))
                 }
-                gameEventManager.dispatchEvent(GameEvent.PlayerMoved(FacingDirection.LEFT))
-            }
-            else -> {
-                moveCmp.speed = 0f
-                gameEventManager.dispatchEvent(GameEvent.PlayerMoved(null))
+                else -> {
+                    it.speed = 0f
+                    gameEventManager.dispatchEvent(GameEvent.PlayerMoved(null))
+                }
             }
         }
     }
