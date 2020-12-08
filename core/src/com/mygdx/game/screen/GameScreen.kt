@@ -15,6 +15,7 @@ import com.mygdx.game.ecs.system.RenderSystem
 import com.mygdx.game.event.GameEvent
 import com.mygdx.game.event.GameEventListener
 import com.mygdx.game.event.GameEventManager
+import com.mygdx.game.widget.parallaxBackground
 import ktx.app.KtxScreen
 import ktx.assets.async.AssetStorage
 import ktx.scene2d.actors
@@ -30,12 +31,12 @@ class GameScreen(private val eventManager: GameEventManager,
     private lateinit var paperRemains: Label
 
     override fun render(delta: Float) {
-        engine.update(delta)
         stage.run {
             viewport.apply()
             act()
             draw()
         }
+        engine.update(delta)
     }
 
     override fun show() {
@@ -43,7 +44,7 @@ class GameScreen(private val eventManager: GameEventManager,
         // initialize entity engine
         engine.apply {
             addSystem(MoveSystem())
-            addSystem(RenderSystem(assets, stage, gameViewport, assets[Textures.Example.descriptor]))
+            addSystem(RenderSystem(assets, stage, gameViewport ))
             addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor]))
             addSystem(PlayerInputSystem(eventManager))
         }
@@ -66,6 +67,10 @@ class GameScreen(private val eventManager: GameEventManager,
 
     private fun setupUI() {
         stage.actors {
+            parallaxBackground(Array(1) { assets[Textures.Background.descriptor] }).apply  {
+                heigth = 720f
+                width = 1280f
+            }
             table {
                 label("Paper remains:") {
                     setAlignment(Align.left)
@@ -79,7 +84,6 @@ class GameScreen(private val eventManager: GameEventManager,
                         expandX()
                     }
                 }
-
 
                 top()
                 setFillParent(true)

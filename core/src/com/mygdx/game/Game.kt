@@ -38,7 +38,7 @@ class Game : KtxGame<KtxScreen>() {
     }
     private val gameViewport = FitViewport(1280f, 720f)
     private val stage: Stage by lazy {
-        val result = Stage(gameViewport)
+        val result = Stage(FitViewport(1280f, 720f))
         Gdx.input.inputProcessor = result
         result
     }
