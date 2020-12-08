@@ -1,71 +1,74 @@
 package com.mygdx.game.screen
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
-import com.badlogic.gdx.graphics.Colors.reset
-import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Align
-import com.badlogic.gdx.utils.Null
 import com.badlogic.gdx.utils.viewport.FitViewport
-import com.mygdx.game.Game
-import com.mygdx.game.UI.SkinImageButton
 import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.Textures
+import com.mygdx.game.ecs.component.FacingDirection
+import com.mygdx.game.ecs.createHouses
 import com.mygdx.game.ecs.createPlayer
 import com.mygdx.game.ecs.system.AnimationSystem
 import com.mygdx.game.ecs.system.MoveSystem
+import com.mygdx.game.ecs.system.PlayerInputSystem
 import com.mygdx.game.ecs.system.RenderSystem
-import kotlinx.coroutines.launch
-import ktx.actors.onClick
+import com.mygdx.game.event.GameEvent
+import com.mygdx.game.event.GameEventListener
+import com.mygdx.game.event.GameEventManager
+import com.mygdx.game.widget.ParallaxBackground
+import com.mygdx.game.widget.parallaxBackground
 import ktx.app.KtxScreen
-import ktx.ashley.entity
-import ktx.ashley.get
-import ktx.ashley.getSystem
 import ktx.assets.async.AssetStorage
-import ktx.async.KtxAsync
 import ktx.scene2d.actors
-import ktx.scene2d.imageButton
 import ktx.scene2d.label
 import ktx.scene2d.table
-import java.nio.file.Files.exists
-import kotlin.math.min
-private const val MAX_DELTA_TIME = 1 / 30f
 
-class GameScreen(private val game: Game,
-                 private val assets: AssetStorage,
-                 private val engine: PooledEngine,
-                 private val stage: Stage,
-                 private val gameViewport: FitViewport) : KtxScreen {
+val DEFAULT_BACKGROUND_SPEED = 1
+
+class GameScreen(private val eventManager: GameEventManager,
+        private val assets: AssetStorage,
+        private val engine: PooledEngine,
+        private val stage: Stage,
+        private val gameViewport: FitViewport) : KtxScreen, GameEventListener {
+
+    private lateinit var paperRemains: Label
+    private lateinit var background: ParallaxBackground
 
     override fun render(delta: Float) {
-        engine.update(delta)
-
         stage.run {
             viewport.apply()
             act()
             draw()
         }
-
-
+        engine.update(delta)
     }
 
     override fun show() {
         super.show()
         // initialize entity engine
         engine.apply {
-            addSystem(MoveSystem())
-            addSystem(RenderSystem(assets, stage, gameViewport, assets[Textures.Example.descriptor]))
-//            addSystem(PlayerMovementSystem(assets[Animations.Lvl1.descriptor]))
+            addSystem(MoveSystem(eventManager))
+            addSystem(RenderSystem(assets, stage, gameViewport))
             addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor]))
+            addSystem(PlayerInputSystem(eventManager))
         }
+
         engine.run {
-
             createPlayer(assets)
-
+            createHouses(assets)
         }
-
+        eventManager.run {
+            addListener(GameEvent.PaperThrown::class, this@GameScreen)
+            addListener(GameEvent.PlayerMoved::class, this@GameScreen)
+        }
         setupUI()
+    }
+
+    override fun hide() {
+        super.hide()
+        eventManager.removeListener(this)
     }
 
     override fun resize(width: Int, height: Int) {
@@ -75,44 +78,57 @@ class GameScreen(private val game: Game,
 
     private fun setupUI() {
         stage.actors {
+            background = parallaxBackground(arrayOf(
+                    assets[Textures.Background.descriptor],
+                    assets[Textures.HousesBackground.descriptor],
+                    assets[Textures.Road.descriptor]
+            )).apply {
+                heigth = 720f
+                width = 1280f
+            }
             table {
-                defaults().fillX()
-                setDebug(true)
-
-                imageButton(SkinImageButton.MENUBUTTON.name){
-                    imageCell.maxHeight(100f).maxWidth(100f)
-                    right()
-                    onClick {
-                        hide()
-                        game.setScreen<Menu>()
-
+                label("Paper remains:") {
+                    setAlignment(Align.left)
+                    it.apply { padLeft(20f) }
+                }
+                paperRemains = label("0") {
+                    setAlignment(Align.left)
+                    it.apply {
+                        padLeft(10f)
+                        fillX()
+                        expandX()
                     }
                 }
 
                 top()
-                right()
                 setFillParent(true)
                 pack()
             }
         }
 
+        paperRemains.setText(10)
     }
 
-    override fun dispose() {
-        super.dispose()
-    }
-    override fun hide() {
-        stage.clear()
-        engine.run {
-            getSystem<MoveSystem>().setProcessing(false)
-            getSystem<RenderSystem>().setProcessing(false)
-            getSystem<AnimationSystem>().setProcessing(false)
-            engine.removeAllEntities()
-
-
+    override fun onEvent(event: GameEvent) {
+        when (event) {
+            is GameEvent.PaperThrown -> {
+                paperRemains.run {
+                    setText(text.toString().toInt() - 1)
+                }
+            }
+            is GameEvent.PlayerMoved -> {
+                when (event.direction) {
+                    FacingDirection.RIGHT -> {
+                        background.setSpeed(DEFAULT_BACKGROUND_SPEED)
+                    }
+                    FacingDirection.LEFT -> {
+                        background.setSpeed(-DEFAULT_BACKGROUND_SPEED)
+                    }
+                    else -> {
+                        background.setSpeed(0)
+                    }
+                }
+            }
         }
-
-
     }
-
 }

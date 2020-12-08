@@ -17,12 +17,10 @@ import ktx.graphics.use
 class RenderSystem(
         private val assets: AssetStorage,
         private val stage: Stage,
-        private val gameViewport: Viewport,
-        backgroundTexture: Texture) : SortedIteratingSystem(
+        private val gameViewport: Viewport,) : SortedIteratingSystem(
         allOf(TransformComponent::class, GraphicComponent::class, FacingComponent::class).get(),
         compareBy { entity: Entity -> entity[GraphicComponent.mapper]?.z }), EntityListener {
     private val batch = stage.batch
-    private val background = Sprite(backgroundTexture)
 
     override fun addedToEngine(engine: Engine) {
         super.addedToEngine(engine)
@@ -31,7 +29,6 @@ class RenderSystem(
 
     override fun update(deltaTime: Float) {
         stage.viewport.apply()
-        renderBackground()
         forceSort()
         gameViewport.apply()
         batch.use(gameViewport.camera.combined) {
@@ -49,15 +46,6 @@ class RenderSystem(
                     setFlip(facingComponent.direction == FacingDirection.LEFT, false)
                     setBounds(transform.position.x, transform.position.y, transform.size.x, transform.size.y)
                     draw(batch) }
-            }
-        }
-    }
-
-    private fun renderBackground() {
-        batch.use(stage.camera.combined) {
-            background.run {
-                setSize(gameViewport.worldWidth, gameViewport.worldHeight)
-                draw(batch)
             }
         }
     }
