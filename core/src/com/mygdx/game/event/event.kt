@@ -1,6 +1,7 @@
 package com.mygdx.game.event
 
 import com.badlogic.gdx.utils.ObjectMap
+import com.mygdx.game.ecs.component.FacingDirection
 import ktx.collections.GdxSet
 import kotlin.reflect.KClass
 
@@ -8,6 +9,7 @@ private const val INITIAL_LISTENER_CAPACITY = 8
 
 sealed class GameEvent {
     object PaperThrown : GameEvent()
+    data class PlayerMoved(val direction: FacingDirection?) : GameEvent()
 }
 
 interface GameEventListener {

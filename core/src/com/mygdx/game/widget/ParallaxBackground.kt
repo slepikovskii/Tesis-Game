@@ -40,7 +40,7 @@ class ParallaxBackground(textures: Array<Texture>) : Actor() {
             element.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat)
         }
         scroll = 0
-        speed = 1
+        speed = 0
         srcY = 0
         rotation = 0
         originY = 0
@@ -60,7 +60,5 @@ class ParallaxBackground(textures: Array<Texture>) : Actor() {
 @Scene2dDsl
 inline fun <S> KWidget<S>.parallaxBackground(
         textures: Array<Texture>,
-//        skin: Skin = Scene2DSkin.defaultSkin,
-//        style: String = defaultStyle,
         init: ParallaxBackground.(S) -> Unit = {}
 ): ParallaxBackground = actor(ParallaxBackground(textures), init)

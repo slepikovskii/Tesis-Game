@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.Textures
+import com.mygdx.game.ecs.component.FacingDirection
 import com.mygdx.game.ecs.createPlayer
 import com.mygdx.game.ecs.system.AnimationSystem
 import com.mygdx.game.ecs.system.MoveSystem
@@ -15,12 +16,15 @@ import com.mygdx.game.ecs.system.RenderSystem
 import com.mygdx.game.event.GameEvent
 import com.mygdx.game.event.GameEventListener
 import com.mygdx.game.event.GameEventManager
+import com.mygdx.game.widget.ParallaxBackground
 import com.mygdx.game.widget.parallaxBackground
 import ktx.app.KtxScreen
 import ktx.assets.async.AssetStorage
 import ktx.scene2d.actors
 import ktx.scene2d.label
 import ktx.scene2d.table
+
+val DEFAULT_BACKGROUND_SPEED = 1
 
 class GameScreen(private val eventManager: GameEventManager,
         private val assets: AssetStorage,
@@ -29,6 +33,7 @@ class GameScreen(private val eventManager: GameEventManager,
         private val gameViewport: FitViewport) : KtxScreen, GameEventListener {
 
     private lateinit var paperRemains: Label
+    private lateinit var background: ParallaxBackground
 
     override fun render(delta: Float) {
         stage.run {
@@ -43,15 +48,18 @@ class GameScreen(private val eventManager: GameEventManager,
         super.show()
         // initialize entity engine
         engine.apply {
-            addSystem(MoveSystem())
-            addSystem(RenderSystem(assets, stage, gameViewport ))
+            addSystem(MoveSystem(eventManager))
+            addSystem(RenderSystem(assets, stage, gameViewport))
             addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor]))
             addSystem(PlayerInputSystem(eventManager))
         }
         engine.run {
             createPlayer(assets)
         }
-        eventManager.addListener(GameEvent.PaperThrown::class, this)
+        eventManager.run {
+            addListener(GameEvent.PaperThrown::class, this@GameScreen)
+            addListener(GameEvent.PlayerMoved::class, this@GameScreen)
+        }
         setupUI()
     }
 
@@ -67,7 +75,11 @@ class GameScreen(private val eventManager: GameEventManager,
 
     private fun setupUI() {
         stage.actors {
-            parallaxBackground(Array(1) { assets[Textures.Background.descriptor] }).apply  {
+            background = parallaxBackground(arrayOf(
+                    assets[Textures.Background.descriptor],
+                    assets[Textures.Houses.descriptor],
+                    assets[Textures.Road.descriptor]
+            )).apply {
                 heigth = 720f
                 width = 1280f
             }
@@ -99,6 +111,19 @@ class GameScreen(private val eventManager: GameEventManager,
             is GameEvent.PaperThrown -> {
                 paperRemains.run {
                     setText(text.toString().toInt() - 1)
+                }
+            }
+            is GameEvent.PlayerMoved -> {
+                when (event.direction) {
+                    FacingDirection.RIGHT -> {
+                        background.setSpeed(DEFAULT_BACKGROUND_SPEED)
+                    }
+                    FacingDirection.LEFT -> {
+                        background.setSpeed(-DEFAULT_BACKGROUND_SPEED)
+                    }
+                    else -> {
+                        background.setSpeed(0)
+                    }
                 }
             }
         }

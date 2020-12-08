@@ -25,7 +25,7 @@ fun Engine.createPlayer(
             )
             setInitialPosition(
                     10f,
-                    5f,
+                    50f,
             )
         }
         with<MoveComponent>()
