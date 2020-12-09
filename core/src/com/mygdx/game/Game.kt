@@ -9,10 +9,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.mygdx.game.assests.FontAsset
 import com.mygdx.game.assests.TextureAtlasAssets
 import com.mygdx.game.event.GameEventManager
-import com.mygdx.game.screen.Bedroom
-import com.mygdx.game.screen.GameScreen
-import com.mygdx.game.screen.MainScreen
-import com.mygdx.game.screen.Menu
+import com.mygdx.game.screen.*
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import ktx.app.KtxGame
@@ -58,6 +55,7 @@ class Game : KtxGame<KtxScreen>() {
             addScreen(GameScreen(inject(), inject(), inject(), inject(), inject()))
             addScreen(Menu(inject(), inject(), inject(), inject(), inject()))
             addScreen(Bedroom(inject(), inject(), inject(), inject(), inject(), inject()))
+            addScreen(ShopScreen(inject(), inject(), inject(), inject(), inject(), inject()))
         }
         val assetRefs = gdxArrayOf(
                 TextureAtlasAssets.values().map { assets.loadAsync(it.descriptor) },

@@ -87,6 +87,8 @@ class GameScreen(private val eventManager: GameEventManager,
                 width = 1280f
             }
             table {
+
+
                 label("Paper remains:") {
                     setAlignment(Align.left)
                     it.apply { padLeft(20f) }

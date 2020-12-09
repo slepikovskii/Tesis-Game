@@ -23,19 +23,18 @@ import ktx.collections.gdxArrayOf
 import ktx.log.debug
 import ktx.log.logger
 import ktx.scene2d.actors
+import ktx.scene2d.horizontalGroup
 import ktx.scene2d.imageButton
-import ktx.scene2d.table
-import ktx.scene2d.verticalGroup
 
 private val log = logger<Game>()
 
-class Bedroom(
-        private val game: Game,
-        private val assets: AssetStorage,
-        private val engine: PooledEngine,
-        private val stage: Stage,
-        private val gameViewport: FitViewport,
-        private val eventManager: GameEventManager
+class ShopScreen(
+private val game: Game,
+private val assets: AssetStorage,
+private val engine: PooledEngine,
+private val stage: Stage,
+private val gameViewport: FitViewport,
+private val eventManager: GameEventManager
 ): KtxScreen {
     private lateinit var background: ParallaxBackground
 
@@ -47,6 +46,7 @@ class Bedroom(
         }
         engine.update(delta)
     }
+
     override fun show() {
         log.debug { "${this.stage} is shown" }
         super.show()
@@ -64,83 +64,51 @@ class Bedroom(
         setupUI()
 
     }
+
     override fun hide() {
         stage.clear()
 
     }
+
     override fun resize(width: Int, height: Int) {
         gameViewport.update(width, height, true)
         stage.viewport.update(width, height, true)
     }
+
     private fun setupUI() {
         stage.actors {
             background = parallaxBackground(arrayOf(
-                    assets[Textures.RoomBackground.descriptor]
+                    assets[Textures.ShopBackground.descriptor]
 
             )).apply {
                 heigth = 720f
                 width = 1280f
             }
-           table {
-               defaults().fillX().expandX().fillY().expandY()
+            horizontalGroup {
                 setFillParent(true)
-               setDebug(true)
+                setDebug(true)
+                imageButton(SkinImageButton.MENUBUTTON.name) {
 
-               verticalGroup {
-                   imageButton(SkinImageButton.MENUBUTTON.name){
+                    imageCell.maxHeight(200f).maxWidth(200f)
+                    onClick {
+                        hide()
+                        game.setScreen<Menu>()
+                    }
+                }
+                imageButton(SkinImageButton.GAMEBUTTON.name) {
 
-                   imageCell.maxHeight(200f).maxWidth(200f)
-                   onClick {
-                       hide()
-                       game.setScreen<Menu>()
-                   }
+                    imageCell.maxHeight(200f).maxWidth(200f)
+                    onClick {
+                        hide()
+                        game.setScreen<GameScreen>()
+                    }
 
-               }
-                   top()
-                   left()
-
-               }
-
-
-
-               verticalGroup {
-                   imageButton(SkinImageButton.GAMEBUTTON.name) {
-
-                       imageCell.maxHeight(200f).maxWidth(200f)
-                       onClick {
-                           hide()
-                           game.setScreen<GameScreen>()
-                       }
-
-                   }
-
-                   imageButton(SkinImageButton.SHOPBUTTON.name){
-
-                       imageCell.maxHeight(200f).maxWidth(200f)
-                   onClick {
-                       hide()
-                       game.setScreen<ShopScreen>()
-                   }
-                   }
-
-                   imageButton(SkinImageButton.PIGGYBUTTON.name){
-                       left()
-                       imageCell.maxHeight(200f).maxWidth(200f)
-                   }
-
-                   right()
-                   top()
-               }
-
-
-               top()
-
-
-           }
+                }
+                center()
 
             }
         }
-
-
-
     }
+}
+
+
