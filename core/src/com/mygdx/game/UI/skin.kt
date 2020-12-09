@@ -10,23 +10,30 @@ import ktx.style.label
 import ktx.style.skin
 
 enum class SkinImageButton {
-    PLAYBUTTON, QUITBUTTON, SETTINGSBUTTON, MENUBUTTON
+    PLAYBUTTON, QUITBUTTON, SETTINGSBUTTON, MENUBUTTON, SHOPBUTTON, GAMEBUTTON, HOMEBUTTON,PIGGYBUTTON
 }
 
 enum class SkinImage(val atlaskey: String) {
     PLAY("play button"),
     QUIT("X button"),
     SETTINGS("Settings button"),
-    MENU("Menu button")
+    MENU("Menu button"),
+    SHOP("shop"),
+    GAME("work"),
+    HOME("Homeshop button"),
+    PIGGY("Gpig")
+
 }
 
 fun createSkin(assets: AssetStorage) {
     val atlas = assets[TextureAtlasAssets.Buttons.descriptor]
+
     Scene2DSkin.defaultSkin = skin(atlas) { skin ->
         createImageButtonStyles(skin)
         label("default") {
             font = assets[FontAsset.FONT_DEFAULT.descriptor]
         }
+
     }
 
 }
@@ -48,6 +55,22 @@ private fun Skin.createImageButtonStyles(
     }
     imageButton(SkinImageButton.MENUBUTTON.name) {
         imageUp = skin.getDrawable(SkinImage.MENU.atlaskey)
+        imageDown = imageUp
+    }
+    imageButton(SkinImageButton.SHOPBUTTON.name) {
+        imageUp = skin.getDrawable(SkinImage.SHOP.atlaskey)
+        imageDown = imageUp
+    }
+    imageButton(SkinImageButton.GAMEBUTTON.name) {
+        imageUp = skin.getDrawable(SkinImage.GAME.atlaskey)
+        imageDown = imageUp
+    }
+    imageButton(SkinImageButton.HOMEBUTTON.name) {
+        imageUp = skin.getDrawable(SkinImage.HOME.atlaskey)
+        imageDown = imageUp
+    }
+    imageButton(SkinImageButton.PIGGYBUTTON.name) {
+        imageUp = skin.getDrawable(SkinImage.PIGGY.atlaskey)
         imageDown = imageUp
     }
 }

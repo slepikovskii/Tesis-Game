@@ -2,35 +2,29 @@ package com.mygdx.game.screen
 
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Screen
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.Stage
-import com.badlogic.gdx.scenes.scene2d.ui.*
-import com.badlogic.gdx.scenes.scene2d.ui.Cell.defaults
-import com.badlogic.gdx.scenes.scene2d.ui.Value.maxHeight
-import com.badlogic.gdx.utils.Align
-import com.badlogic.gdx.utils.Align.center
-import com.badlogic.gdx.utils.I18NBundle
 import com.mygdx.game.Game
-
 import com.mygdx.game.UI.SkinImageButton
-import com.mygdx.game.assests.*
-import com.sun.awt.SecurityWarning.setPosition
+import com.mygdx.game.UI.SkinImageButton.QUITBUTTON
+import com.mygdx.game.UI.SkinImageButton.SETTINGSBUTTON
+import com.mygdx.game.UI.createSkin
+import com.mygdx.game.assests.Animations
+import com.mygdx.game.assests.FontAsset
+import com.mygdx.game.assests.TextureAtlasAssets
+import com.mygdx.game.assests.Textures
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import ktx.actors.onClick
 import ktx.app.KtxScreen
-import ktx.app.clearScreen
-import ktx.app.emptyScreen
 import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
 import ktx.collections.gdxArrayOf
-import ktx.graphics.color
 import ktx.log.debug
 import ktx.log.logger
-import ktx.scene2d.*
-import javax.swing.text.StyleConstants.setAlignment
-import com.mygdx.game.screen.GameScreen as GameScreen
+import ktx.scene2d.actors
+import ktx.scene2d.imageButton
+import ktx.scene2d.table
 
 private const val MENU_DEFAULT_PADDING = 25f
 private val log = logger<Game>()
@@ -67,7 +61,7 @@ class Menu(private val game: Game,
         ).flatten()
         KtxAsync.launch {
             assetRefs.joinAll()
-
+            createSkin(assets)
 
         }
         setupUI()
@@ -80,23 +74,24 @@ class Menu(private val game: Game,
         table {
             defaults().fillX().expandX().pad(MENU_DEFAULT_PADDING)
             setFillParent(true)
-
+            setDebug(true)
            imageButton(SkinImageButton.PLAYBUTTON.name){
                 imageCell.maxHeight(200f).maxWidth(200f)
                 onClick {
 
                     hide()
-                    game.setScreen<GameScreen>()
+                    game.setScreen<Bedroom>()
 
                 }
 
             }
             row()
-            imageButton(SkinImageButton.SETTINGSBUTTON.name){
+            imageButton(SETTINGSBUTTON.name){
                 imageCell.maxHeight(200f).maxWidth(200f)
             }
             row()
-            imageButton(SkinImageButton.QUITBUTTON.name){
+            imageButton(QUITBUTTON.name){
+
                 imageCell.maxHeight(200f).maxWidth(200f)
                 onClick { Gdx.app.exit() }
             }
