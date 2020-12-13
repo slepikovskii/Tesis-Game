@@ -13,10 +13,10 @@ class TransformComponent : Component, Pool.Poolable {
 
     val size = vec2(1f, 1f)
     val position = vec2()
-    var flipped = false
 
     override fun reset() {
         position.set(Vector2.Zero)
+        size.set(1f, 1f)
     }
 
     fun setInitialPosition(x: Float, y: Float) {

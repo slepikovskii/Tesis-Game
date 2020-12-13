@@ -25,7 +25,7 @@ import ktx.scene2d.actors
 import ktx.scene2d.label
 import ktx.scene2d.table
 
-val DEFAULT_BACKGROUND_SPEED = 1
+const val DEFAULT_BACKGROUND_SPEED = 1
 
 class GameScreen(private val eventManager: GameEventManager,
         private val assets: AssetStorage,
@@ -47,17 +47,14 @@ class GameScreen(private val eventManager: GameEventManager,
 
     override fun show() {
         super.show()
-        // initialize entity engine
-        engine.apply {
-            addSystem(MoveSystem(eventManager))
-            addSystem(RenderSystem(assets, stage, gameViewport))
-            addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor]))
-            addSystem(PlayerInputSystem(eventManager))
-        }
 
         engine.run {
+            addSystem(MoveSystem(eventManager, gameViewport))
+            addSystem(RenderSystem(stage, gameViewport))
+            addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor]))
+            addSystem(PlayerInputSystem(eventManager))
             createPlayer(assets)
-            createHouses(assets)
+            createHouses(assets, gameViewport)
         }
         eventManager.run {
             addListener(GameEvent.PaperThrown::class, this@GameScreen)
@@ -117,17 +114,7 @@ class GameScreen(private val eventManager: GameEventManager,
                 }
             }
             is GameEvent.PlayerMoved -> {
-                when (event.direction) {
-                    FacingDirection.RIGHT -> {
-                        background.setSpeed(DEFAULT_BACKGROUND_SPEED)
-                    }
-                    FacingDirection.LEFT -> {
-                        background.setSpeed(-DEFAULT_BACKGROUND_SPEED)
-                    }
-                    else -> {
-                        background.setSpeed(0)
-                    }
-                }
+                background.setSpeed(event.speed)
             }
         }
     }
