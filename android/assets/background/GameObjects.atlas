@@ -1,0 +1,48 @@
+
+GameObjects.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+closed_mailbox
+  rotate: false
+  xy: 2, 2
+  size: 540, 540
+  orig: 540, 540
+  offset: 0, 0
+  index: -1
+lamp
+  rotate: false
+  xy: 544, 1086
+  size: 540, 540
+  orig: 540, 540
+  offset: 0, 0
+  index: -1
+open_mailbox
+  rotate: false
+  xy: 544, 544
+  size: 540, 540
+  orig: 540, 540
+  offset: 0, 0
+  index: -1
+rock
+  rotate: false
+  xy: 2, 1086
+  size: 540, 540
+  orig: 540, 540
+  offset: 0, 0
+  index: -1
+tree1
+  rotate: false
+  xy: 1086, 1086
+  size: 540, 540
+  orig: 540, 540
+  offset: 0, 0
+  index: -1
+tree2
+  rotate: false
+  xy: 2, 544
+  size: 540, 540
+  orig: 540, 540
+  offset: 0, 0
+  index: -1
