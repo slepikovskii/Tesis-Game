@@ -9,7 +9,6 @@ import com.mygdx.game.Game
 import com.mygdx.game.UI.SkinImageButton
 import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.Textures
-import com.mygdx.game.ecs.component.FacingDirection
 import com.mygdx.game.ecs.createHouses
 import com.mygdx.game.ecs.createPlayer
 import com.mygdx.game.ecs.system.AnimationSystem
@@ -23,6 +22,7 @@ import com.mygdx.game.widget.ParallaxBackground
 import com.mygdx.game.widget.parallaxBackground
 import ktx.actors.onClick
 import ktx.app.KtxScreen
+import ktx.ashley.getSystem
 import ktx.assets.async.AssetStorage
 import ktx.scene2d.*
 
@@ -69,7 +69,7 @@ class GameScreen(private val eventManager: GameEventManager,
     override fun hide() {
         super.hide()
         stage.clear()
-        engine.removeAllEntities()
+        engine.getSystem<RenderSystem>().setProcessing(false)
 
         eventManager.removeListener(this)
     }

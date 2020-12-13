@@ -84,7 +84,7 @@ class Bedroom(
            table {
                defaults().fillX().expandX().fillY().expandY()
                 setFillParent(true)
-               setDebug(true)
+               setDebug(false)
 
                verticalGroup {
                    imageButton(SkinImageButton.MENUBUTTON.name){
