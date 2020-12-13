@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.utils.Pool
 import ktx.ashley.mapperFor
 
-class GraphicComponent : Component, Pool.Poolable {
+class GraphicComponent : Component, Pool.Poolable, Comparable<GraphicComponent> {
     companion object {
         val mapper = mapperFor<GraphicComponent>()
     }
@@ -24,5 +24,9 @@ class GraphicComponent : Component, Pool.Poolable {
             setSize(region.regionWidth.toFloat(), region.regionHeight.toFloat())
             setOriginCenter()
         }
+    }
+
+    override fun compareTo(other: GraphicComponent): Int {
+        return z.compareTo(other.z)
     }
 }

@@ -18,7 +18,7 @@ fun Engine.createPlayer(
 
     return entity {
         with<PlayerComponent> {
-            papers = 10
+            papers = 50
         }
         with<TransformComponent> {
             val atlas = assets[Animations.Lvl1.descriptor]
@@ -33,9 +33,8 @@ fun Engine.createPlayer(
             )
         }
         with<MoveComponent>()
-        with<GraphicComponent> { z = 2 }
+        with<GraphicComponent> { z = 3 }
         with<AnimationComponent> { type = AnimationType.BIKE_LVL_1 }
-        with<FacingComponent>()
     }
 }
 
@@ -50,9 +49,12 @@ fun Engine.createHouses(assets: AssetStorage, viewport: Viewport) {
 }
 
 fun Engine.createHouse(assets: AssetStorage, offsetX: Float = 0f): Entity {
+    val atlas = assets[TextureAtlasAssets.Houses.descriptor]
+    val house = atlas.regions.get(Random.nextInt(10))
+    if (Random.nextBoolean()) {
+        createMailbox(assets, offsetX + house.regionWidth.toFloat())
+    }
     return entity {
-        val atlas = assets[TextureAtlasAssets.Houses.descriptor]
-        val house = atlas.regions.get(Random.nextInt(10))
         with<GraphicComponent> {
             z = 1
             setSpriteRegion(house)
@@ -65,6 +67,27 @@ fun Engine.createHouse(assets: AssetStorage, offsetX: Float = 0f): Entity {
             setInitialPosition(
                     offsetX,
                     Gdx.graphics.height / 3f - 11, // TODO: Get rid off magic numbers
+            )
+        }
+    }
+}
+
+fun Engine.createMailbox(assets: AssetStorage, positionX: Float): Entity {
+    return entity {
+        val atlas = assets[TextureAtlasAssets.GameObjects.descriptor]
+        val mailbox = atlas.findRegion("open_mailbox")
+        with<GraphicComponent> {
+            z = 2
+            setSpriteRegion(mailbox)
+        }
+        with<TransformComponent> {
+            size.set(
+                    mailbox.originalWidth.toFloat() / 5,
+                    mailbox.originalHeight.toFloat() / 5
+            )
+            setInitialPosition(
+                    positionX - mailbox.regionWidth.toFloat() / 5,
+                    Gdx.graphics.height / 3f - 20, // TODO: Get rid off magic numbers
             )
         }
         with<CollisionComponent>()

@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.mygdx.game.assests.Animations
+import com.mygdx.game.assests.TextureAtlasAssets
 import com.mygdx.game.assests.Textures
 import com.mygdx.game.ecs.createHouses
 import com.mygdx.game.ecs.createPlayer
@@ -50,7 +51,7 @@ class GameScreen(private val eventManager: GameEventManager,
             addSystem(RenderSystem(assets, stage, gameViewport))
             addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor], eventManager))
             addSystem(PlayerInputSystem(eventManager))
-            addSystem(CollisionSystem(eventManager, gameViewport))
+            addSystem(CollisionSystem(eventManager, gameViewport, assets[TextureAtlasAssets.GameObjects.descriptor]))
             createPlayer(assets)
             createHouses(assets, gameViewport)
         }
@@ -101,7 +102,7 @@ class GameScreen(private val eventManager: GameEventManager,
             }
         }
 
-        paperRemains.setText(10)
+        paperRemains.setText(50)
     }
 
     override fun onEvent(event: GameEvent) {
