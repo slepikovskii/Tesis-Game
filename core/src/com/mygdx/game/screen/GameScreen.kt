@@ -27,6 +27,8 @@ import ktx.assets.async.AssetStorage
 import ktx.scene2d.*
 
 val DEFAULT_BACKGROUND_SPEED = 1
+private var TIMERMAX = 1000
+private var TIMEISUP = 0
 
 class GameScreen(private val eventManager: GameEventManager,
         private val assets: AssetStorage,
@@ -36,6 +38,7 @@ class GameScreen(private val eventManager: GameEventManager,
         private val gameViewport: FitViewport) : KtxScreen, GameEventListener {
 
     private lateinit var paperRemains: Label
+
     private lateinit var background: ParallaxBackground
 
     override fun render(delta: Float) {
@@ -50,6 +53,7 @@ class GameScreen(private val eventManager: GameEventManager,
     override fun show() {
         super.show()
         // initialize entity engine
+//       var countdown =timer(period = 1000,action = {counterTime()})
         engine.apply {
             addSystem(MoveSystem(eventManager))
             addSystem(RenderSystem(assets, stage, gameViewport))
@@ -65,6 +69,7 @@ class GameScreen(private val eventManager: GameEventManager,
             addListener(GameEvent.PaperThrown::class, this@GameScreen)
             addListener(GameEvent.PlayerMoved::class, this@GameScreen)
         }
+
         setupUI()
     }
 
@@ -72,6 +77,7 @@ class GameScreen(private val eventManager: GameEventManager,
         super.hide()
         stage.clear()
         engine.removeAllEntities()
+
         eventManager.removeListener(this)
     }
 
@@ -79,6 +85,21 @@ class GameScreen(private val eventManager: GameEventManager,
         gameViewport.update(width, height, true)
         stage.viewport.update(width, height, true)
     }
+
+//    private fun counterTime(){
+//
+//        if (TIMERMAX >= 0){
+//            TIMERMAX -= 100
+//        }
+//        else{
+//            game.removeScreen<GameScreen>()
+//            game.setScreen<GameOverScreen>()
+//
+//        }
+//
+//    }
+
+
 
     private fun setupUI() {
         stage.actors {
@@ -143,6 +164,7 @@ class GameScreen(private val eventManager: GameEventManager,
                 paperRemains.run {
                     setText(text.toString().toInt() - 1)
                 }
+
             }
             is GameEvent.PlayerMoved -> {
                 when (event.direction) {
