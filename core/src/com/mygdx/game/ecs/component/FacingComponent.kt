@@ -14,6 +14,10 @@ class FacingComponent : Component, Pool.Poolable {
     companion object {
         val mapper = mapperFor<FacingComponent>()
     }
+
+    fun switchDirection() {
+        direction = if (direction == FacingDirection.RIGHT) FacingDirection.LEFT else FacingDirection.RIGHT
+    }
 }
 
 enum class FacingDirection {

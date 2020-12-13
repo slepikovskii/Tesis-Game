@@ -13,6 +13,7 @@ import com.mygdx.game.event.GameEvent
 import com.mygdx.game.event.GameEventManager
 import ktx.ashley.allOf
 import ktx.ashley.get
+import kotlin.math.abs
 import kotlin.math.min
 
 private const val HOR_ACCELERATION = 50f
@@ -20,43 +21,39 @@ private const val MAX_SPEED = 200f
 
 class MoveSystem(private val gameEventManager: GameEventManager, private val viewport: Viewport) : IteratingSystem(
         allOf(TransformComponent::class, MoveComponent::class).get()) {
-    var previousDirecrion = FacingDirection.RIGHT
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        entity[MoveComponent.mapper]?.let {
-            when {
-                Gdx.input.isKeyPressed(Input.Keys.RIGHT) -> {
-                    if (previousDirecrion == FacingDirection.LEFT) {
-                        it.speed = 0f
-                        previousDirecrion = FacingDirection.RIGHT
+        var newSpeed = 0f
+        val oldSpeed = entity[MoveComponent.mapper]?.speed ?: 0f
+        when {
+            Gdx.input.isKeyPressed(Input.Keys.RIGHT) -> {
+                entity[FacingComponent.mapper]?.apply {
+                    if (direction == FacingDirection.LEFT) {
+                        switchDirection()
                     } else {
-                        it.speed = min(MAX_SPEED, it.speed + HOR_ACCELERATION * deltaTime)
+                        newSpeed = min(MAX_SPEED, oldSpeed + HOR_ACCELERATION * deltaTime)
                     }
-
-                    entity[FacingComponent.mapper]?.direction = FacingDirection.RIGHT
-                    entity[TransformComponent.mapper]?.apply {
-                        viewport.camera.translate(it.speed * deltaTime, 0f, 0f)
-                    }
-                    gameEventManager.dispatchEvent(GameEvent.PlayerMoved(it.speed * deltaTime))
                 }
-                Gdx.input.isKeyPressed(Input.Keys.LEFT) -> {
-                    if (previousDirecrion == FacingDirection.RIGHT) {
-                        it.speed = 0f
-                        previousDirecrion = FacingDirection.LEFT
-                    } else {
-                        it.speed = min(MAX_SPEED, it.speed + HOR_ACCELERATION * deltaTime)
+            }
+            Gdx.input.isKeyPressed(Input.Keys.LEFT) -> {
+                entity[FacingComponent.mapper]?.apply {
+                    if (direction == FacingDirection.RIGHT) {
+                        switchDirection()
+                    } else if (viewport.camera.position.x > viewport.screenWidth / 2) {
+                        newSpeed = -min(MAX_SPEED, oldSpeed + HOR_ACCELERATION * deltaTime)
                     }
-                    entity[FacingComponent.mapper]?.direction = FacingDirection.LEFT
-                    entity[TransformComponent.mapper]?.apply {
-                        viewport.camera.translate(-it.speed * deltaTime, 0f, 0f)
-                    }
-                    gameEventManager.dispatchEvent(GameEvent.PlayerMoved(-it.speed * deltaTime))
-                }
-                else -> {
-                    it.speed = 0f
-                    gameEventManager.dispatchEvent(GameEvent.PlayerMoved(0f))
                 }
             }
         }
+
+        entity[MoveComponent.mapper]?.let {
+            it.speed = abs(newSpeed)
+            moveEntity(newSpeed, deltaTime)
+        }
+    }
+
+    private fun moveEntity(newSpeed: Float, deltaTime: Float) {
+        viewport.camera.translate(newSpeed * deltaTime, 0f, 0f)
+        gameEventManager.dispatchEvent(GameEvent.PlayerMoved(newSpeed * deltaTime))
     }
 }
