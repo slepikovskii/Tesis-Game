@@ -21,7 +21,7 @@ private val log = logger<RenderSystem>()
 class RenderSystem(
         private val assets: AssetStorage,
         private val stage: Stage,
-        private val gameViewport: Viewport,) : SortedIteratingSystem(
+        private val gameViewport: Viewport) : SortedIteratingSystem(
         allOf(TransformComponent::class, GraphicComponent::class, FacingComponent::class).get(),
         compareBy { entity: Entity -> entity[GraphicComponent.mapper]?.z }), EntityListener {
     private val batch = stage.batch

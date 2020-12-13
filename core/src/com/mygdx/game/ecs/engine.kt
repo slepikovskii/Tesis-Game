@@ -42,7 +42,7 @@ fun Engine.createPlayer(
 fun Engine.createHouses(assets: AssetStorage, viewport: Viewport) {
     var totalWidth = 0f
     while (totalWidth < viewport.worldWidth) {
-        val offset = Random.nextInt(5, 10)
+        val offset = Random.nextInt(20, 30)
         createHouse(assets, totalWidth + offset).also {
             totalWidth += it.getComponent(TransformComponent::class.java).size.x + offset
         }
@@ -67,5 +67,6 @@ fun Engine.createHouse(assets: AssetStorage, offsetX: Float = 0f): Entity {
                     Gdx.graphics.height / 3f - 11, // TODO: Get rid off magic numbers
             )
         }
+        with<CollisionComponent>()
     }
 }

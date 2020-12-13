@@ -9,10 +9,7 @@ import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.Textures
 import com.mygdx.game.ecs.createHouses
 import com.mygdx.game.ecs.createPlayer
-import com.mygdx.game.ecs.system.AnimationSystem
-import com.mygdx.game.ecs.system.MoveSystem
-import com.mygdx.game.ecs.system.PlayerInputSystem
-import com.mygdx.game.ecs.system.RenderSystem
+import com.mygdx.game.ecs.system.*
 import com.mygdx.game.event.GameEvent
 import com.mygdx.game.event.GameEventListener
 import com.mygdx.game.event.GameEventManager
@@ -23,6 +20,7 @@ import ktx.assets.async.AssetStorage
 import ktx.scene2d.actors
 import ktx.scene2d.label
 import ktx.scene2d.table
+import java.util.*
 
 const val DEFAULT_BACKGROUND_SPEED = 1
 
@@ -52,11 +50,12 @@ class GameScreen(private val eventManager: GameEventManager,
             addSystem(RenderSystem(assets, stage, gameViewport))
             addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor], eventManager))
             addSystem(PlayerInputSystem(eventManager))
+            addSystem(CollisionSystem(eventManager, gameViewport))
             createPlayer(assets)
             createHouses(assets, gameViewport)
         }
         eventManager.run {
-            addListener(GameEvent.PaperThrown::class, this@GameScreen)
+            addListener(GameEvent.PaperHit::class, this@GameScreen)
             addListener(GameEvent.PlayerMoved::class, this@GameScreen)
         }
         setupUI()
@@ -107,7 +106,7 @@ class GameScreen(private val eventManager: GameEventManager,
 
     override fun onEvent(event: GameEvent) {
         when (event) {
-            is GameEvent.PaperThrown -> {
+            is GameEvent.PaperHit -> {
                 paperRemains.run {
                     setText(text.toString().toInt() - 1)
                 }
