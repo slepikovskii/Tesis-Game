@@ -8,11 +8,12 @@ import ktx.scene2d.KWidget
 import ktx.scene2d.Scene2dDsl
 import ktx.scene2d.actor
 
+private const val LAYER_SPEED_DIFFERENCE = 1.3
+
 @Scene2dDsl
 class ParallaxBackground(textures: Array<Texture>) : Actor() {
-    private var scroll: Int
+    private var scroll: Float
     private val layers: Array<Texture> = textures
-    private val LAYER_SPEED_DIFFERENCE = 2
     var heigth: Float
     var originX: Int
     var originY: Int
@@ -21,8 +22,8 @@ class ParallaxBackground(textures: Array<Texture>) : Actor() {
     var srcY: Int
     var flipX: Boolean
     var flipY: Boolean
-    private var speed: Int
-    fun setSpeed(newSpeed: Int) {
+    private var speed: Float
+    fun setSpeed(newSpeed: Float) {
         speed = newSpeed
     }
 
@@ -30,17 +31,18 @@ class ParallaxBackground(textures: Array<Texture>) : Actor() {
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha)
         scroll += speed
         for (i in layers.indices) {
-            srcX = scroll + i * LAYER_SPEED_DIFFERENCE * scroll
-            batch.draw(layers[i], x, y, originX.toFloat(), originY.toFloat(), width, heigth, scaleX, scaleY, rotation.toFloat(), srcX, srcY, layers[i].width, layers[i].height, flipX, flipY)
+            srcX = (scroll + i * LAYER_SPEED_DIFFERENCE * scroll).toInt()
+            batch.draw(layers[i], x, y, originX.toFloat(), originY.toFloat(), width, heigth, scaleX, scaleY,
+                       rotation.toFloat(), srcX, srcY, layers[i].width, layers[i].height, flipX, flipY)
         }
     }
 
     init {
         for (element in textures) {
-            element.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat)
+            element.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat)
         }
-        scroll = 0
-        speed = 0
+        scroll = 0f
+        speed = 0f
         srcY = 0
         rotation = 0
         originY = 0

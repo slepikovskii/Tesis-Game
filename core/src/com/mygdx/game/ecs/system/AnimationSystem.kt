@@ -6,9 +6,14 @@ import com.badlogic.ashley.core.EntityListener
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.utils.GdxRuntimeException
-import com.mygdx.game.ecs.component.*
+import com.mygdx.game.ecs.component.Animation2D
+import com.mygdx.game.ecs.component.AnimationComponent
+import com.mygdx.game.ecs.component.AnimationType
+import com.mygdx.game.ecs.component.GraphicComponent
+import com.mygdx.game.event.GameEvent
+import com.mygdx.game.event.GameEventListener
+import com.mygdx.game.event.GameEventManager
 import ktx.ashley.allOf
-import ktx.ashley.exclude
 import ktx.ashley.get
 import ktx.log.debug
 import ktx.log.error
@@ -18,13 +23,17 @@ import java.util.*
 private val LOG = logger<AnimationSystem>()
 
 class AnimationSystem(
-        private val atlas: TextureAtlas
-) : IteratingSystem(allOf(AnimationComponent::class, GraphicComponent::class, MoveComponent::class).get()), EntityListener {
+        private val atlas: TextureAtlas,
+        private val eventManager: GameEventManager
+) : IteratingSystem(
+        allOf(AnimationComponent::class, GraphicComponent::class).get()), EntityListener, GameEventListener {
     private val animationCache = EnumMap<AnimationType, Animation2D>(AnimationType::class.java)
+    private var isMoving = false
 
     override fun addedToEngine(engine: Engine) {
         super.addedToEngine(engine)
         engine.addEntityListener(family, this)
+        eventManager.addListener(GameEvent.PlayerMoved::class, this)
     }
 
     override fun removedFromEngine(engine: Engine) {
@@ -37,8 +46,6 @@ class AnimationSystem(
         require(aniCmp != null) { "Entity |entity| must have an AnimationComponent. entity=$entity" }
         val graphic = entity[GraphicComponent.mapper]
         require(graphic != null) { "Entity |entity| must have a GraphicComponent. entity=$entity" }
-        val moveCmp = entity[MoveComponent.mapper]
-        require(moveCmp != null) { "Entity |entity| must have an MoveComponent. entity=$entity" }
 
         if (aniCmp.type == AnimationType.NONE) {
             LOG.error { "No aniCmp type specified" }
@@ -46,8 +53,7 @@ class AnimationSystem(
         }
 
         if (aniCmp.animation.type == aniCmp.type) {
-            // animation is correct -> update it
-            if (moveCmp.speed > 0) {
+            if (isMoving) {
                 aniCmp.stateTime += deltaTime
             } else {
                 aniCmp.stateTime = 0f
@@ -86,6 +92,12 @@ class AnimationSystem(
             aniCmp.animation = getAnimation(aniCmp.type)
             val frame = aniCmp.animation.getKeyFrame(aniCmp.stateTime)
             entity[GraphicComponent.mapper]?.setSpriteRegion(frame)
+        }
+    }
+
+    override fun onEvent(event: GameEvent) {
+        if (event is GameEvent.PlayerMoved) {
+            isMoving = event.speed != 0f
         }
     }
 }
