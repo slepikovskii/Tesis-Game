@@ -50,7 +50,7 @@ class GameScreen(private val eventManager: GameEventManager,
 
         engine.run {
             addSystem(MoveSystem(eventManager, gameViewport))
-            addSystem(RenderSystem(stage, gameViewport))
+            addSystem(RenderSystem(assets, stage, gameViewport))
             addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor]))
             addSystem(PlayerInputSystem(eventManager))
             createPlayer(assets)
