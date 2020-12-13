@@ -52,7 +52,7 @@ class Game : KtxGame<KtxScreen>() {
             bindSingleton(stage)
             bindSingleton(GameEventManager())
             addScreen(MainScreen(inject(), inject(), inject(), inject(), inject()))
-            addScreen(GameScreen(inject(), inject(), inject(), inject(), inject()))
+            addScreen(GameScreen(inject(), inject(), inject(), inject(), inject(), inject()))
             addScreen(Menu(inject(), inject(), inject(), inject(), inject()))
             addScreen(Bedroom(inject(), inject(), inject(), inject(), inject(), inject()))
             addScreen(ShopScreen(inject(), inject(), inject(), inject(), inject(), inject()))
