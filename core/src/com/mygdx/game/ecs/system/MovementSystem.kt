@@ -20,12 +20,19 @@ private const val MAX_SPEED = 200f
 
 class MoveSystem(private val gameEventManager: GameEventManager, private val viewport: Viewport) : IteratingSystem(
         allOf(TransformComponent::class, MoveComponent::class).get()) {
+    var previousDirecrion = FacingDirection.RIGHT
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         entity[MoveComponent.mapper]?.let {
             when {
                 Gdx.input.isKeyPressed(Input.Keys.RIGHT) -> {
-                    it.speed = min(MAX_SPEED, it.speed + HOR_ACCELERATION * deltaTime)
+                    if (previousDirecrion == FacingDirection.LEFT) {
+                        it.speed = 0f
+                        previousDirecrion = FacingDirection.RIGHT
+                    } else {
+                        it.speed = min(MAX_SPEED, it.speed + HOR_ACCELERATION * deltaTime)
+                    }
+
                     entity[FacingComponent.mapper]?.direction = FacingDirection.RIGHT
                     entity[TransformComponent.mapper]?.apply {
                         viewport.camera.translate(it.speed * deltaTime, 0f, 0f)
@@ -33,7 +40,12 @@ class MoveSystem(private val gameEventManager: GameEventManager, private val vie
                     gameEventManager.dispatchEvent(GameEvent.PlayerMoved(it.speed * deltaTime))
                 }
                 Gdx.input.isKeyPressed(Input.Keys.LEFT) -> {
-                    it.speed = min(MAX_SPEED, it.speed + HOR_ACCELERATION * deltaTime)
+                    if (previousDirecrion == FacingDirection.RIGHT) {
+                        it.speed = 0f
+                        previousDirecrion = FacingDirection.LEFT
+                    } else {
+                        it.speed = min(MAX_SPEED, it.speed + HOR_ACCELERATION * deltaTime)
+                    }
                     entity[FacingComponent.mapper]?.direction = FacingDirection.LEFT
                     entity[TransformComponent.mapper]?.apply {
                         viewport.camera.translate(-it.speed * deltaTime, 0f, 0f)
