@@ -13,7 +13,6 @@ import ktx.ashley.exclude
 import ktx.ashley.get
 import ktx.assets.async.AssetStorage
 import ktx.graphics.use
-import ktx.log.info
 import ktx.log.logger
 import kotlin.random.Random
 

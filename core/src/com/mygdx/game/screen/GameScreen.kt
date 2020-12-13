@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.Textures
-import com.mygdx.game.ecs.component.FacingDirection
 import com.mygdx.game.ecs.createHouses
 import com.mygdx.game.ecs.createPlayer
 import com.mygdx.game.ecs.system.AnimationSystem
@@ -51,7 +50,7 @@ class GameScreen(private val eventManager: GameEventManager,
         engine.run {
             addSystem(MoveSystem(eventManager, gameViewport))
             addSystem(RenderSystem(assets, stage, gameViewport))
-            addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor]))
+            addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor], eventManager))
             addSystem(PlayerInputSystem(eventManager))
             createPlayer(assets)
             createHouses(assets, gameViewport)
