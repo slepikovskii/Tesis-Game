@@ -10,7 +10,7 @@ enum class Textures(val path: String,
         val descriptor: AssetDescriptor<Texture> = AssetDescriptor(path, Texture::class.java)) {
     Example("background/Example on how the platform looks like.png"),
     Background("background/sky_bg.png"),
-    HousesBackground("background/houses_bg.png"),
+    HousesBackground("background/blur bg.png"),
     Road("background/road.png"),
     RoomBackground("background/bedroom.png"),
     ShopBackground("background/garage.png"),

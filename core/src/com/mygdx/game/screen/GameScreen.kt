@@ -36,9 +36,10 @@ class GameScreen(private val eventManager: GameEventManager,
         private val gameViewport: FitViewport) : KtxScreen, GameEventListener {
 
     private lateinit var paperRemains: Label
-
     private lateinit var background: ParallaxBackground
 
+
+    
     override fun render(delta: Float) {
         stage.run {
             viewport.apply()
@@ -78,21 +79,6 @@ class GameScreen(private val eventManager: GameEventManager,
         gameViewport.update(width, height, true)
         stage.viewport.update(width, height, true)
     }
-
-//    private fun counterTime(){
-//
-//        if (TIMERMAX >= 0){
-//            TIMERMAX -= 100
-//        }
-//        else{
-//            game.removeScreen<GameScreen>()
-//            game.setScreen<GameOverScreen>()
-//
-//        }
-//
-//    }
-
-
 
     private fun setupUI() {
         stage.actors {
