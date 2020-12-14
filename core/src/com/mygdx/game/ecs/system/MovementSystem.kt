@@ -5,25 +5,36 @@ import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.utils.viewport.Viewport
-import com.mygdx.game.ecs.component.*
+import com.mygdx.game.ecs.component.FacingDirection
+import com.mygdx.game.ecs.component.MoveComponent
+import com.mygdx.game.ecs.component.PlayerComponent
+import com.mygdx.game.ecs.component.TransformComponent
 import com.mygdx.game.event.GameEvent
 import com.mygdx.game.event.GameEventManager
 import ktx.ashley.allOf
 import ktx.ashley.get
+import ktx.log.logger
 import kotlin.math.abs
 import kotlin.math.min
 
 private const val HOR_ACCELERATION = 50f
 private const val MAX_SPEED = 200f
 
+private val log = logger<MoveSystem>()
+
 class MoveSystem(private val gameEventManager: GameEventManager, private val viewport: Viewport) : IteratingSystem(
         allOf(TransformComponent::class, MoveComponent::class, PlayerComponent::class).get()) {
+
+    private val part = viewport.screenWidth / 3
+    private val leftSide = 0..part
+    private val rightSide = part * 2..part * 3
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         var newSpeed = 0f
         val oldSpeed = entity[MoveComponent.mapper]?.speed ?: 0f
+
         when {
-            Gdx.input.isKeyPressed(Input.Keys.RIGHT) -> {
+            Gdx.input.isKeyPressed(Input.Keys.RIGHT) || (Gdx.input.isTouched && Gdx.input.x in rightSide) -> {
                 entity[TransformComponent.mapper]?.let {
                     if (it.direction == FacingDirection.LEFT) {
                         it.switchDirection()
@@ -32,7 +43,7 @@ class MoveSystem(private val gameEventManager: GameEventManager, private val vie
                     }
                 }
             }
-            Gdx.input.isKeyPressed(Input.Keys.LEFT) -> {
+            Gdx.input.isKeyPressed(Input.Keys.LEFT) || (Gdx.input.isTouched && Gdx.input.x in leftSide) -> {
                 entity[TransformComponent.mapper]?.let {
                     if (it.direction == FacingDirection.RIGHT) {
                         it.switchDirection()
