@@ -12,10 +12,7 @@ import com.mygdx.game.assests.TextureAtlasAssets
 import com.mygdx.game.assests.Textures
 import com.mygdx.game.ecs.createHouses
 import com.mygdx.game.ecs.createPlayer
-import com.mygdx.game.ecs.system.AnimationSystem
-import com.mygdx.game.ecs.system.MoveSystem
-import com.mygdx.game.ecs.system.PlayerInputSystem
-import com.mygdx.game.ecs.system.RenderSystem
+import com.mygdx.game.ecs.system.*
 import com.mygdx.game.event.GameEvent
 import com.mygdx.game.event.GameEventListener
 import com.mygdx.game.event.GameEventManager
@@ -25,11 +22,8 @@ import ktx.actors.onClick
 import ktx.app.KtxScreen
 import ktx.ashley.getSystem
 import ktx.assets.async.AssetStorage
-import ktx.scene2d.actors
-import ktx.scene2d.label
-import ktx.scene2d.table
-import java.util.*
 import ktx.scene2d.*
+import java.util.*
 
 const val DEFAULT_BACKGROUND_SPEED = 1
 
@@ -136,12 +130,12 @@ class GameScreen(private val eventManager: GameEventManager,
             }
         }
 
-        paperRemains.setText(10)
+        paperRemains.setText(50)
     }
 
     override fun onEvent(event: GameEvent) {
         when (event) {
-            is GameEvent.PaperThrown -> {
+            is GameEvent.PaperHit -> {
                 paperRemains.run {
                     setText(text.toString().toInt() - 1)
                 }
