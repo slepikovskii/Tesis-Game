@@ -51,7 +51,7 @@ class RenderSystem(
             val rightHouseCoordinate = it.position.x + it.size.x
             if (rightHouseCoordinate < rightWorldCoordinate) {
                 log.info { "$rightHouseCoordinate -- $rightWorldCoordinate" }
-                engine.createHouse(assets, rightHouseCoordinate + Random.nextInt(20, 30))
+                engine.createHouse(assets, gameViewport, rightHouseCoordinate + Random.nextInt(20, 30))
             }
         }
     }

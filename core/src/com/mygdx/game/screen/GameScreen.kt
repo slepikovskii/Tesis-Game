@@ -52,7 +52,7 @@ class GameScreen(private val eventManager: GameEventManager,
             addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor], eventManager))
             addSystem(PlayerInputSystem(eventManager))
             addSystem(CollisionSystem(eventManager, gameViewport, assets[TextureAtlasAssets.GameObjects.descriptor]))
-            createPlayer(assets)
+            createPlayer(assets, gameViewport)
             createHouses(assets, gameViewport)
         }
         eventManager.run {

@@ -13,7 +13,8 @@ import ktx.assets.async.AssetStorage
 import kotlin.random.Random
 
 fun Engine.createPlayer(
-        assets: AssetStorage
+        assets: AssetStorage,
+        viewport: Viewport
 ): Entity {
 
     return entity {
@@ -28,7 +29,7 @@ fun Engine.createPlayer(
                     playerGraphicRegion.regionHeight.toFloat()
             )
             setInitialPosition(
-                    Gdx.graphics.width / 2f - playerGraphicRegion.regionWidth / 2f,
+                    viewport.worldWidth / 2f - playerGraphicRegion.regionWidth / 2f,
                     50f,
             )
         }
@@ -42,17 +43,18 @@ fun Engine.createHouses(assets: AssetStorage, viewport: Viewport) {
     var totalWidth = 0f
     while (totalWidth < viewport.worldWidth) {
         val offset = Random.nextInt(20, 30)
-        createHouse(assets, totalWidth + offset).also {
+        createHouse(assets, viewport, totalWidth + offset).also {
             totalWidth += it.getComponent(TransformComponent::class.java).size.x + offset
         }
     }
 }
 
-fun Engine.createHouse(assets: AssetStorage, offsetX: Float = 0f): Entity {
+fun Engine.createHouse(assets: AssetStorage, viewport: Viewport, offsetX: Float = 0f): Entity {
     val atlas = assets[TextureAtlasAssets.Houses.descriptor]
     val house = atlas.regions.get(Random.nextInt(10))
+    val positionY = viewport.worldHeight / 3f
     if (Random.nextBoolean()) {
-        createMailbox(assets, offsetX + house.regionWidth.toFloat())
+        createMailbox(assets, offsetX + house.regionWidth.toFloat(), positionY)
     }
     return entity {
         with<GraphicComponent> {
@@ -66,13 +68,13 @@ fun Engine.createHouse(assets: AssetStorage, offsetX: Float = 0f): Entity {
             )
             setInitialPosition(
                     offsetX,
-                    Gdx.graphics.height / 3f - 11, // TODO: Get rid off magic numbers
+                    positionY - 11, // TODO: Get rid off magic numbers
             )
         }
     }
 }
 
-fun Engine.createMailbox(assets: AssetStorage, positionX: Float): Entity {
+fun Engine.createMailbox(assets: AssetStorage, positionX: Float, positionY: Float): Entity {
     return entity {
         val atlas = assets[TextureAtlasAssets.GameObjects.descriptor]
         val mailbox = atlas.findRegion("open_mailbox")
@@ -87,7 +89,7 @@ fun Engine.createMailbox(assets: AssetStorage, positionX: Float): Entity {
             )
             setInitialPosition(
                     positionX - mailbox.regionWidth.toFloat() / 5,
-                    Gdx.graphics.height / 3f - 20, // TODO: Get rid off magic numbers
+                    positionY - 20, // TODO: Get rid off magic numbers
             )
         }
         with<CollisionComponent>()
