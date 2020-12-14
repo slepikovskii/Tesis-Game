@@ -9,6 +9,7 @@ private const val INITIAL_LISTENER_CAPACITY = 8
 
 sealed class GameEvent {
     object PaperThrown : GameEvent()
+    object PaperHit : GameEvent()
     data class PlayerMoved(val speed: Float) : GameEvent()
 }
 

@@ -21,9 +21,8 @@ enum class TextureAtlasAssets(val path: String, val descriptor: AssetDescriptor<
         TextureAtlas::class.java)) {
     Buttons("UI/Buttons.atlas"),
     Scales("UI/Scales.atlas"),
-    Houses("background/houses.atlas"),
-
-
+    Houses("background/Houses.atlas"),
+    GameObjects("background/GameObjects.atlas")
 }
 
 enum class Animations(val path: String,

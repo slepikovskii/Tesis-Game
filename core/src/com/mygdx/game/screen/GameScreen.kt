@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.mygdx.game.Game
 import com.mygdx.game.UI.SkinImageButton
 import com.mygdx.game.assests.Animations
+import com.mygdx.game.assests.TextureAtlasAssets
 import com.mygdx.game.assests.Textures
 import com.mygdx.game.ecs.createHouses
 import com.mygdx.game.ecs.createPlayer
@@ -24,6 +25,10 @@ import ktx.actors.onClick
 import ktx.app.KtxScreen
 import ktx.ashley.getSystem
 import ktx.assets.async.AssetStorage
+import ktx.scene2d.actors
+import ktx.scene2d.label
+import ktx.scene2d.table
+import java.util.*
 import ktx.scene2d.*
 
 const val DEFAULT_BACKGROUND_SPEED = 1
@@ -38,8 +43,6 @@ class GameScreen(private val eventManager: GameEventManager,
     private lateinit var paperRemains: Label
     private lateinit var background: ParallaxBackground
 
-
-    
     override fun render(delta: Float) {
         stage.run {
             viewport.apply()
@@ -56,12 +59,13 @@ class GameScreen(private val eventManager: GameEventManager,
             addSystem(MoveSystem(eventManager, gameViewport))
             addSystem(RenderSystem(assets, stage, gameViewport))
             addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor], eventManager))
-            addSystem(PlayerInputSystem(eventManager))
-            createPlayer(assets)
+            addSystem(PlayerInputSystem(eventManager, gameViewport))
+            addSystem(CollisionSystem(eventManager, gameViewport, assets[TextureAtlasAssets.GameObjects.descriptor]))
+            createPlayer(assets, gameViewport)
             createHouses(assets, gameViewport)
         }
         eventManager.run {
-            addListener(GameEvent.PaperThrown::class, this@GameScreen)
+            addListener(GameEvent.PaperHit::class, this@GameScreen)
             addListener(GameEvent.PlayerMoved::class, this@GameScreen)
         }
         setupUI()
@@ -82,7 +86,6 @@ class GameScreen(private val eventManager: GameEventManager,
 
     private fun setupUI() {
         stage.actors {
-
             background = parallaxBackground(arrayOf(
                     assets[Textures.Background.descriptor],
                     assets[Textures.HousesBackground.descriptor],
@@ -129,8 +132,7 @@ class GameScreen(private val eventManager: GameEventManager,
 
                 top()
                 setFillParent(true)
-
-
+                pack()
             }
         }
 
