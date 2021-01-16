@@ -1,15 +1,16 @@
 package com.mygdx.game.screen
 
 import com.badlogic.ashley.core.PooledEngine
+import com.badlogic.gdx.Preferences
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.mygdx.game.Game
 import com.mygdx.game.UI.SkinImageButton
-import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.TextureAtlasAssets
 import com.mygdx.game.assests.Textures
+import com.mygdx.game.ecs.component.PlayerComponent
 import com.mygdx.game.ecs.createHouses
 import com.mygdx.game.ecs.createPlayer
 import com.mygdx.game.ecs.system.*
@@ -20,7 +21,9 @@ import com.mygdx.game.widget.ParallaxBackground
 import com.mygdx.game.widget.parallaxBackground
 import ktx.actors.onClick
 import ktx.app.KtxScreen
+import ktx.ashley.get
 import ktx.ashley.getSystem
+import ktx.ashley.oneOf
 import ktx.assets.async.AssetStorage
 import ktx.scene2d.*
 import java.util.*
@@ -32,7 +35,8 @@ class GameScreen(private val eventManager: GameEventManager,
         private val engine: PooledEngine,
         private val stage: Stage,
         private val game: Game,
-        private val gameViewport: FitViewport) : KtxScreen, GameEventListener {
+        private val gameViewport: FitViewport,
+        private val preferences: Preferences) : KtxScreen, GameEventListener {
 
     private lateinit var paperRemains: Label
     private lateinit var background: ParallaxBackground
@@ -52,10 +56,10 @@ class GameScreen(private val eventManager: GameEventManager,
         engine.run {
             addSystem(MoveSystem(eventManager, gameViewport))
             addSystem(RenderSystem(assets, stage, gameViewport))
-            addSystem(AnimationSystem(assets[Animations.Lvl1.descriptor], eventManager))
-            addSystem(PlayerInputSystem(eventManager, gameViewport))
+            addSystem(AnimationSystem(assets, eventManager))
+            addSystem(PlayerInputSystem(eventManager, gameViewport, preferences))
             addSystem(CollisionSystem(eventManager, gameViewport, assets[TextureAtlasAssets.GameObjects.descriptor]))
-            createPlayer(assets, gameViewport)
+            createPlayer(assets, gameViewport, preferences)
             createHouses(assets, gameViewport)
         }
         eventManager.run {
@@ -103,7 +107,6 @@ class GameScreen(private val eventManager: GameEventManager,
                         }
                         paperRemains = label("0") {
                             setAlignment(Align.left)
-
                         }
                     }
                 }
@@ -130,7 +133,9 @@ class GameScreen(private val eventManager: GameEventManager,
             }
         }
 
-        paperRemains.setText(50)
+        engine.getEntitiesFor(oneOf(PlayerComponent::class).get()).first()[PlayerComponent.mapper]?.papers?.let {
+            paperRemains.setText(it)
+        }
     }
 
     override fun onEvent(event: GameEvent) {

@@ -2,7 +2,7 @@ package com.mygdx.game.ecs
 
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Preferences
 import com.badlogic.gdx.utils.viewport.Viewport
 import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.TextureAtlasAssets
@@ -14,7 +14,8 @@ import kotlin.random.Random
 
 fun Engine.createPlayer(
         assets: AssetStorage,
-        viewport: Viewport
+        viewport: Viewport,
+        preferences: Preferences
 ): Entity {
 
     return entity {
@@ -23,7 +24,7 @@ fun Engine.createPlayer(
         }
         with<TransformComponent> {
             val atlas = assets[Animations.Lvl1.descriptor]
-            val playerGraphicRegion = atlas.findRegion("bike_lvl", 0)
+            val playerGraphicRegion = atlas.regions.first()
             size.set(
                     playerGraphicRegion.regionWidth.toFloat(),
                     playerGraphicRegion.regionHeight.toFloat()
@@ -35,7 +36,7 @@ fun Engine.createPlayer(
         }
         with<MoveComponent>()
         with<GraphicComponent> { z = 3 }
-        with<AnimationComponent> { type = AnimationType.BIKE_LVL_1 }
+        with<AnimationComponent> { type = AnimationType.byAssetName(preferences.getString("lvl", "Lvl1")) }
     }
 }
 

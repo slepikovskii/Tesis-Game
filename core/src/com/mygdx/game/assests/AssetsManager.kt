@@ -25,9 +25,16 @@ enum class TextureAtlasAssets(val path: String, val descriptor: AssetDescriptor<
     GameObjects("background/GameObjects.atlas")
 }
 
-enum class Animations(val path: String,
+enum class Animations(private val path: String,
         val descriptor: AssetDescriptor<TextureAtlas> = AssetDescriptor(path, TextureAtlas::class.java)) {
-    Lvl1("animation/Animation.atlas")
+    Lvl1("animation/AnimationLvl1.atlas"),
+    Lvl2("animation/AnimationLvl2.atlas"),
+    Lvl3("animation/AnimationLvl3.atlas");
+
+    companion object {
+        private val map = values().associateBy(Animations::name)
+        fun byName(name: String) = map.getValue(name)
+    }
 }
 
 enum class FontAsset(

@@ -4,8 +4,8 @@ import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.EntityListener
 import com.badlogic.ashley.systems.IteratingSystem
-import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.utils.GdxRuntimeException
+import com.mygdx.game.assests.Animations
 import com.mygdx.game.ecs.component.Animation2D
 import com.mygdx.game.ecs.component.AnimationComponent
 import com.mygdx.game.ecs.component.AnimationType
@@ -15,6 +15,7 @@ import com.mygdx.game.event.GameEventListener
 import com.mygdx.game.event.GameEventManager
 import ktx.ashley.allOf
 import ktx.ashley.get
+import ktx.assets.async.AssetStorage
 import ktx.log.debug
 import ktx.log.error
 import ktx.log.logger
@@ -23,7 +24,7 @@ import java.util.*
 private val LOG = logger<AnimationSystem>()
 
 class AnimationSystem(
-        private val atlas: TextureAtlas,
+        private val assetStorage: AssetStorage,
         private val eventManager: GameEventManager
 ) : IteratingSystem(
         allOf(AnimationComponent::class, GraphicComponent::class).get()), EntityListener, GameEventListener {
@@ -71,11 +72,9 @@ class AnimationSystem(
     private fun getAnimation(type: AnimationType): Animation2D {
         var animation = animationCache[type]
         if (animation == null) {
-            var regions = atlas.findRegions(type.atlasKey)
+            val regions = assetStorage[Animations.byName(type.assetName).descriptor].regions
             if (regions.isEmpty) {
-                LOG.error { "No regions found for ${type.atlasKey}" }
-                regions = atlas.findRegions("error")
-                if (regions.isEmpty) throw GdxRuntimeException("There is no error region in the game atlas")
+                throw GdxRuntimeException("There is no animation region in the game atlas")
             } else {
                 LOG.debug { "Adding animation of type $type with ${regions.size} regions" }
             }
