@@ -44,6 +44,7 @@ class PlayerInputSystem(private val gameEventManager: GameEventManager, viewport
         entities.forEach {
             it[PlayerComponent.mapper]?.apply {
                 --papers
+                money += 10
             }
         }
     }

@@ -45,6 +45,11 @@ class GameScreen(private val eventManager: GameEventManager,
             act()
             draw()
         }
+        engine.getEntitiesFor(oneOf(PlayerComponent::class).get()).first()[PlayerComponent.mapper]?.let {
+            paperRemains.setText(it.papers)
+            money.setText(it.money)
+            preferences.putInteger("money", it.money).flush()
+        }
         engine.update(delta)
     }
 
@@ -61,7 +66,6 @@ class GameScreen(private val eventManager: GameEventManager,
             createHouses(assets, gameViewport)
         }
         eventManager.run {
-            addListener(GameEvent.PaperHit::class, this@GameScreen)
             addListener(GameEvent.PlayerMoved::class, this@GameScreen)
         }
         setupUI()
@@ -123,23 +127,11 @@ class GameScreen(private val eventManager: GameEventManager,
                 setFillParent(true)
             }
         }
-
-        engine.getEntitiesFor(oneOf(PlayerComponent::class).get()).first()[PlayerComponent.mapper]?.let {
-            paperRemains.setText(it.papers)
-            money.setText(it.money)
-        }
     }
 
     override fun onEvent(event: GameEvent) {
-        when (event) {
-            is GameEvent.PaperHit -> {
-                paperRemains.run {
-                    setText(text.toString().toInt() - 1)
-                }
-            }
-            is GameEvent.PlayerMoved -> {
-                background.setSpeed(event.speed)
-            }
+        if (event is GameEvent.PlayerMoved) {
+            background.setSpeed(event.speed)
         }
     }
 }

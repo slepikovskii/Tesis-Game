@@ -21,6 +21,7 @@ fun Engine.createPlayer(
     return entity {
         with<PlayerComponent> {
             papers = 50
+            money = preferences.getInteger("money", 0)
         }
         with<TransformComponent> {
             val atlas = assets[Animations.Lvl1.descriptor]

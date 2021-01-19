@@ -10,8 +10,10 @@ class PlayerComponent: Component, Pool.Poolable {
     }
 
     var papers = 0
+    var money = 0
 
     override fun reset() {
         papers = 0
+        money = 0
     }
 }
