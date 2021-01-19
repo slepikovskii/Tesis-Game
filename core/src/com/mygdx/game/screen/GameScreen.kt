@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Preferences
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.mygdx.game.Game
 import com.mygdx.game.UI.SkinImageButton
@@ -28,8 +27,6 @@ import ktx.assets.async.AssetStorage
 import ktx.scene2d.*
 import java.util.*
 
-const val DEFAULT_BACKGROUND_SPEED = 1
-
 class GameScreen(private val eventManager: GameEventManager,
         private val assets: AssetStorage,
         private val engine: PooledEngine,
@@ -39,6 +36,7 @@ class GameScreen(private val eventManager: GameEventManager,
         private val preferences: Preferences) : KtxScreen, GameEventListener {
 
     private lateinit var paperRemains: Label
+    private lateinit var money: Label
     private lateinit var background: ParallaxBackground
 
     override fun render(delta: Float) {
@@ -93,48 +91,42 @@ class GameScreen(private val eventManager: GameEventManager,
                 width = 1280f
             }
             table {
-                defaults().fillX().expandX()
-                debug = true
+                defaults().expandX().fillX()
 
                 verticalGroup {
                     left()
-                    top()
-                    horizontalGroup{
-                        padLeft(10f)
-                        label("Paper remains:") {
-                            setAlignment(Align.left)
+                    columnLeft()
+                    padLeft(10f)
 
-                        }
-                        paperRemains = label("0") {
-                            setAlignment(Align.left)
-                        }
+                    horizontalGroup {
+                        space(10f)
+                        label("Paper remains:")
+                        paperRemains = label("0")
+                    }
+
+                    horizontalGroup {
+                        space(10f)
+                        label("Money:")
+                        money = label("0")
                     }
                 }
 
-
-                verticalGroup {
-                    top()
+                imageButton(SkinImageButton.MENUBUTTON.name) {
                     right()
-                    imageButton(SkinImageButton.MENUBUTTON.name){
-                        imageCell.maxWidth(100f).maxHeight(100f)
-                        onClick {
-                            hide()
-                            game.setScreen<Menu>()
-                        }
+                    imageCell.maxWidth(100f).maxHeight(100f)
+                    onClick {
+                        game.setScreen<Menu>()
                     }
                 }
-
-
-
 
                 top()
                 setFillParent(true)
-                pack()
             }
         }
 
-        engine.getEntitiesFor(oneOf(PlayerComponent::class).get()).first()[PlayerComponent.mapper]?.papers?.let {
-            paperRemains.setText(it)
+        engine.getEntitiesFor(oneOf(PlayerComponent::class).get()).first()[PlayerComponent.mapper]?.let {
+            paperRemains.setText(it.papers)
+            money.setText(it.money)
         }
     }
 
