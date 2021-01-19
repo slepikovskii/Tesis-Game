@@ -7,8 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor
 import ktx.scene2d.KWidget
 import ktx.scene2d.Scene2dDsl
 import ktx.scene2d.actor
+import kotlin.math.pow
 
-private const val LAYER_SPEED_DIFFERENCE = 1.3
+private const val LAYER_SPEED_DIFFERENCE = 1 / 3f
 
 @Scene2dDsl
 class ParallaxBackground(textures: Array<Texture>) : Actor() {
@@ -22,17 +23,13 @@ class ParallaxBackground(textures: Array<Texture>) : Actor() {
     var srcY: Int
     var flipX: Boolean
     var flipY: Boolean
-    private var speed: Float
-
-    fun setSpeed(newSpeed: Float) {
-        speed = newSpeed
-    }
+    var speed: Float
 
     override fun draw(batch: Batch, parentAlpha: Float) {
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha)
         scroll += speed
         for (i in layers.indices) {
-            srcX = (scroll + i * LAYER_SPEED_DIFFERENCE * scroll).toInt()
+            srcX = ((LAYER_SPEED_DIFFERENCE.pow(layers.size - i - 1) * scroll) * 3).toInt()
             batch.draw(layers[i], x, y, originX.toFloat(), originY.toFloat(), width, heigth, scaleX, scaleY,
                        rotation.toFloat(), srcX, srcY, layers[i].width, layers[i].height, flipX, flipY)
         }

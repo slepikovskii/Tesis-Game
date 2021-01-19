@@ -131,7 +131,7 @@ class GameScreen(private val eventManager: GameEventManager,
 
     override fun onEvent(event: GameEvent) {
         if (event is GameEvent.PlayerMoved) {
-            background.setSpeed(event.speed)
+            background.speed = event.speed
         }
     }
 }
