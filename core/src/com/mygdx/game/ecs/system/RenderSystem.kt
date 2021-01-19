@@ -42,10 +42,10 @@ class RenderSystem(
 
     override fun update(deltaTime: Float) {
         stage.viewport.apply()
-        renderPlayer()
         batch.use(gameViewport.camera.combined) {
             super.update(deltaTime)
         }
+        renderPlayer()
         houses.last()[TransformComponent.mapper]?.let {
             val rightWorldCoordinate = gameViewport.camera.position.x + gameViewport.screenWidth / 2
             val rightHouseCoordinate = it.position.x + it.size.x

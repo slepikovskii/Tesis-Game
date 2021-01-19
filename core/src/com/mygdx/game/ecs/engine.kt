@@ -12,6 +12,8 @@ import ktx.ashley.with
 import ktx.assets.async.AssetStorage
 import kotlin.random.Random
 
+val backgroundObjects = arrayOf("lamp", "tree1", "tree2")
+
 fun Engine.createPlayer(
         assets: AssetStorage,
         viewport: Viewport,
@@ -55,9 +57,13 @@ fun Engine.createHouse(assets: AssetStorage, viewport: Viewport, offsetX: Float 
     val atlas = assets[TextureAtlasAssets.Houses.descriptor]
     val house = atlas.regions.get(Random.nextInt(10))
     val positionY = viewport.worldHeight / 3f
+
     if (Random.nextBoolean()) {
         createMailbox(assets, offsetX + house.regionWidth.toFloat(), positionY)
+    } else {
+        createBackgroundObject(assets, offsetX + house.regionWidth.toFloat(), positionY)
     }
+
     return entity {
         with<GraphicComponent> {
             z = 1
@@ -95,5 +101,26 @@ fun Engine.createMailbox(assets: AssetStorage, positionX: Float, positionY: Floa
             )
         }
         with<CollisionComponent>()
+    }
+}
+
+fun Engine.createBackgroundObject(assets: AssetStorage, positionX: Float, positionY: Float): Entity {
+    return entity {
+        val atlas = assets[TextureAtlasAssets.GameObjects.descriptor]
+        val lamp = atlas.findRegion(backgroundObjects.random())
+        with<GraphicComponent> {
+            z = 2
+            setSpriteRegion(lamp)
+        }
+        with<TransformComponent> {
+            size.set(
+                    lamp.originalWidth.toFloat() / 2,
+                    lamp.originalHeight.toFloat() / 2
+            )
+            setInitialPosition(
+                    positionX - lamp.regionWidth / 4f,
+                    positionY - 60
+            )
+        }
     }
 }

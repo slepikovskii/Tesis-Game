@@ -23,6 +23,7 @@ class ParallaxBackground(textures: Array<Texture>) : Actor() {
     var flipX: Boolean
     var flipY: Boolean
     private var speed: Float
+
     fun setSpeed(newSpeed: Float) {
         speed = newSpeed
     }
