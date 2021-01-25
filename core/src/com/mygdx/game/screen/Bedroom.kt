@@ -123,10 +123,10 @@ class Bedroom(
                    }
                    }
 
-                   imageButton(SkinImageButton.PIGGYBUTTON.name){
-                       left()
-                       imageCell.maxHeight(200f).maxWidth(200f)
-                   }
+//                   imageButton(SkinImageButton.GPIGGYBUTTON.name){
+//                       left()
+//                       imageCell.maxHeight(200f).maxWidth(200f)
+//                   }
 
                    right()
                    top()

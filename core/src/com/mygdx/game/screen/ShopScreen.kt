@@ -22,9 +22,7 @@ import ktx.async.KtxAsync
 import ktx.collections.gdxArrayOf
 import ktx.log.debug
 import ktx.log.logger
-import ktx.scene2d.actors
-import ktx.scene2d.horizontalGroup
-import ktx.scene2d.imageButton
+import ktx.scene2d.*
 
 private val log = logger<Game>()
 
@@ -84,37 +82,81 @@ class ShopScreen(
                 heigth = 720f
                 width = 1280f
             }
-            horizontalGroup {
+            table {
+                defaults().fillX().expandX().fillY().expandY()
                 setFillParent(true)
                 setDebug(true)
-                imageButton(SkinImageButton.SHOPCARD1BUTTON.name) {
 
-                    imageCell.maxHeight(200f).maxWidth(200f)
-                    onClick {
-                        hide()
+                  verticalGroup {
+                      top()
+
+                      imageButton(SkinImageButton.PPIGGYBUTTON.name) {
+                          center()
+                          imageCell.maxHeight(200f).maxWidth(200f)
+                          onClick {
+
 //                        game.setScreen<Menu>()
-                    }
-                }
-                imageButton(SkinImageButton.SHOPCARD2BUTTON.name) {
+                          }
+                      }
+                  }
 
-                    imageCell.maxHeight(200f).maxWidth(200f)
-                    onClick {
-                        hide()
+                   verticalGroup {
+                       top()
+                       right()
+                        imageButton(SkinImageButton.MENUBUTTON.name) {
+
+                         imageCell.maxWidth(150f).maxHeight(150f)
+                         onClick {
+                         game.setScreen<Menu>()
+                         }
+                      }
+                   }
+
+
+
+
+                row()
+                verticalGroup {
+                    horizontalGroup {
+
+
+                    imageButton(SkinImageButton.SHOPCARD1BUTTON.name) {
+
+                        imageCell.maxHeight(200f).maxWidth(200f).size(400f)
+                        onClick {
+
 //                        game.setScreen<Menu>()
+                        }
                     }
-                }
-                imageButton(SkinImageButton.SHOPCARD3BUTTON.name) {
+                    imageButton(SkinImageButton.SHOPCARD2BUTTON.name) {
 
-                    imageCell.maxHeight(200f).maxWidth(200f)
-                    onClick {
-                        hide()
+                        imageCell.maxHeight(200f).maxWidth(200f).size(400f)
+                        onClick {
+
 //                        game.setScreen<Menu>()
+                        }
                     }
+                    imageButton(SkinImageButton.SHOPCARD3BUTTON.name) {
+
+                        imageCell.maxHeight(200f).maxWidth(200f).size(400f)
+                        onClick {
+
+//                        game.setScreen<Menu>()
+                        }
+                    }
+                    center()
+
+                }
+                }
+                row()
+                verticalGroup {
+                    left()
                 }
 
-                center()
 
             }
+
+
         }
     }
 }

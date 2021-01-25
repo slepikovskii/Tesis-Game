@@ -10,7 +10,7 @@ import ktx.style.label
 import ktx.style.skin
 
 enum class SkinImageButton {
-    PLAYBUTTON, QUITBUTTON, SETTINGSBUTTON, MENUBUTTON, SHOPBUTTON, GAMEBUTTON, HOMEBUTTON,PIGGYBUTTON, SHOPCARD1BUTTON, SHOPCARD2BUTTON, SHOPCARD3BUTTON
+    PLAYBUTTON, QUITBUTTON, SETTINGSBUTTON, MENUBUTTON, SHOPBUTTON, GAMEBUTTON, HOMEBUTTON,GPIGGYBUTTON, SHOPCARD1BUTTON, SHOPCARD2BUTTON, SHOPCARD3BUTTON, PPIGGYBUTTON,
 }
 
 enum class SkinImage(val atlaskey: String) {
@@ -21,10 +21,11 @@ enum class SkinImage(val atlaskey: String) {
     SHOP("shop"),
     GAME("work"),
     HOME("Homeshop button"),
-    PIGGY("Gpig"),
+    GPIGGY("Gpig"),
     SHOPCARD1("Shop_card1"),
     SHOPCARD2("Shop_card2"),
     SHOPCARD3("Shop_card3"),
+    PPIGGY("Ppig")
 
 }
 
@@ -71,8 +72,8 @@ private fun Skin.createImageButtonStyles(
         imageUp = skin.getDrawable(SkinImage.HOME.atlaskey)
         imageDown = imageUp
     }
-    imageButton(SkinImageButton.PIGGYBUTTON.name) {
-        imageUp = skin.getDrawable(SkinImage.PIGGY.atlaskey)
+    imageButton(SkinImageButton.GPIGGYBUTTON.name) {
+        imageUp = skin.getDrawable(SkinImage.GPIGGY.atlaskey)
         imageDown = imageUp
     }
     imageButton(SkinImageButton.SHOPCARD1BUTTON.name) {
@@ -85,6 +86,10 @@ private fun Skin.createImageButtonStyles(
     }
     imageButton(SkinImageButton.SHOPCARD3BUTTON.name) {
         imageUp = skin.getDrawable(SkinImage.SHOPCARD3.atlaskey)
+        imageDown = imageUp
+    }
+    imageButton(SkinImageButton.PPIGGYBUTTON.name) {
+        imageUp = skin.getDrawable(SkinImage.PPIGGY.atlaskey)
         imageDown = imageUp
     }
 }
