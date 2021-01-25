@@ -1,391 +1,262 @@
 
 Buttons.png
-size: 4096,4096
+size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+Coin
+  rotate: false
+  xy: 2, 1088
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
+Energy 4
+  rotate: false
+  xy: 2, 220
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
 Gpig
   rotate: false
-  xy: 2, 1084
-  size: 3840, 2160
-  orig: 3840, 2160
+  xy: 2, 1522
+  size: 768, 432
+  orig: 768, 432
   offset: 0, 0
   index: -1
-box
+Settings button
+  rotate: false
+  xy: 2, 654
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
+Settings button click
+  rotate: false
+  xy: 772, 220
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
+Shop_card1
   rotate: false
   xy: 2, 2
-  size: 1080, 1080
-  orig: 1080, 1080
+  size: 216, 216
+  orig: 216, 216
   offset: 0, 0
   index: -1
-box2
+Shop_card2
   rotate: false
-  xy: 1084, 2
-  size: 1080, 1080
-  orig: 1080, 1080
+  xy: 220, 2
+  size: 216, 216
+  orig: 216, 216
+  offset: 0, 0
+  index: -1
+Shop_card3
+  rotate: false
+  xy: 1542, 436
+  size: 216, 216
+  orig: 216, 216
+  offset: 0, 0
+  index: -1
+Sound
+  rotate: false
+  xy: 772, 1522
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
+Timer
+  rotate: false
+  xy: 772, 1088
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
+calendar1
+  rotate: false
+  xy: 772, 654
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
+energy bar
+  rotate: false
+  xy: 1542, 1522
+  size: 432, 432
+  orig: 432, 432
+  offset: 0, 0
+  index: -1
+pig1
+  rotate: false
+  xy: 1542, 654
+  size: 432, 432
+  orig: 432, 432
+  offset: 0, 0
+  index: -1
+pig2
+  rotate: false
+  xy: 1542, 1088
+  size: 432, 432
+  orig: 432, 432
   offset: 0, 0
   index: -1
 
 Buttons2.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-reply
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons3.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-Sound
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons4.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-Settings button
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons5.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-Timer
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons6.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-Energy 4
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons7.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-calendar1
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons8.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-Back
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons9.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-Settings button click
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons10.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-Homeshop button
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons11.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-shop
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons12.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-X button
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons13.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-Energy 3
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons14.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-Help
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons15.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-Ppig
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons16.png
-size: 4096,4096
+size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 Energy 0
   rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
+  xy: 772, 2
+  size: 768, 432
+  orig: 768, 432
   offset: 0, 0
   index: -1
-
-Buttons17.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-Menu3
+Energy 3
+  rotate: false
+  xy: 2, 436
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
+Help
+  rotate: false
+  xy: 772, 436
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
+Homeshop button
+  rotate: false
+  xy: 2, 1304
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
+Ppig
   rotate: false
   xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
+  size: 768, 432
+  orig: 768, 432
   offset: 0, 0
   index: -1
-
-Buttons18.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-Music
+X button
   rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
+  xy: 772, 1304
+  size: 768, 432
+  orig: 768, 432
   offset: 0, 0
   index: -1
-
-Buttons19.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-shop green
+newspaper
   rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
+  xy: 772, 870
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
+shop
+  rotate: false
+  xy: 2, 870
+  size: 768, 432
+  orig: 768, 432
   offset: 0, 0
   index: -1
 
-Buttons20.png
-size: 4096,4096
+Buttons3.png
+size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 Energy 5
   rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
+  xy: 772, 2
+  size: 768, 432
+  orig: 768, 432
   offset: 0, 0
   index: -1
-
-Buttons21.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-work
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons22.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 Menu button
   rotate: false
   xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
+  size: 768, 432
+  orig: 768, 432
   offset: 0, 0
   index: -1
-
-Buttons23.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
+Menu3
+  rotate: false
+  xy: 2, 1304
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
+Music
+  rotate: false
+  xy: 2, 870
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
 pause button
   rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
+  xy: 772, 436
+  size: 768, 432
+  orig: 768, 432
   offset: 0, 0
   index: -1
-
-Buttons24.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 save button
   rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
+  xy: 2, 436
+  size: 768, 432
+  orig: 768, 432
   offset: 0, 0
   index: -1
-
-Buttons25.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-play button
+shop green
   rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
+  xy: 772, 1304
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
+work
+  rotate: false
+  xy: 772, 870
+  size: 768, 432
+  orig: 768, 432
   offset: 0, 0
   index: -1
 
-Buttons26.png
-size: 4096,4096
+Buttons4.png
+size: 2048,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 Energy 2
   rotate: false
   xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
+  size: 768, 432
+  orig: 768, 432
   offset: 0, 0
   index: -1
-
-Buttons27.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-Coin
-  rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
-  offset: 0, 0
-  index: -1
-
-Buttons28.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 Energy full
   rotate: false
-  xy: 2, 2
-  size: 3840, 2160
-  orig: 3840, 2160
+  xy: 772, 2
+  size: 768, 432
+  orig: 768, 432
   offset: 0, 0
   index: -1
-
-Buttons29.png
-size: 4096,4096
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-energy bar
+play button
   rotate: false
-  xy: 2, 2
-  size: 2160, 2160
-  orig: 2160, 2160
+  xy: 2, 436
+  size: 768, 432
+  orig: 768, 432
+  offset: 0, 0
+  index: -1
+reply
+  rotate: false
+  xy: 772, 436
+  size: 768, 432
+  orig: 768, 432
   offset: 0, 0
   index: -1

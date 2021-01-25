@@ -87,23 +87,31 @@ class ShopScreen(
             horizontalGroup {
                 setFillParent(true)
                 setDebug(true)
-                imageButton(SkinImageButton.MENUBUTTON.name) {
+                imageButton(SkinImageButton.SHOPCARD1BUTTON.name) {
 
                     imageCell.maxHeight(200f).maxWidth(200f)
                     onClick {
                         hide()
-                        game.setScreen<Menu>()
+//                        game.setScreen<Menu>()
                     }
                 }
-                imageButton(SkinImageButton.GAMEBUTTON.name) {
+                imageButton(SkinImageButton.SHOPCARD2BUTTON.name) {
 
                     imageCell.maxHeight(200f).maxWidth(200f)
                     onClick {
                         hide()
-                        game.setScreen<GameScreen>()
+//                        game.setScreen<Menu>()
                     }
-
                 }
+                imageButton(SkinImageButton.SHOPCARD3BUTTON.name) {
+
+                    imageCell.maxHeight(200f).maxWidth(200f)
+                    onClick {
+                        hide()
+//                        game.setScreen<Menu>()
+                    }
+                }
+
                 center()
 
             }

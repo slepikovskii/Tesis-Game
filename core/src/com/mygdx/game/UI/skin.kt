@@ -10,7 +10,7 @@ import ktx.style.label
 import ktx.style.skin
 
 enum class SkinImageButton {
-    PLAYBUTTON, QUITBUTTON, SETTINGSBUTTON, MENUBUTTON, SHOPBUTTON, GAMEBUTTON, HOMEBUTTON,PIGGYBUTTON
+    PLAYBUTTON, QUITBUTTON, SETTINGSBUTTON, MENUBUTTON, SHOPBUTTON, GAMEBUTTON, HOMEBUTTON,PIGGYBUTTON, SHOPCARD1BUTTON, SHOPCARD2BUTTON, SHOPCARD3BUTTON
 }
 
 enum class SkinImage(val atlaskey: String) {
@@ -21,7 +21,10 @@ enum class SkinImage(val atlaskey: String) {
     SHOP("shop"),
     GAME("work"),
     HOME("Homeshop button"),
-    PIGGY("Gpig")
+    PIGGY("Gpig"),
+    SHOPCARD1("Shop_card1"),
+    SHOPCARD2("Shop_card2"),
+    SHOPCARD3("Shop_card3"),
 
 }
 
@@ -33,9 +36,7 @@ fun createSkin(assets: AssetStorage) {
         label("default") {
             font = assets[FontAsset.FONT_DEFAULT.descriptor]
         }
-
     }
-
 
 }
 
@@ -72,6 +73,18 @@ private fun Skin.createImageButtonStyles(
     }
     imageButton(SkinImageButton.PIGGYBUTTON.name) {
         imageUp = skin.getDrawable(SkinImage.PIGGY.atlaskey)
+        imageDown = imageUp
+    }
+    imageButton(SkinImageButton.SHOPCARD1BUTTON.name) {
+        imageUp = skin.getDrawable(SkinImage.SHOPCARD1.atlaskey)
+        imageDown = imageUp
+    }
+    imageButton(SkinImageButton.SHOPCARD2BUTTON.name) {
+        imageUp = skin.getDrawable(SkinImage.SHOPCARD2.atlaskey)
+        imageDown = imageUp
+    }
+    imageButton(SkinImageButton.SHOPCARD3BUTTON.name) {
+        imageUp = skin.getDrawable(SkinImage.SHOPCARD3.atlaskey)
         imageDown = imageUp
     }
 }
