@@ -1,6 +1,7 @@
 package com.mygdx.game.screen
 
 import com.badlogic.ashley.core.PooledEngine
+import com.badlogic.gdx.Preferences
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.mygdx.game.Game
@@ -10,7 +11,6 @@ import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.FontAsset
 import com.mygdx.game.assests.TextureAtlasAssets
 import com.mygdx.game.assests.Textures
-import com.mygdx.game.event.GameEventManager
 import com.mygdx.game.widget.ParallaxBackground
 import com.mygdx.game.widget.parallaxBackground
 import kotlinx.coroutines.joinAll
@@ -29,12 +29,12 @@ import ktx.scene2d.imageButton
 private val log = logger<Game>()
 
 class ShopScreen(
-private val game: Game,
-private val assets: AssetStorage,
-private val engine: PooledEngine,
-private val stage: Stage,
-private val gameViewport: FitViewport,
-private val eventManager: GameEventManager
+        private val game: Game,
+        private val assets: AssetStorage,
+        private val engine: PooledEngine,
+        private val stage: Stage,
+        private val gameViewport: FitViewport,
+        private val preferences: Preferences
 ): KtxScreen {
     private lateinit var background: ParallaxBackground
 
@@ -66,8 +66,8 @@ private val eventManager: GameEventManager
     }
 
     override fun hide() {
+        preferences.flush()
         stage.clear()
-
     }
 
     override fun resize(width: Int, height: Int) {

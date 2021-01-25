@@ -10,12 +10,19 @@ import ktx.collections.GdxArray
 const val DEFAULT_FRAME_DURATION = 1 / 20f
 
 enum class AnimationType(
-        val atlasKey: String,
+        val assetName: String,
         val playMode: Animation.PlayMode = Animation.PlayMode.LOOP,
         val speed: Float = 1f
 ) {
     NONE(""),
-    BIKE_LVL_1("bike_lvl"),
+    BIKE_LVL_1("Lvl1"),
+    BIKE_LVL_2("Lvl2"),
+    BIKE_LVL_3("lvl3");
+
+    companion object {
+        private val map = values().associateBy(AnimationType::assetName)
+        fun byAssetName(name: String) = map.getValue(name)
+    }
 }
 
 class Animation2D(

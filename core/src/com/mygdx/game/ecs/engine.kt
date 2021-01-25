@@ -2,7 +2,7 @@ package com.mygdx.game.ecs
 
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Preferences
 import com.badlogic.gdx.utils.viewport.Viewport
 import com.mygdx.game.assests.Animations
 import com.mygdx.game.assests.TextureAtlasAssets
@@ -12,18 +12,22 @@ import ktx.ashley.with
 import ktx.assets.async.AssetStorage
 import kotlin.random.Random
 
+val backgroundObjects = arrayOf("lamp", "tree1", "tree2")
+
 fun Engine.createPlayer(
         assets: AssetStorage,
-        viewport: Viewport
+        viewport: Viewport,
+        preferences: Preferences
 ): Entity {
 
     return entity {
         with<PlayerComponent> {
             papers = 50
+            money = preferences.getInteger("money", 0)
         }
         with<TransformComponent> {
             val atlas = assets[Animations.Lvl1.descriptor]
-            val playerGraphicRegion = atlas.findRegion("bike_lvl", 0)
+            val playerGraphicRegion = atlas.regions.first()
             size.set(
                     playerGraphicRegion.regionWidth.toFloat(),
                     playerGraphicRegion.regionHeight.toFloat()
@@ -35,7 +39,7 @@ fun Engine.createPlayer(
         }
         with<MoveComponent>()
         with<GraphicComponent> { z = 3 }
-        with<AnimationComponent> { type = AnimationType.BIKE_LVL_1 }
+        with<AnimationComponent> { type = AnimationType.byAssetName(preferences.getString("lvl", "Lvl1")) }
     }
 }
 
@@ -53,9 +57,13 @@ fun Engine.createHouse(assets: AssetStorage, viewport: Viewport, offsetX: Float 
     val atlas = assets[TextureAtlasAssets.Houses.descriptor]
     val house = atlas.regions.get(Random.nextInt(10))
     val positionY = viewport.worldHeight / 3f
+
     if (Random.nextBoolean()) {
         createMailbox(assets, offsetX + house.regionWidth.toFloat(), positionY)
+    } else {
+        createBackgroundObject(assets, offsetX + house.regionWidth.toFloat(), positionY)
     }
+
     return entity {
         with<GraphicComponent> {
             z = 1
@@ -93,5 +101,26 @@ fun Engine.createMailbox(assets: AssetStorage, positionX: Float, positionY: Floa
             )
         }
         with<CollisionComponent>()
+    }
+}
+
+fun Engine.createBackgroundObject(assets: AssetStorage, positionX: Float, positionY: Float): Entity {
+    return entity {
+        val atlas = assets[TextureAtlasAssets.GameObjects.descriptor]
+        val lamp = atlas.findRegion(backgroundObjects.random())
+        with<GraphicComponent> {
+            z = 2
+            setSpriteRegion(lamp)
+        }
+        with<TransformComponent> {
+            size.set(
+                    lamp.originalWidth.toFloat() / 2,
+                    lamp.originalHeight.toFloat() / 2
+            )
+            setInitialPosition(
+                    positionX - lamp.regionWidth / 4f,
+                    positionY - 60
+            )
+        }
     }
 }
