@@ -96,32 +96,55 @@ class GameScreen(private val eventManager: GameEventManager,
             }
             table {
                 defaults().expandX().fillX()
-
+                setDebug(true)
                 verticalGroup {
                     left()
                     columnLeft()
                     padLeft(10f)
-
                     horizontalGroup {
-                        space(10f)
-                        label("Paper remains:")
-                        paperRemains = label("0")
-                    }
+                        imageButton(SkinImageButton.MENUBUTTON.name) {
+                        left()
+                        imageCell.maxHeight(100f).maxWidth(100f)
+                        onClick {
+                            hide()
+                            game.setScreen<Menu>()
+                             }
+                        }
+                        imageButton(SkinImageButton.COINBUTTON.name){
+                            center()
+                            imageCell.maxHeight(200f).maxWidth(200f)
 
-                    horizontalGroup {
-                        space(10f)
-                        label("Money:")
                         money = label("0")
+                        }
+                        imageButton(SkinImageButton.NEWSPAPERBUTTON.name){
+                            center()
+                            imageCell.maxHeight(200f).maxWidth(200f)
+
+                        paperRemains = label("0")
+                        }
+                        imageButton(SkinImageButton.CALENDARBUTTON.name){
+                            imageCell.maxHeight(200f).maxWidth(200f)
+                        }
                     }
+
+                    imageButton(SkinImageButton.SETTINGSBUTTON.name){
+                        right()
+                        imageCell.maxHeight(100f).maxWidth(100f)
+                    }
+
+//                    horizontalGroup {
+//                        space(10f)
+//                        label("Paper remains:")
+//                        paperRemains = label("0")
+//                    }
+//
+//                    horizontalGroup {
+//                        space(10f)
+//
+//                    }
                 }
 
-                imageButton(SkinImageButton.MENUBUTTON.name) {
-                    right()
-                    imageCell.maxWidth(100f).maxHeight(100f)
-                    onClick {
-                        game.setScreen<Menu>()
-                    }
-                }
+
 
                 top()
                 setFillParent(true)
