@@ -41,10 +41,12 @@ class PlayerInputSystem(private val gameEventManager: GameEventManager, viewport
     }
 
     override fun onEvent(event: GameEvent) {
-        entities.forEach {
-            it[PlayerComponent.mapper]?.apply {
-                --papers
-                money += 10
+        if (event is GameEvent.PaperHit) {
+            entities.forEach {
+                it[PlayerComponent.mapper]?.apply {
+                    --papers
+                    money += 10
+                }
             }
         }
     }
