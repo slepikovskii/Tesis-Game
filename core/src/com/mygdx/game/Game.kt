@@ -69,6 +69,7 @@ class Game : KtxGame<KtxScreen>() {
                 label("default") {
                     font = assets[FontAsset.FONT_DEFAULT.descriptor]
                 }
+
             }
         }
         setScreen<MainScreen>()

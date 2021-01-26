@@ -38,10 +38,10 @@ fun createSkin(assets: AssetStorage) {
     Scene2DSkin.defaultSkin = skin(atlas) { skin ->
         createImageButtonStyles(skin)
         label("default") {
-            font = assets[FontAsset.FONT_DEFAULT.descriptor]
-        }
-    }
+           font = assets[FontAsset.FONT_DEFAULT.descriptor]
+       }
 
+    }
 }
 
 private fun Skin.createImageButtonStyles(
@@ -99,6 +99,7 @@ private fun Skin.createImageButtonStyles(
         imageUp = skin.getDrawable(SkinImage.COIN.atlaskey)
         imageDown = imageUp
     }
+
     imageButton(SkinImageButton.CALENDARBUTTON.name) {
         imageUp = skin.getDrawable(SkinImage.CALENDAR.atlaskey)
         imageDown = imageUp

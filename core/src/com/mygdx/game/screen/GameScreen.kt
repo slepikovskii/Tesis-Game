@@ -64,11 +64,13 @@ class GameScreen(private val eventManager: GameEventManager,
             addSystem(CollisionSystem(eventManager, gameViewport, assets[TextureAtlasAssets.GameObjects.descriptor]))
             createPlayer(assets, gameViewport, preferences)
             createHouses(assets, gameViewport)
+
         }
         eventManager.run {
             addListener(GameEvent.PlayerMoved::class, this@GameScreen)
         }
         setupUI()
+
     }
 
     override fun hide() {
@@ -95,53 +97,48 @@ class GameScreen(private val eventManager: GameEventManager,
                 width = 1280f
             }
             table {
-                defaults().expandX().fillX()
+                defaults().expandX().fillX().fillY()
                 setDebug(true)
                 verticalGroup {
                     left()
                     columnLeft()
                     padLeft(10f)
-                    horizontalGroup {
-                        imageButton(SkinImageButton.MENUBUTTON.name) {
+
+                    imageButton(SkinImageButton.SETTINGSBUTTON.name){
                         left()
-                        imageCell.maxHeight(100f).maxWidth(100f)
+                        imageCell.maxHeight(150f).maxWidth(150f)
+                    }
+                    imageButton(SkinImageButton.MENUBUTTON.name) {
+                        left()
+                        imageCell.maxHeight(150f).maxWidth(150f)
                         onClick {
                             hide()
                             game.setScreen<Menu>()
-                             }
                         }
-                        imageButton(SkinImageButton.COINBUTTON.name){
-                            center()
-                            imageCell.maxHeight(200f).maxWidth(200f)
+                    }
+
+                }
+
+                horizontalGroup {
+                    top()
+
+                    imageButton(SkinImageButton.COINBUTTON.name){
+
+                        imageCell.maxHeight(200f).maxWidth(200f)
 
                         money = label("0")
-                        }
-                        imageButton(SkinImageButton.NEWSPAPERBUTTON.name){
-                            center()
-                            imageCell.maxHeight(200f).maxWidth(200f)
+                    }
+
+                    imageButton(SkinImageButton.NEWSPAPERBUTTON.name){
+
+                        imageCell.maxHeight(200f).maxWidth(200f)
 
                         paperRemains = label("0")
-                        }
-                        imageButton(SkinImageButton.CALENDARBUTTON.name){
-                            imageCell.maxHeight(200f).maxWidth(200f)
-                        }
                     }
+                    imageButton(SkinImageButton.CALENDARBUTTON.name){
 
-                    imageButton(SkinImageButton.SETTINGSBUTTON.name){
-                        right()
-                        imageCell.maxHeight(100f).maxWidth(100f)
+                        imageCell.maxHeight(200f).maxWidth(200f)
                     }
-
-//                    horizontalGroup {
-//                        space(10f)
-//                        label("Paper remains:")
-//                        paperRemains = label("0")
-//                    }
-//
-//                    horizontalGroup {
-//                        space(10f)
-//
-//                    }
                 }
 
 

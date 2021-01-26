@@ -14,7 +14,9 @@ enum class Textures(val path: String,
     Road("background/road.png"),
     RoomBackground("background/bedroom.png"),
     ShopBackground("background/garage.png"),
-    MenuBG("background/piggy screen.png")
+    MenuBG("background/piggy screen.png"),
+    Coin("UI/Coin.png"),
+    News("UI/newspaper.png")
 }
 
 enum class TextureAtlasAssets(val path: String, val descriptor: AssetDescriptor<TextureAtlas> = AssetDescriptor(path,
