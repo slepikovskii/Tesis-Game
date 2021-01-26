@@ -33,7 +33,7 @@ class PlayerInputSystem(private val gameEventManager: GameEventManager, viewport
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Gdx.input.justTouched() && Gdx.input.x in center)) {
             gameEventManager.dispatchEvent(GameEvent.PaperThrown)
         } else if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-            preferences.putString("lvl", "Lvl2")
+            preferences.putInteger("lvl", 2)
             entity[AnimationComponent.mapper]?.type = AnimationType.BIKE_LVL_2
             preferences.flush()
         }

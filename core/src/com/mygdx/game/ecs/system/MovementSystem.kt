@@ -17,9 +17,6 @@ import ktx.log.logger
 import kotlin.math.abs
 import kotlin.math.min
 
-private const val HOR_ACCELERATION = 50f
-private const val MAX_SPEED = 200f
-
 private val log = logger<MoveSystem>()
 
 class MoveSystem(private val gameEventManager: GameEventManager, private val viewport: Viewport) : IteratingSystem(
@@ -31,24 +28,27 @@ class MoveSystem(private val gameEventManager: GameEventManager, private val vie
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         var newSpeed = 0f
-        val oldSpeed = entity[MoveComponent.mapper]?.speed ?: 0f
 
         when {
             Gdx.input.isKeyPressed(Input.Keys.RIGHT) || (Gdx.input.isTouched && Gdx.input.x in rightSide) -> {
-                entity[TransformComponent.mapper]?.let {
-                    if (it.direction == FacingDirection.LEFT) {
-                        it.switchDirection()
-                    } else {
-                        newSpeed = min(MAX_SPEED, oldSpeed + HOR_ACCELERATION * deltaTime)
+                entity[MoveComponent.mapper]?.run {
+                    entity[TransformComponent.mapper]?.let {
+                        if (it.direction == FacingDirection.LEFT) {
+                            it.switchDirection()
+                        } else {
+                            newSpeed = min(maxSpeed, speed + horAcceleration * deltaTime)
+                        }
                     }
                 }
             }
             Gdx.input.isKeyPressed(Input.Keys.LEFT) || (Gdx.input.isTouched && Gdx.input.x in leftSide) -> {
-                entity[TransformComponent.mapper]?.let {
-                    if (it.direction == FacingDirection.RIGHT) {
-                        it.switchDirection()
-                    } else if (viewport.camera.position.x > viewport.screenWidth / 2) {
-                        newSpeed = -min(MAX_SPEED, oldSpeed + HOR_ACCELERATION * deltaTime)
+                entity[MoveComponent.mapper]?.run {
+                    entity[TransformComponent.mapper]?.let {
+                        if (it.direction == FacingDirection.RIGHT) {
+                            it.switchDirection()
+                        } else if (viewport.camera.position.x > viewport.screenWidth / 2) {
+                            newSpeed = -min(maxSpeed, speed + horAcceleration * deltaTime)
+                        }
                     }
                 }
             }

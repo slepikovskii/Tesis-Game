@@ -1,16 +1,18 @@
 package com.mygdx.game.event
 
 import com.badlogic.gdx.utils.ObjectMap
-import com.mygdx.game.ecs.component.FacingDirection
 import ktx.collections.GdxSet
 import kotlin.reflect.KClass
 
 private const val INITIAL_LISTENER_CAPACITY = 8
 
+enum class Item { LVL2, LVL3, BOOST }
+
 sealed class GameEvent {
     object PaperThrown : GameEvent()
     object PaperHit : GameEvent()
     data class PlayerMoved(val speed: Float) : GameEvent()
+    data class ItemBought(val item: Item) : GameEvent()
 }
 
 interface GameEventListener {

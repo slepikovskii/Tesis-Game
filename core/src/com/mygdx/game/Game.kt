@@ -56,7 +56,7 @@ class Game : KtxGame<KtxScreen>() {
             addScreen(GameScreen(inject(), inject(), inject(), inject(), inject(), inject(), inject()))
             addScreen(Menu(inject(), inject(), inject(), inject(), inject()))
             addScreen(Bedroom(inject(), inject(), inject(), inject(), inject(), inject()))
-            addScreen(ShopScreen(inject(), inject(), inject(), inject(), inject(), inject()))
+            addScreen(ShopScreen(inject(), inject(), inject(), inject(), inject(), inject(), inject()))
             addScreen(GameOverScreen(inject(), inject(), inject(), inject(), inject()))
         }
         val assetRefs = gdxArrayOf(

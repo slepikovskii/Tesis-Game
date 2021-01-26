@@ -10,6 +10,7 @@ import com.mygdx.game.ecs.component.*
 import ktx.ashley.entity
 import ktx.ashley.with
 import ktx.assets.async.AssetStorage
+import kotlin.math.pow
 import kotlin.random.Random
 
 val backgroundObjects = arrayOf("lamp", "tree1", "tree2")
@@ -19,6 +20,7 @@ fun Engine.createPlayer(
         viewport: Viewport,
         preferences: Preferences
 ): Entity {
+    val level = preferences.getInteger("lvl", 1)
 
     return entity {
         with<PlayerComponent> {
@@ -37,9 +39,12 @@ fun Engine.createPlayer(
                     50f,
             )
         }
-        with<MoveComponent>()
+        with<MoveComponent> {
+            maxSpeed *= 1.5.pow(level).toFloat()
+            horAcceleration *= 1.2.pow(level).toFloat()
+        }
         with<GraphicComponent> { z = 3 }
-        with<AnimationComponent> { type = AnimationType.byAssetName(preferences.getString("lvl", "Lvl1")) }
+        with<AnimationComponent> { type = AnimationType.byAssetName("Lvl$level") }
     }
 }
 

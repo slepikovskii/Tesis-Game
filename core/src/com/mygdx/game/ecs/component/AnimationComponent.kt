@@ -17,7 +17,7 @@ enum class AnimationType(
     NONE(""),
     BIKE_LVL_1("Lvl1"),
     BIKE_LVL_2("Lvl2"),
-    BIKE_LVL_3("lvl3");
+    BIKE_LVL_3("Lvl3");
 
     companion object {
         private val map = values().associateBy(AnimationType::assetName)

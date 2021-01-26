@@ -7,10 +7,12 @@ import ktx.assets.async.AssetStorage
 import ktx.scene2d.Scene2DSkin
 import ktx.style.imageButton
 import ktx.style.label
+import ktx.style.set
 import ktx.style.skin
 
 enum class SkinImageButton {
-    PLAYBUTTON, QUITBUTTON, SETTINGSBUTTON, MENUBUTTON, SHOPBUTTON, GAMEBUTTON, HOMEBUTTON,GPIGGYBUTTON, SHOPCARD1BUTTON, SHOPCARD2BUTTON, SHOPCARD3BUTTON, PPIGGYBUTTON, COINBUTTON, CALENDARBUTTON, NEWSPAPERBUTTON
+    PLAYBUTTON, QUITBUTTON, SETTINGSBUTTON, MENUBUTTON, SHOPBUTTON, GAMEBUTTON, HOMEBUTTON, GPIGGYBUTTON,
+    SHOPCARD1BUTTON, SHOPCARD2BUTTON, SHOPCARD3BUTTON, PPIGGYBUTTON, COINBUTTON, CALENDARBUTTON, NEWSPAPERBUTTON
 }
 
 enum class SkinImage(val atlaskey: String) {
@@ -37,11 +39,18 @@ fun createSkin(assets: AssetStorage) {
 
     Scene2DSkin.defaultSkin = skin(atlas) { skin ->
         createImageButtonStyles(skin)
+        createImageStyles(skin)
         label("default") {
             font = assets[FontAsset.FONT_DEFAULT.descriptor]
         }
     }
 
+}
+
+private fun createImageStyles(
+        skin: Skin
+) {
+    skin[SkinImageButton.PPIGGYBUTTON.name] = skin.getDrawable(SkinImage.PPIGGY.atlaskey)
 }
 
 private fun Skin.createImageButtonStyles(
@@ -82,18 +91,17 @@ private fun Skin.createImageButtonStyles(
     imageButton(SkinImageButton.SHOPCARD1BUTTON.name) {
         imageUp = skin.getDrawable(SkinImage.SHOPCARD1.atlaskey)
         imageDown = imageUp
+        imageDisabled = newDrawable(imageUp, 255f, 255f, 255f, 0.45f)
     }
     imageButton(SkinImageButton.SHOPCARD2BUTTON.name) {
         imageUp = skin.getDrawable(SkinImage.SHOPCARD2.atlaskey)
         imageDown = imageUp
+        imageDisabled = newDrawable(imageUp, 255f, 255f, 255f, 0.45f)
     }
     imageButton(SkinImageButton.SHOPCARD3BUTTON.name) {
         imageUp = skin.getDrawable(SkinImage.SHOPCARD3.atlaskey)
         imageDown = imageUp
-    }
-    imageButton(SkinImageButton.PPIGGYBUTTON.name) {
-        imageUp = skin.getDrawable(SkinImage.PPIGGY.atlaskey)
-        imageDown = imageUp
+        imageDisabled = newDrawable(imageUp, 255f, 255f, 255f, 0.45f)
     }
     imageButton(SkinImageButton.COINBUTTON.name) {
         imageUp = skin.getDrawable(SkinImage.COIN.atlaskey)

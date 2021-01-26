@@ -96,38 +96,38 @@ class GameScreen(private val eventManager: GameEventManager,
             }
             table {
                 defaults().expandX().fillX()
-                setDebug(true)
+
                 verticalGroup {
                     left()
                     columnLeft()
                     padLeft(10f)
                     horizontalGroup {
                         imageButton(SkinImageButton.MENUBUTTON.name) {
-                        left()
-                        imageCell.maxHeight(100f).maxWidth(100f)
-                        onClick {
-                            hide()
-                            game.setScreen<Menu>()
-                             }
+                            left()
+                            imageCell.maxHeight(100f).maxWidth(100f)
+                            onClick {
+                                hide()
+                                game.setScreen<Menu>()
+                            }
                         }
-                        imageButton(SkinImageButton.COINBUTTON.name){
+                        imageButton(SkinImageButton.COINBUTTON.name) {
                             center()
                             imageCell.maxHeight(200f).maxWidth(200f)
 
-                        money = label("0")
+                            money = label("0")
                         }
-                        imageButton(SkinImageButton.NEWSPAPERBUTTON.name){
+                        imageButton(SkinImageButton.NEWSPAPERBUTTON.name) {
                             center()
                             imageCell.maxHeight(200f).maxWidth(200f)
 
-                        paperRemains = label("0")
+                            paperRemains = label("0")
                         }
-                        imageButton(SkinImageButton.CALENDARBUTTON.name){
+                        imageButton(SkinImageButton.CALENDARBUTTON.name) {
                             imageCell.maxHeight(200f).maxWidth(200f)
                         }
                     }
 
-                    imageButton(SkinImageButton.SETTINGSBUTTON.name){
+                    imageButton(SkinImageButton.SETTINGSBUTTON.name) {
                         right()
                         imageCell.maxHeight(100f).maxWidth(100f)
                     }
